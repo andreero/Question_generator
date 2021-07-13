@@ -1,10 +1,21 @@
+import subprocess
+import sys
+
+# Install jinja2, if it's not already installed
+try:
+    import jinja2
+except ImportError:
+    print('Jinja2 is not installed, trying to install...')
+    subprocess.check_call([sys.executable, '-m', 'pip', 'install', '-r', 'requirements.txt'])
+    import jinja2
+
 from question_definitions import question_sets
 from config import Config as cfg
 import csv
 
 
 def write_questions_to_csv_file(csv_file_path, headers, questions):
-    with open(csv_file_path, 'a+', newline='') as csv_file:
+    with open(csv_file_path, 'a+', newline='', encoding='utf-8') as csv_file:
         writer = csv.DictWriter(csv_file, fieldnames=headers, delimiter=';', quotechar='"', quoting=csv.QUOTE_MINIMAL)
         if csv_file.tell() == 0:
             writer.writeheader()

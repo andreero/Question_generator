@@ -1,7 +1,7 @@
 from jinja2 import Template, StrictUndefined
 from jinja2.exceptions import UndefinedError
 import random
-from typing import Dict
+from typing import Dict, List
 
 
 class Question:
@@ -37,7 +37,7 @@ class Question:
         except UndefinedError as e:
             raise ValueError(f'Error in template {template_string}: {e}')
 
-    def render(self):
+    def render(self) -> Dict[str, str]:
         """ Return a randomized question string from the provided question definition. """
         generated_variables = self.generate_variables()
         generated_strings = {
@@ -60,14 +60,14 @@ class QuestionSet:
         self.question_type = question_type
         self.questions = questions
 
-    def generate_questions(self, n):
+    def generate_questions(self, n) -> List[Dict[str, str]]:
         question_list = []
         for i in range(n):
             question = random.choice(self.questions)
             question_list.append(question.render())
         return question_list
 
-    def render_questions(self, n):
+    def render_questions(self, n) -> List[Dict[str, str]]:
         questions = self.generate_questions(n)
         questions_with_extra_data = list()
         for question in questions:

@@ -1,5 +1,5 @@
 class Config:
-    QUESTIONS_PER_QUESTION_SET = 5
+    QUESTIONS_PER_QUESTION_SET = 10
     CSV_FILE_PATH = 'output.csv'
     CSV_HEADERS = [
         'functionname',

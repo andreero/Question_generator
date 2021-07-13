@@ -112,7 +112,7 @@ variable_richtig_ausgeklammert = QuestionSet(
         ]
 )
 
-terme_zuordnen = QuestionSet(
+terme_zuordnen_dragGroup = QuestionSet(
     capital='Terme',
     subcapital='Binomische Formeln',
     title='Terme zuordnen',
@@ -121,23 +121,56 @@ terme_zuordnen = QuestionSet(
     questions=[
         Question(
             formula='',
-            correct='1. binomische Formel|({{v1}}+x)^2~(b+{{v2}})^2, '  # strings will be automatically joined
-                    '2. binomische Formel|(a-{{v3}})^2~({{v4}}-z)^2, '
+            correct='1. binomische Formel|({{v1}}+x)^2~(b+{{v2}})^2, ' +
+                    '2. binomische Formel|(a-{{v3}})^2~({{v4}}-z)^2, ' +
                     '3. binomische Formel|({{v5}}-b)({{v5}}+b)~(y+{{v6}})(y-{{v6}})',
             variables={
                 'v1': (randint, 2, 10),
                 'v2': (randint, 2, 10),
                 'v3': (randint, 2, 10),
-                'v4': (randdecimal, 0.5, 0.9),
+                'v4': (randdecimal, 0.3, 0.9),
                 'v5': (randint, 2, 10),
                 'v6': (randint, 2, 10),
             }),
     ]
 )
 
+terme_zuordnen_dragMatch = QuestionSet(
+    capital='Terme',
+    subcapital='Binomische Formeln',
+    title='Terme zuordnen',
+    instruction='Füge äquivalente Terme zusammen.',
+    question_type='dragMatch',
+    questions=[
+        Question(
+            formula='',
+            correct='({{v1}}+x)^2|{{v1**2}}+{{2*v1}}x+x^2,' +
+                    '(x-{{v2}})^2|x^2-{{2*v2}}x+{{v2**2}},' +
+                    '({{v3}}-x)({{v3}}+x)|{{v3**2}}-x^2',
+            variables={
+                'v1': (randint, 2, 6),
+                'v2': (randint, 2, 6),
+                'v3': (randint, 2, 6),
+            }),
+        Question(
+            formula='',
+            correct='(v+{{v1}})^2|v^2+{{2*v1}}v+{{v1**2}},' +
+                    '({{v2}}-v)^2|{{v2**2}}-{{2*v2}}v+v^2,' +
+                    '(v+{{v3}})(v-{{v3}})|v^2-{{v3**2}}',
+            variables={
+                'v1': (randint, 3, 9),
+                'v2': (randint, 3, 9),
+                'v3': (randint, 5, 15),
+            }),
+    ]
+)
+
+
+# Add newly created question sets in that list, so the script can use them
 question_sets = [
     terme_mit_potenzen,
     variablen_ausklammern,
     variable_richtig_ausgeklammert,
-    terme_zuordnen,
+    terme_zuordnen_dragGroup,
+    terme_zuordnen_dragMatch,
 ]
