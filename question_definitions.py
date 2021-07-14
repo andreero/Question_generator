@@ -9,44 +9,6 @@ def randdecimal(a, b):
     return round(random.uniform(a, b), 1)
 
 
-terme_potenzen_q1 = Question(
-    formula='{{v1}} + x * y + {{v2}} * z',
-    correct='{{v1}} + xy + {{v2}}z',
-    wrong_1='{{v1}}x + {{v1}}y + {{v2}}z',
-    variables={
-        'v1': (randint, 2, 10),
-        'v2': (randint, 2, 10),
-    })
-
-terme_potenzen_q2 = Question(
-    formula='{{v1}} * a * b : c',
-    correct='({{v1}}ab) / c',
-    wrong_1='{{v1}} + (ab) / c',
-    wrong_2='{{v1}}abc',
-    variables={
-        'v1': (randint, 2, 20),
-    })
-
-terme_potenzen_q3 = Question(
-    formula='{{v1}} * ( {{v2}} * x + {{v3}} )',
-    correct='{{v1 * v2}}x + {{v1*v3}}',
-    wrong_1='{{(v1+1) * v2}}x + {{(v1-1)*v3}}',
-    wrong_2='{{v1+v2+v3}}x',
-    variables={
-        'v1': (randint, 2, 20),
-        'v2': (randint, 2, 10),
-        'v3': (randint, 5, 12),
-    })
-
-terme_potenzen_q4 = Question(
-    formula='({{v1}}x)^2',
-    correct='{{v1}}*{{v1}}*x*x',
-    wrong_1='{{v1}}*{{v1}}*x',
-    wrong_2='{{v1}}*x*x',
-    variables={
-        'v1': (randint, 2, 9),
-    })
-
 terme_mit_potenzen = QuestionSet(
     capital='Terme',
     subcapital='Terme multiplizieren und dividieren',
@@ -54,10 +16,42 @@ terme_mit_potenzen = QuestionSet(
     instruction='Welcher Term ist wertgleich?',
     question_type='MC',
     questions=[
-        terme_potenzen_q1,
-        terme_potenzen_q2,
-        terme_potenzen_q3,
-        terme_potenzen_q4,
+        Question(
+            formula='({{v1}}x)^2',
+            correct='{{v1}}*{{v1}}*x*x',
+            wrong_1='{{v1}}*{{v1}}*x',
+            wrong_2='{{v1}}*x*x',
+            variables={
+                'v1': (randint, 2, 9),
+            }),
+        Question(
+            formula='({{v1}}a)^2',
+            correct='{{v1}}*{{v1}}*a*a',
+            wrong_1='{{v1}}*{{v1}}*a',
+            wrong_2='{{v1}}*a*a',
+            variables={
+                'v1': (randint, 2, 9),
+            }),
+        Question(
+            formula='({{v1}}y)^3',
+            correct='{{v1}}*{{v1}}*{{v1}}*y*y*y',
+            wrong_1='{{v1}}*{{v1}}*{{v1}}*y',
+            wrong_2='{{v1}}*{{v1}}*y*y*y',
+            variables={
+                'v1': (randint, 2, 9),
+            }),
+        Question(
+            formula='(-b)^3',
+            correct='(-1)*(-1)*(-1)*b*b*b',
+            wrong_1='b',
+            wrong_2='b*b*b',
+            variables={}),
+        Question(
+            formula='(-{{v1}}xy)^2',
+            correct='(-{{v1}})*(-{{v1}})*x*x*y*y',
+            wrong_1='(-{{v1}})*(-{{v1}})*x*x*y',
+            wrong_2='(-{{v1}})*(-{{v1}})*x*y*y',
+            variables={}),
         ]
 )
 
@@ -73,7 +67,7 @@ variablen_ausklammern = QuestionSet(
             correct='a',
             wrong_1='b',
             variables={
-                'v1': (randint, 2, 10),
+                'v1': (randint, 2, 9),
             }),
         Question(
             formula='{{v1}}xz-{{v2}}xy',
@@ -81,8 +75,16 @@ variablen_ausklammern = QuestionSet(
             wrong_1='y',
             wrong_2='z',
             variables={
-                'v1': (randint, 2, 10),
-                'v2': (randint, 2, 10),
+                'v1': (randint, 2, 9),
+                'v2': (randint, 2, 9),
+            }),
+        Question(
+            formula='{{v1}}u^2-{{v2}}uv',
+            correct='u',
+            wrong_1='v',
+            variables={
+                'v1': (randint, 2, 9),
+                'v2': (randint, 2, 9),
             }),
         ]
 )
@@ -99,15 +101,107 @@ variable_richtig_ausgeklammert = QuestionSet(
             correct='correct',
             wrong_1='wrong',
             variables={
-                'v1': (randint, 2, 10),
+                'v1': (randint, 2, 9),
             }),
         Question(
             formula='{{v1}}xyz-{{v2}}x^2 = x({{v1}}yz-{{v2}})',
             correct='wrong',
             wrong_1='correct',
             variables={
-                'v1': (randint, 2, 10),
-                'v2': (randint, 2, 10),
+                'v1': (randint, 2, 9),
+                'v2': (randint, 2, 9),
+            }),
+        Question(
+            formula='{{v1}}a^2b+{{v2}}ac^2 = a({{v1}}ab+{{v2}}ac^2)',
+            correct='wrong',
+            wrong_1='correct',
+            variables={
+                'v1': (randint, 10, 20),
+                'v2': (randint, 2, 9),
+            }),
+        Question(
+            formula='abc-ab-ac = a(bc-b-c)',
+            correct='correct',
+            wrong_1='wrong',
+            variables={}),
+        ]
+)
+
+nennergleiche_bruchterme_addieren = QuestionSet(
+    capital='Terme',
+    subcapital='Bruchterme',
+    title='Nennergleiche Bruchterme addieren',
+    instruction='Zu welchem Bruchterm ist der folgende Bruchterm äquivalent?',
+    question_type='MC',
+    questions=[
+        Question(
+            formula='(x+y)/x + (x-y)/x',
+            correct='(x+y+x-y)/x',
+            wrong_1='(x+y+x-y)/x^2',
+            wrong_2='(x+y-x+y)/x',
+            variables={}),
+        Question(
+            formula='b/(a-b) - ({{v1}}a+b)/(a-b)',
+            correct='(b-{{v1-1}}a-b)/(a-b)',
+            wrong_1='(b-{{v1-1}}a-b)/(a-b)^3',
+            wrong_2='(b-{{v1-1}}a+b)/(a-b)',
+            variables={
+                'v1': (randint, 3, 9),
+            }),
+        Question(
+            formula='({{v1}}x(x+1))/(x+y) - (x(y+1))/(x+y)',
+            correct='({{v1}}x^2+{{v1}}x-xy-x)/(x+y)',
+            wrong_1='({{v1}}x^2+{{v1}}x-xy-x)/({{v1+1}}x+{{v1+1}}y)',
+            wrong_2='({{v1}}x^2+{{v1}}x-xy+x)/(x+y)',
+            variables={
+                'v1': (randint, 3, 8),
+            }),
+        Question(
+            formula='(a^2-{{v1}}ab)/(a+b)^2 - (a(a-{{v2}}b))/(a+b)^2',
+            correct='(a^2-{{v1}}ab-a^2+{{v2}}ab)/(a+b)^2',
+            wrong_1='(a^2-{{v1}}ab-a^2-{{v2}}ab)/(a+b)^2',
+            wrong_2='(a^2-{{v1}}ab+a^2-{{v2}}ab)/(a+b)^2',
+            variables={
+                'v1': (randint, 2, 9),
+                'v2': (randint, 2, 9),
+            }),
+        ]
+)
+
+terme_vereinfachen_2 = QuestionSet(
+    capital='Terme',
+    subcapital='Terme mit Variablen',
+    title='Terme vereinfachen (2)',
+    instruction='Vereinfache den folgenden Term.',
+    question_type='MC',
+    questions=[
+        Question(
+            formula='{{v1}}+{{v2}}*y+{{v3}}*y',
+            correct='{{v1}}+{{v2+v3}}y',
+            wrong_1='{{v1+v2}}+{{v3}}y',
+            wrong_2='{{v1+v2}}+{{v2+v3}}y',
+            variables={
+                'v1': (randint, 11, 20),
+                'v2': (randint, 2, 9),
+                'v3': (randint, 2, 9),
+            }),
+        Question(
+            formula='{{v1}}*{{v2}}*a*b:c',
+            correct='({{v1*v2}}ab)/c',
+            wrong_1='{{v1*v2}}abc',
+            wrong_2='({{v1}}{{v2}}ab)/c',
+            variables={
+                'v1': (randint, 10, 20),
+                'v2': (randint, 3, 6),
+            }),
+        Question(
+            formula='{{v1}}*({{v2}}*x+(-1)*y)',
+            correct='{{v1*v2}}x-{{v1}}y',
+            wrong_1='{{v1}}{{v2}}x-{{v1}}y',
+            wrong_2='{{v1*v2}}x+{{v1}}y',
+            variables={
+                'v1': (randint, 2, 6),
+                'v2': (randint, 2, 6),
             }),
         ]
 )
@@ -174,3 +268,30 @@ question_sets = [
     terme_zuordnen_dragGroup,
     terme_zuordnen_dragMatch,
 ]
+
+# #        Question(
+#             formula='{{v1}} + x * y + {{v2}} * z',
+#             correct='{{v1}} + xy + {{v2}}z',
+#             wrong_1='{{v1}}x + {{v1}}y + {{v2}}z',
+#             variables={
+#                 'v1': (randint, 2, 10),
+#                 'v2': (randint, 2, 10),
+#             }),
+#         Question(
+#             formula='{{v1}} * a * b : c',
+#             correct='({{v1}}ab) / c',
+#             wrong_1='{{v1}} + (ab) / c',
+#             wrong_2='{{v1}}abc',
+#             variables={
+#                 'v1': (randint, 2, 20),
+#             }),
+#         Question(
+#             formula='{{v1}} * ( {{v2}} * x + {{v3}} )',
+#             correct='{{v1 * v2}}x + {{v1*v3}}',
+#             wrong_1='{{(v1+1) * v2}}x + {{(v1-1)*v3}}',
+#             wrong_2='{{v1+v2+v3}}x',
+#             variables={
+#                 'v1': (randint, 2, 20),
+#                 'v2': (randint, 2, 10),
+#                 'v3': (randint, 5, 12),
+#             }),
