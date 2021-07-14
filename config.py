@@ -1,6 +1,11 @@
+import os
+
+
 class Config:
     QUESTIONS_PER_QUESTION_SET = 10
-    CSV_FILE_PATH = 'output.csv'
+    grade = os.environ.get('grade')
+    mode = os.environ.get('capital')
+    CSV_FILE_PATH = "./sheets/"+grade+"/"+mode+".csv"
     CSV_HEADERS = [
         'functionname',
         'capital',

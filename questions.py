@@ -61,10 +61,33 @@ class QuestionSet:
         self.questions = questions
 
     def generate_questions(self, n) -> List[Dict[str, str]]:
+        """ Try to generate unique questions from the provided question set,
+            rerolling when encountering a duplicate question. """
         question_list = []
-        for i in range(n):
-            question = random.choice(self.questions)
-            question_list.append(question.render())
+        seen_questions = set()
+        max_retries = n*50
+        for i in range(max_retries):  # try to generate n questions, but give up after 10*n attempts
+            if len(question_list) >= n:
+                break
+            question = random.choice(self.questions).render()
+
+            if question['answer']:  # MC and buttons types
+                if question['answer'] in seen_questions:
+                    continue
+                seen_questions.add(question['answer'])
+                question_list.append(question)
+
+            elif question['correct']:  # dragGroup and dragMatch types, which have multiple parts
+                drag_parts = question['correct'].split(';')
+                for part in drag_parts:
+                    if part in seen_questions:
+                        break
+                else:
+                    seen_questions.update(drag_parts)
+                    question_list.append(question)
+        else:
+            print(f'Warning: Could not generate enough unique questions for question set {self.title} after {max_retries} retries.')
+            print(f'Please define more question templates or increase the range of random variables.')
         return question_list
 
     def render_questions(self, n) -> List[Dict[str, str]]:

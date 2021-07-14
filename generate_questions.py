@@ -1,3 +1,4 @@
+import os
 import subprocess
 import sys
 
@@ -15,6 +16,7 @@ import csv
 
 
 def write_questions_to_csv_file(csv_file_path, headers, questions):
+    os.makedirs(os.path.dirname(csv_file_path), exist_ok=True)
     with open(csv_file_path, 'a+', newline='', encoding='utf-8') as csv_file:
         writer = csv.DictWriter(csv_file, fieldnames=headers, delimiter=';', quotechar='"', quoting=csv.QUOTE_MINIMAL)
         if csv_file.tell() == 0:
