@@ -1033,8 +1033,212 @@ vereinfachen_und_umformen = QuestionSet(
             variables={
                 'v1': (randint, 2, 9),
                 'v2': (randint, 2, 9),
+                'v3': (randint, 2, 9),
             }),
         ]
+)
+
+faktorisierung_kennenlernen = QuestionSet(
+    capital='Terme',
+    subcapital='Ausklammern',
+    title='Faktorisierung kennenlernen',
+    instruction='Welche Zahl kann man ausklammern?',
+    question_type='buttons',
+    questions=[
+        Question(
+            formula='{{v1}}b-{{v1*v2}}x',
+            correct='{{v1}}',
+            wrong_1='{{v1*v2}}',
+            variables={
+                'v1': (randint, 2, 9),
+                'v2': (randint, 2, 4),
+            }),
+        Question(
+            formula='{{v1*4}}x+{{v1}}a',
+            correct='{{v1}}',
+            wrong_1='{{v1*2}}',
+            wrong_2='{{v1*4}}',
+            variables={
+                'v1': (randint, 2, 9),
+            }),
+        Question(
+            formula='{{v1}}c-{{v1*v2}}d',
+            correct='{{v1}}',
+            wrong_1='1{{v1}}',
+            wrong_2='{{v1*v2}}',
+            variables={
+                'v1': (randint, 2, 9),
+                'v2': (randint, 2, 9),
+            }),
+        ]
+)
+
+subtrahieren_einer_klammer = QuestionSet(
+    capital='Terme',
+    subcapital='Subtrahieren einer Klammer',
+    title='Minusklammern kennenlernen',
+    instruction='Wurde die Minusklammer korrekt berechnet?',
+    question_type='buttons',
+    questions=[
+        Question(
+            formula='-(x+{{v1}})=-x+{{v1}}',
+            correct='wrong',
+            wrong_1='correct',
+            variables={
+                'v1': (randint, 2, 9),
+            }),
+        Question(
+            formula='-(-{{v1}}+{{v2}}p)={{v1}}-{{v2}}p',
+            correct='correct',
+            wrong_1='wrong',
+            variables={
+                'v1': (randint, 10, 30),
+                'v2': (randint, 2, 9),
+            }),
+        Question(
+            formula='-({{v1}}z-{{v2}})=-{{v1}}z-{{v2}}',
+            correct='wrong',
+            wrong_1='correct',
+            variables={
+                'v1': (randint, 2, 9),
+                'v2': (randint, 10, 30),
+            }),
+        Question(
+            formula='-(-{{v1}}-v)={{v1}}+v',
+            correct='correct',
+            wrong_1='wrong',
+            variables={
+                'v1': (randint, 2, 9),
+            }),
+        ]
+)
+
+summen_und_differenzen_ausklammern = QuestionSet(
+    capital='Terme',
+    subcapital='Ausklammern',
+    title='Summen und Differenzen ausklammern',
+    instruction='Was kann man ausklammern?',
+    question_type='buttons',
+    questions=[
+        Question(
+            formula='{{v1}}*(b-d)+c*(b-d)',
+            correct='(b-d)',
+            wrong_1='{{v1}}',
+            wrong_2='c',
+            wrong_3='b',
+            variables={
+                'v1': (randint, 2, 9),
+            }),
+        Question(
+            formula='({{v1}}f+{{v2}})*{{v1}}-f*({{v1}}f+{{v2}})',
+            correct='({{v1}}f+{{v2}})',
+            wrong_1='{{v1}}',
+            wrong_2='{{v2}}',
+            wrong_3='f',
+            variables={
+                'v1': (randint, 2, 5),
+                'v2': (randint, 6, 10),
+            }),
+        ]
+)
+
+gemischte_ubungen = QuestionSet(
+    capital='Terme',
+    subcapital='Ausklammern',
+    title='Gemischte Übungen',
+    instruction='Wird die Zahl richtig ausgeklammert?',
+    question_type='buttons',
+    questions=[
+        Question(
+            formula='{{v1}}xy+{{v1*v2}}x={{v1}}(xy+{{v2-1}}x)',
+            correct='wrong',
+            wrong_1='correct',
+            variables={
+                'v1': (randint, 2, 9),
+                'v2': (randint, 3, 9),
+            }),
+        Question(
+            instruction='Welche Faktoren kann man ausklammern?',
+            formula='{{v1*10}}cv-{{v*4}}cd',
+            correct='{{v1*2}}c',
+            wrong_1='{{v1*4}}c',
+            wrong_2='c',
+            wrong_3='{{v1*2}}',
+            variables={
+                'v1': (randint, 2, 9),
+            }),
+        Question(
+            instruction='Was kann man ausklammern?',
+            formula='{{v2}}(c-{{v1}})-(c-{{v1}})*c^2',
+            correct='(c-{{v1}})',
+            wrong_1='(c+{{v1}})',
+            wrong_2='c',
+            wrong_3='c^2',
+            variables={
+                'v1': (randint, 2, 9),
+                'v2': (randint, 10, 20),
+            }),
+        ]
+)
+
+gemischte_ubungen_lineCombineRight = QuestionSet(
+    capital='Terme',
+    subcapital='Ausklammern',
+    title='Gemischte Übungen',
+    instruction='Wo wurde richtig ausgeklammert? Klicke auf die richtige Lösung.',
+    question_type='lineCombineRight',
+    questions=[
+        Question(
+            formula='{{v1*v3}}z-{{v2*v3}}zy',
+            correct='({{v1}}-{{v2}}y)*{{v3}}z',
+            wrong_1='{{v3}}z*({{v2}}-y)',
+            wrong_2='z*({{v3}}-{{v2}}y)',
+            wrong_3='{{v3}}z*({{v2}}-{{v1}}y)',
+            variables={
+                'v1': (randint, 2, 4),
+                'v2': (randint, 5, 7),
+                'v3': (randint, 2, 9),
+            }),
+        Question(
+            formula='{{v1*v2}}-{{v1}}b-{{v1}}c',
+            correct='{{v1}}*({{v2}}-b-c)',
+            wrong_1='{{v1*v2}}*(1-2b)',
+            wrong_2='{{v1}}*(b-c)',
+            wrong_3='{{v1}}*(1-b-c)',
+            variables={
+                'v1': (randint, 2, 9),
+                'v2': (randint, 2, 4),
+            }),
+        ]
+)
+
+gleichartige_terme = QuestionSet(
+    capital='Terme',
+    subcapital='Terme addieren und subtrahieren',
+    title='Gleichartige Terme',
+    instruction='Ordne gleichartige Terme einander zu.',
+    question_type='dragMatch',
+    questions=[
+        Question(
+            formula='',
+            correct='{{v1}}xy|-{{v2}}xy;'
+                    '{{v3}}x*x*y*y|{{v4}}x^2y^2;'
+                    '{{v5}}x^2yz|-{{v6}}x*x*y*z;'
+                    '{{v7}}xy^2+xy^2|-{{v8}}xy^2;'
+                    '{{v9}}x*y*x*y*x*y|{{v10}}x^3y^3',
+            variables={
+                'v1': (randint, 2, 9),
+                'v2': (randint, 2, 9),
+                'v3': (randint, 2, 20),
+                'v4': (randint, 2, 20),
+                'v5': (randint, 2, 9),
+                'v6': (randint, 2, 9),
+                'v7': (randint, 2, 20),
+                'v8': (randint, 2, 20),
+                'v9': (randint, 2, 9),
+                'v10': (randint, 2, 9),
+            }),
+    ]
 )
 
 # Add newly created question sets in that list, so the script can use them
@@ -1065,4 +1269,10 @@ question_sets = [
     terme_zuordnen_dragGroup,
     terme_zuordnen_dragMatch,
     vereinfachen_und_umformen,
+    faktorisierung_kennenlernen,
+    subtrahieren_einer_klammer,
+    summen_und_differenzen_ausklammern,
+    gemischte_ubungen,
+    gemischte_ubungen_lineCombineRight,
+    gleichartige_terme,
 ]
