@@ -5,13 +5,14 @@ from typing import Dict, List
 
 
 class Question:
-    def __init__(self, formula, correct, wrong_1=None, wrong_2=None, wrong_3=None, variables=None):
+    def __init__(self, formula, correct, wrong_1=None, wrong_2=None, wrong_3=None, variables=None, instruction=None):
         self.formula = formula
         self.correct = correct
         self.wrong_1 = wrong_1
         self.wrong_2 = wrong_2
         self.wrong_3 = wrong_3
         self.variables = variables if variables is not None else {}
+        self.instruction = instruction
 
     def generate_variables(self):
         """ Generate values from provided variables definition list
@@ -41,6 +42,7 @@ class Question:
         """ Return a randomized question string from the provided question definition. """
         generated_variables = self.generate_variables()
         generated_strings = {
+            'instruction': self.instruction,  # special case for questions with changed instruction
             'answer': self.render_template(template_string=self.formula, template_variables=generated_variables),
             'correct': self.render_template(template_string=self.correct, template_variables=generated_variables),
             'wrong_1': self.render_template(template_string=self.wrong_1, template_variables=generated_variables),
@@ -78,7 +80,7 @@ class QuestionSet:
                 question_list.append(question)
 
             elif question['correct']:  # dragGroup and dragMatch types, which have multiple parts
-                drag_parts = question['correct'].split(';')
+                drag_parts = question['correct'].replace('~', ';').split(';')
                 for part in drag_parts:
                     if part in seen_questions:
                         break
@@ -98,7 +100,7 @@ class QuestionSet:
             question['capital'] = self.capital
             question['subcapital'] = self.subcapital
             question['title'] = self.title
-            question['instruction'] = self.instruction
+            question['instruction'] = question.get('instruction') or self.instruction
             question['type'] = self.question_type
             questions_with_extra_data.append(question)
         return questions_with_extra_data

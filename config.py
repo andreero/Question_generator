@@ -2,9 +2,9 @@ import os
 
 
 class Config:
-    QUESTIONS_PER_QUESTION_SET = 10
-    grade = os.environ.get('grade')
-    mode = os.environ.get('capital')
+    QUESTIONS_PER_QUESTION_SET = 15
+    grade = os.environ.get('grade') or 'no_grade'
+    mode = os.environ.get('capital') or 'test'
     CSV_FILE_PATH = "./sheets/"+grade+"/"+mode+".csv"
     CSV_HEADERS = [
         'functionname',
