@@ -79,8 +79,11 @@ class QuestionSet:
                 seen_questions.add(question['answer'])
                 question_list.append(question)
 
-            elif question['correct']:  # dragGroup and dragMatch types, which have multiple parts
-                drag_parts = question['correct'].replace('~', ';').split(';')
+            elif self.question_type in ['dragGroup', 'dragMatch']:  # Those types have multiple parts
+                if self.question_type == 'dragGroup':
+                    drag_parts = question['correct'].replace('~', ';').split(';')
+                else:
+                    drag_parts = question['correct'].replace('|', ';').split(';')
                 for part in drag_parts:
                     if part in seen_questions:
                         break

@@ -1159,7 +1159,7 @@ gemischte_ubungen = QuestionSet(
             }),
         Question(
             instruction='Welche Faktoren kann man ausklammern?',
-            formula='{{v1*10}}cv-{{v*4}}cd',
+            formula='{{v1*10}}cv-{{v1*4}}cd',
             correct='{{v1*2}}c',
             wrong_1='{{v1*4}}c',
             wrong_2='c',
@@ -1227,16 +1227,16 @@ gleichartige_terme = QuestionSet(
                     '{{v7}}xy^2+xy^2|-{{v8}}xy^2;'
                     '{{v9}}x*y*x*y*x*y|{{v10}}x^3y^3',
             variables={
-                'v1': (randint, 2, 9),
-                'v2': (randint, 2, 9),
+                'v1': (randint, 2, 20),
+                'v2': (randint, 2, 20),
                 'v3': (randint, 2, 20),
                 'v4': (randint, 2, 20),
-                'v5': (randint, 2, 9),
-                'v6': (randint, 2, 9),
+                'v5': (randint, 2, 20),
+                'v6': (randint, 2, 20),
                 'v7': (randint, 2, 20),
                 'v8': (randint, 2, 20),
-                'v9': (randint, 2, 9),
-                'v10': (randint, 2, 9),
+                'v9': (randint, 2, 20),
+                'v10': (randint, 2, 20),
             }),
     ]
 )
