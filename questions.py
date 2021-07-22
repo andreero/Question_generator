@@ -2,10 +2,12 @@ from jinja2 import Template, StrictUndefined
 from jinja2.exceptions import UndefinedError
 import random
 from typing import Dict, List
+from images import Image
 
 
 class Question:
-    def __init__(self, formula, correct, wrong_1=None, wrong_2=None, wrong_3=None, variables=None, instruction=None):
+    def __init__(self, formula, correct, wrong_1=None, wrong_2=None, wrong_3=None,
+                 variables=None, instruction=None, hint=None, image=None):
         self.formula = formula
         self.correct = correct
         self.wrong_1 = wrong_1
@@ -13,6 +15,8 @@ class Question:
         self.wrong_3 = wrong_3
         self.variables = variables if variables is not None else {}
         self.instruction = instruction
+        self.hint = hint
+        self.image = image
 
     def generate_variables(self):
         """ Generate values from provided variables definition list
@@ -38,6 +42,18 @@ class Question:
         except UndefinedError as e:
             raise ValueError(f'Error in template {template_string}: {e}')
 
+    def render_image_definition(self, vars):
+        if not self.image:
+            return {}
+        generated_image_dict = {}
+        for field_name, field_templates in self.image.items():
+            field_list = list()
+            for template in field_templates:
+                rendered_field = self.render_template(template_string=template, template_variables=vars)
+                field_list.append(rendered_field)
+            generated_image_dict[field_name] = field_list
+        return generated_image_dict
+
     def render(self) -> Dict[str, str]:
         """ Return a randomized question string from the provided question definition. """
         generated_variables = self.generate_variables()
@@ -48,12 +64,15 @@ class Question:
             'wrong_1': self.render_template(template_string=self.wrong_1, template_variables=generated_variables),
             'wrong_2': self.render_template(template_string=self.wrong_2, template_variables=generated_variables),
             'wrong_3': self.render_template(template_string=self.wrong_3, template_variables=generated_variables),
+            'hint': self.hint,
+            'image': self.render_image_definition(vars=generated_variables),
         }
         return generated_strings
 
 
 class QuestionSet:
-    def __init__(self, capital, subcapital, title, instruction, question_type, questions, function_name=None):
+    def __init__(self, capital, subcapital, title, instruction, question_type, questions,
+                 function_name=None, hint=None, output_directory=''):
         self.function_name = function_name
         self.capital = capital
         self.subcapital = subcapital
@@ -61,6 +80,8 @@ class QuestionSet:
         self.instruction = instruction
         self.question_type = question_type
         self.questions = questions
+        self.hint = hint
+        self.output_directory = output_directory
 
     def generate_questions(self, n) -> List[Dict[str, str]]:
         """ Try to generate unique questions from the provided question set,
@@ -73,10 +94,14 @@ class QuestionSet:
                 break
             question = random.choice(self.questions).render()
 
-            if question['answer']:  # MC and buttons types
-                if question['answer'] in seen_questions:
+            if self.question_type in ['MC', 'buttons', 'gap', 'lineCombineRight']:
+                if question.get('image'):
+                    unique_part = question['correct']
+                else:
+                    unique_part = question['answer']
+                if unique_part in seen_questions:
                     continue
-                seen_questions.add(question['answer'])
+                seen_questions.add(unique_part)
                 question_list.append(question)
 
             elif self.question_type in ['dragGroup', 'dragMatch']:  # Those types have multiple parts
@@ -91,7 +116,8 @@ class QuestionSet:
                     seen_questions.update(drag_parts)
                     question_list.append(question)
         else:
-            print(f'Warning: Could not generate enough unique questions for question set {self.title} after {max_retries} retries.')
+            print(f'Warning: Could not generate enough unique questions '
+                  f'for question set {self.title} after {max_retries} retries.')
             print(f'Please define more question templates or increase the range of random variables.')
         return question_list
 
@@ -105,5 +131,15 @@ class QuestionSet:
             question['title'] = self.title
             question['instruction'] = question.get('instruction') or self.instruction
             question['type'] = self.question_type
+            question['hint'] = question.get('hint') or self.hint
+            if question.get('image'):
+                image_dict = question.get('image')
+                image = Image(axis_limits=image_dict.get('axis_limits'),
+                              dots=image_dict.get('dots'),
+                              charts=image_dict.get('charts'),
+                              arrows=image_dict.get('arrows'),
+                              )
+                image.output_directory = self.output_directory
+                question['image'] = image.draw_image()
             questions_with_extra_data.append(question)
         return questions_with_extra_data
