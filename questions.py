@@ -43,15 +43,31 @@ class Question:
             raise ValueError(f'Error in template {template_string}: {e}')
 
     def render_image_definition(self, vars):
+        """ Replace {{variables}} in image templates with actual values, so the image can be generated."""
         if not self.image:
             return {}
         generated_image_dict = {}
         for field_name, field_templates in self.image.items():
-            field_list = list()
-            for template in field_templates:
-                rendered_field = self.render_template(template_string=template, template_variables=vars)
-                field_list.append(rendered_field)
-            generated_image_dict[field_name] = field_list
+            if isinstance(field_templates, list):
+                field_list = list()
+                for template in field_templates:
+                    if isinstance(template, dict):
+                        rendered_entry = dict()
+                        for key, value in template.items():
+                            rendered_field = self.render_template(template_string=value, template_variables=vars)
+                            rendered_entry[key] = rendered_field
+                    else:
+                        rendered_entry = self.render_template(template_string=template, template_variables=vars)
+                    field_list.append(rendered_entry)
+                generated_image_dict[field_name] = field_list
+            elif isinstance(field_templates, dict):
+                field_dict = dict()
+                for key, value in field_templates.items():
+                    rendered_field = self.render_template(template_string=value, template_variables=vars)
+                    field_dict[key] = rendered_field
+                generated_image_dict[field_name] = field_dict
+            else:
+                generated_image_dict[field_name] = self.render_template(template_string=field_templates, template_variables=vars)
         return generated_image_dict
 
     def render(self) -> Dict[str, str]:

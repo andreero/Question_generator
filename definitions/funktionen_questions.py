@@ -1,7 +1,6 @@
 from math import ceil, floor
 from questions import Question, QuestionSet
 from random import randint
-from images import Image
 
 
 def randdecimal(low, high, step=0.1):
@@ -113,10 +112,10 @@ punkte_prufen = QuestionSet(
     subcapital='Funktionsgleichungen',
     title='Punkte prüfen',
     instruction='Überprüfe, ob der Punkt P(x|y) auf dem jeweiligen Graphen liegt. '
-                'Setze dazu den xWert in die Gleichung ein.',
+                'Setze dazu den x-Wert in die Gleichung ein.',
     question_type='gap',
     hint='Jeder Punkt hat einen x und einen y-Wert. Wenn man überprüfen möchte, ob ein Punkt auf einem Graphen liegt, '
-         'muss der xWert eingesetzt werden. Kommt der gleiche y-Wert heraus, so liegt der Punkt auf dem Graphen. '
+         'muss der x-Wert eingesetzt werden. Kommt der gleiche y-Wert heraus, so liegt der Punkt auf dem Graphen. '
          'Wenn der y-Wert nicht gleich ist, liegt er nicht auf dem Graphen.',
     questions=[
         Question(
@@ -250,9 +249,16 @@ funktionsvorschrift_erkennen = QuestionSet(
                 'v2': (randint, 2, 6),
             },
             image={
-                'axis_limits': ['-4', '4', '{{v1-4}}', '{{v1+4}}'],
-                'dots': ['1;{{1+v1}}'],
-                'charts': ['x**2 + {{v1}}'],
+                'axis_limits': {'xmin': '-4',
+                                'xmax': '4',
+                                'ymin': '{{v1-4}}',
+                                'ymax': '{{v1+4}}'},
+                'dots': [
+                    {'x': '1', 'y': '{{1+v1}}', 'color': 'orange'},
+                ],
+                'charts': [
+                    {'chart': 'x**2 + {{v1}}'},
+                ],
             },
         ),
         Question(
@@ -265,9 +271,16 @@ funktionsvorschrift_erkennen = QuestionSet(
                 'v2': (randint, 2, 6),
             },
             image={
-                'axis_limits': ['{{v1/2-4}}', '{{v1/2+4}}', '{{v1**2/4-4}}', '{{v1**2/4+4}}'],
-                'dots': ['1;{{v1-1}}'],
-                'charts': ['-x*(x - {{v1}})'],
+                'axis_limits': {'xmin': '{{v1/2-4}}',
+                                'xmax': '{{v1/2+4}}',
+                                'ymin': '{{v1**2/4-4}}',
+                                'ymax': '{{v1**2/4+4}}'},
+                'dots': [
+                    {'x': '1', 'y': '{{v1-1}}', 'color': 'orange'},
+                ],
+                'charts': [
+                    {'chart': '-x*(x - {{v1}})'},
+                ],
             },
         ),
         Question(
@@ -279,8 +292,12 @@ funktionsvorschrift_erkennen = QuestionSet(
                 'v1': (randint, 1, 3),
             },
             image={
-                'dots': ['1;{{v1}}'],
-                'charts': ['{{v1}}/x'],
+                'dots': [
+                    {'x': '1', 'y': '{{v1}}', 'color': 'orange'},
+                ],
+                'charts': [
+                    {'chart': '{{v1}}/x'},
+                ],
             },
         ),
         Question(
@@ -293,9 +310,16 @@ funktionsvorschrift_erkennen = QuestionSet(
                 'v2': (randint, 1, 4),
             },
             image={
-                'axis_limits': ['-4', '4', '{{v2-4}}', '{{v2+4}}'],
-                'dots': ['1;{{v1+v2}}'],
-                'charts': ['{{v1}}*x+{{v2}}'],
+                'axis_limits': {'xmin': '-4',
+                                'xmax': '4',
+                                'ymin': '{{v2-4}}',
+                                'ymax': '{{v2+4}}'},
+                'dots': [
+                    {'x': '1', 'y': '{{v1+v2}}', 'color': 'orange'},
+                ],
+                'charts': [
+                    {'chart': '{{v1}}*x+{{v2}}'},
+                ],
             },
         ),
     ]
@@ -320,8 +344,13 @@ lineare_zuordnen = QuestionSet(
                 'v4': (randint, 1, 5),
             },
             image={
-                'axis_limits': ['-4', '4', '{{v1-4}}', '{{4+v1}}'],
-                'charts': ['-x + {{v1}}'],
+                'axis_limits': {'xmin': '-4',
+                                'xmax': '4',
+                                'ymin': '{{v1-4}}',
+                                'ymax': '{{4+v1}}'},
+                'charts': [
+                    {'chart': '-x + {{v1}}'},
+                ],
             },
         ),
         Question(
@@ -336,8 +365,13 @@ lineare_zuordnen = QuestionSet(
                 'v4': (randint, 1, 5),
             },
             image={
-                'axis_limits': ['-4', '4', '{{5*(-1)-v2}}', '{{5-v2}}'],
-                'charts': ['{{v1}} * x - {{v2}}'],
+                'axis_limits': {'xmin': '-4',
+                                'xmax': '4',
+                                'ymin': '{{5*(-1)-v2}}',
+                                'ymax': '{{5-v2}}'},
+                'charts': [
+                    {'chart': '{{v1}} * x - {{v2}}'},
+                ],
             },
         ),
         Question(
@@ -352,8 +386,13 @@ lineare_zuordnen = QuestionSet(
                 'v4': (randint, 1, 5),
             },
             image={
-                'axis_limits': ['-4', '4', '{{5*(-1)+v2}}', '{{5+v2}}'],
-                'charts': ['{{v1}} * x + {{v2}}'],
+                'axis_limits': {'xmin': '-4',
+                                'xmax': '4',
+                                'ymin': '{{5*(-1)+v2}}',
+                                'ymax': '{{5+v2}}'},
+                'charts': [
+                    {'chart': '{{v1}} * x + {{v2}}'},
+                ],
             },
         ),
         Question(
@@ -368,8 +407,13 @@ lineare_zuordnen = QuestionSet(
                 'v4': (randint, 1, 5),
             },
             image={
-                'axis_limits': ['-4', '4', '{{5*(-1)-v2}}', '{{5-v2}}'],
-                'charts': ['{{v1}} * x - {{v2}}'],
+                'axis_limits': {'xmin': '-4',
+                                'xmax': '4',
+                                'ymin': '{{5*(-1)-v2}}',
+                                'ymax': '{{5-v2}}'},
+                'charts': [
+                    {'chart': '{{v1}} * x - {{v2}}'},
+                ],
             },
         ),
     ]
@@ -395,6 +439,32 @@ proportionale_funktionen_gap_2 = QuestionSet(
         ]
 )
 
+quotientengleichheit = QuestionSet(
+    capital='Funktionen',
+    subcapital='Proportionale Funktionen',
+    title='Quotientengleichheit',
+    instruction='Rechne den Quotienten <mat>y/x</mat> für das folgende Wertepaare aus.',
+    question_type='gap',
+    hint='Beispiel: Um den Quotienten <mat>y/x</mat> für das Wertepaar <mat>x=-3</mat> und <mat>y=-7.5</mat> '
+         'zu berechnen, muss folgende Gleichung gelöst werden: <br><mat>(-7.5)/(-3)</mat>',
+    questions=[
+        Question(
+            formula='x = {{v1}}   y = {{v1*v2}}',
+            correct='{{v2}}',
+            variables={
+                'v1': (randint, 2, 9),
+                'v2': (randdecimal, 1.5, 4, 0.5),
+            }),
+        Question(
+            formula='x = {{v1}}   y = {{v1*v2}}',
+            correct='{{v2}}',
+            variables={
+                'v1': (randint, -9, -2),
+                'v2': (randdecimal, 1.5, 4, 0.5),
+            }),
+        ]
+)
+
 steigungsdreieck = QuestionSet(
     capital='Funktionen',
     subcapital='Proportionale Funktionen',
@@ -411,8 +481,13 @@ steigungsdreieck = QuestionSet(
                 'v1': (randint, 1, 4),
             },
             image={
-                'axis_limits': ['-2', '6', '-2', '{{v1*2+4}}'],
-                'charts': ['{{v1}} * x'],
+                'axis_limits': {'xmin': '-2',
+                                'xmax': '6',
+                                'ymin': '-2',
+                                'ymax': '{{v1*2+4}}'},
+                'charts': [
+                    {'chart': '{{v1}} * x'},
+                ],
                 'arrows': [
                     ('1; {{v1}}; 1; 0; x'),
                     ('2; {{v1}}; 0; {{v1}}; y'),
@@ -428,8 +503,13 @@ steigungsdreieck = QuestionSet(
                 'v1': (randint, 1, 4),
             },
             image={
-                'axis_limits': ['-2', '6', '-2', '{{v1*2+4}}'],
-                'charts': ['{{v1}} * x'],
+                'axis_limits': {'xmin': '-2',
+                                'xmax': '6',
+                                'ymin': '-2',
+                                'ymax': '{{v1*2+4}}'},
+                'charts': [
+                    {'chart': '{{v1}} * x'},
+                ],
                 'arrows': [
                     ('1; {{v1}}; 1; 0; x'),
                     ('2; {{v1}}; 0; {{v1}}; y'),
@@ -445,8 +525,13 @@ steigungsdreieck = QuestionSet(
                 'v1': (randint, -4, -1),
             },
             image={
-                'axis_limits': ['-2', '6', '{{v1*2-4}}', '2'],
-                'charts': ['{{v1}} * x'],
+                'axis_limits': {'xmin': '-2',
+                                'xmax': '6',
+                                'ymin': '{{v1*2-4}}',
+                                'ymax': '2'},
+                'charts': [
+                    {'chart': '{{v1}} * x'},
+                ],
                 'arrows': [
                     ('1; {{v1}}; 1; 0; +1'),
                     ('2; {{v1}}; 0; {{v1}}; y'),
@@ -462,8 +547,13 @@ steigungsdreieck = QuestionSet(
                 'v1': (randint, -4, -1),
             },
             image={
-                'axis_limits': ['-2', '6', '{{v1*2-4}}', '2'],
-                'charts': ['{{v1}} * x'],
+                'axis_limits': {'xmin': '-2',
+                                'xmax': '6',
+                                'ymin': '{{v1*2-4}}',
+                                'ymax': '2'},
+                'charts': [
+                    {'chart': '{{v1}} * x'},
+                ],
                 'arrows': [
                     ('1; {{v1}}; 1; 0; +1'),
                     ('2; {{v1}}; 0; {{v1}}; y'),
@@ -473,15 +563,296 @@ steigungsdreieck = QuestionSet(
     ]
 )
 
+antiproportionale_funktionen = QuestionSet(
+    capital='Funktionen',
+    subcapital='Antiproportionale Funktionen',
+    title='Antiproportionale Funktionen',
+    instruction='Rechne das Produkt <mat>x * y</mat> für das folgende Wertepaare aus.',
+    question_type='gap',
+    questions=[
+        Question(
+            formula='x = {{v1}} <br> y = {{v2}}',
+            correct='{{v1*v2}}',
+            variables={
+                'v1': (randint, 2, 5),
+                'v2': (randint, 11, 25),
+            }),
+        Question(
+            formula='x = {{v1}} <br> y = {{v1*v2}}',
+            correct='{{v2}}',
+            variables={
+                'v1': (randint, -9, -2),
+                'v2': (randdecimal, 1.5, 4, 0.5),
+            }),
+        ]
+)
+
+schnittpunkte_berechnen = QuestionSet(
+    capital='Funktionen',
+    subcapital='Lineare Funktion',
+    title='Schnittpunkte berechnen',
+    instruction='Bestimme für jede Funktionsvorschrift den y-Achsenabschnitt.',
+    hint='Der <b>y-Achsenabschnitt</b> b kann der Funktionsvorschrift <mat>f(x) = m*x + b</mat> direktentnommen werden.',
+    question_type='gap',
+    questions=[
+        Question(
+            formula='f(x) = {{v1}}*x - {{v2}}<br>b = ___',
+            correct='{{v2}}',
+            variables={
+                'v1': (randint, 2, 9),
+                'v2': (randint, 2, 9),
+            }),
+        Question(
+            instruction='Bestimme für jede Funktionsvorschrift die Nullstelle.',
+            hint='Die Formel für die Nullstelle <mat>x_0</mat>, also den Schnittpunkt mit der x-Achse, '
+                 'lautet: <br> <mat>x = -b/m</mat>.',
+            formula='f(x) = {{v1}}*x - {{v1*v2}} <br> x_0 = - ___/___ = ___',
+            correct='{{(-v1*v2)}};{{v1}};{{v2}}',
+            variables={
+                'v1': (randint, 2, 9),
+                'v2': (randint, 1, 3),
+            }),
+        Question(
+            formula='f(x) = {{v1}}*x + {{v2}} <br> b = ___',
+            correct='{{v2}}',
+            variables={
+                'v1': (randint, -9, -2),
+                'v2': (randint, 2, 9),
+            }),
+        Question(
+            instruction='Bestimme für jede Funktionsvorschrift die Nullstelle.',
+            hint='Die Formel für die Nullstelle <mat>x_0</mat>, also den Schnittpunkt mit der x-Achse, '
+                 'lautet: <br> <mat>x = -b/m</mat>.',
+            formula='f(x) = {{v1}}*x + {{v1*v2}} <br> x_0 = - ___/___ = ___',
+            correct='{{v1*v2}};{{v1}};{{v2}}',
+            variables={
+                'v1': (randint, -8, -2),
+                'v2': (randint, -3, -1),
+            }),
+        ]
+)
+
+funktionswerte_bestimmen_1_2 = QuestionSet(
+    capital='Funktionen',
+    subcapital='Geraden durch Punkte',
+    title='Funktionswerte bestimmen (1)',
+    instruction='Bestimme den y-Achsenabschnitt b mit der Steigung m und dem Punkt P.',
+    question_type='gap',
+    questions=[
+        Question(
+            formula='m = {{v1}}<br>P = ({{v2}}|{{v3}})<br><br>b = ___ - ___ * ___ = ___',
+            correct='{{v3}};{{v1}};{{v2}};{{v3-v1*v2}}',
+            variables={
+                'v1': (randint, 1, 4),
+                'v2': (randint, 1, 4),
+                'v3': (randint, 1, 4),
+            }),
+        Question(
+            instruction='Bestimme die gesamte Funktionsvorschrift an.',
+            formula='m = {{v1}}<br>P = ({{v2}}|{{v3}})<br><br>f(x) = ___ * ___ + ___',
+            correct='x;{{v1}};{{v3-v1*v2}}',
+            variables={
+                'v1': (randint, 1, 4),
+                'v2': (randint, 1, 4),
+                'v3': (randint, 1, 4),
+            }),
+        Question(
+            formula='m = {{v1}}<br>P = ({{v2}}|{{v3}})<br><br>b = ___ - ___ * ___ = ___',
+            correct='{{v3}};{{v1}};{{v2}};{{v3-v1*v2}}',
+            variables={
+                'v1': (randint, 1, 4),
+                'v2': (randint, -4, -1),
+                'v3': (randint, -4, -1),
+            }),
+        Question(
+            instruction='Bestimme die gesamte Funktionsvorschrift an.',
+            formula='m = {{v1}}<br>P = ({{v2}}|{{v3}})<br><br>f(x) = ___ * ___ + ___',
+            correct='x;{{v1}};{{v3-v1*v2}}',
+            variables={
+                'v1': (randint, 1, 4),
+                'v2': (randint, -4, -1),
+                'v3': (randint, -4, -1),
+            }),
+        ]
+)
+
+funktionswerte_bestimmen_2_2 = QuestionSet(
+    capital='Funktionen',
+    subcapital='Geraden durch Punkte',
+    title='Funktionswerte bestimmen (2)',
+    instruction='Bestimme den y-Achsenabschnitt b mit der Steigung m und dem Punkt P.',
+    question_type='gap',
+    questions=[
+        Question(
+            formula='b = {{v1}}<br>P = ({{v2}}|{{v2*v3+v1}})<br><br>m = ( ___ - ___ ) / ___ = ___',
+            correct='{{v2*v3-v1}};{{v1}};{{v2}};{{v3}}',
+            variables={
+                'v1': (randint, 1, 6),
+                'v2': (randint, 1, 4),
+                'v3': (randint, 1, 3),
+            }),
+        Question(
+            instruction='Bestimme die gesamte Funktionsvorschrift an.',
+            formula='b = {{v1}}<br>P = ({{v2}}|{{v2*v3+v1}})<br><br>f(x) = ___ * ___ + ___ ',
+            correct='x;{{v3}};{{v1}}',
+            variables={
+                'v1': (randint, 1, 6),
+                'v2': (randint, 1, 4),
+                'v3': (randint, 1, 3),
+            }),
+        ]
+)
+
+funktionswerte_bestimmen_3 = QuestionSet(
+    capital='Funktionen',
+    subcapital='Geraden durch Punkte',
+    title='Funktionswerte bestimmen (2)',
+    instruction='',
+    question_type='gap',
+    questions=[
+        Question(
+            instruction='Wie lauten die Koordinaten der Punkte <mat>P_1</mat> und <mat>P_2</mat>?',
+            formula='<mat>P_1 = (x_1|y_1) = ( ___ | ___ )</mat><br><mat>P_2 = (x_2|y_2) = ( ___| ___ )</mat>',
+            correct='{{v3}};{{v1*v3+v2}};{{v4}};{{v1*v4+v2}}',
+            variables={
+                'v1': (randint, 1, 2),
+                'v2': (randint, -2, 2),
+                'v3': (randint, -3, -1),
+                'v4': (randint, 1, 3),
+            },
+            image={
+                'axis_limits': {'xmin': '{{v3-1}}',
+                                'xmax': '{{v4+1}}',
+                                'ymin': '{{v1*v3+v2-1}}',
+                                'ymax': '{{v1*v4+v2+1}}'},
+                'dots': [
+                    {'x': '{{v3}}', 'y': '{{v1*v3+v2}}', 'color': 'orange', 'text': 'P1'},
+                    {'x': '{{v4}}', 'y': '{{v1*v4+v2}}', 'color': 'orange', 'text': 'P2'},
+                ],
+                'charts': [
+                    {'chart': 'x*{{v1}}+({{v2}})'},
+                ],
+            },
+        ),
+        Question(
+            instruction='Berechne die Steigung anhand der folgenden Formel.<br><br><mat>m = y_2 - y_1 / x_2 - x_1</mat>',
+            formula='<mat>m = ( ___ -  ___ ) / ( ___ -  ___ ) = ___ / ___ = ___</mat>',
+            correct='{{v1*v4+v2}};{{v1*v3+v2}};{{v4}};{{v3}};{{v1*(v4-v3)}};{{v4-v3}};{{v1}}',
+            variables={
+                'v1': (randint, 1, 2),
+                'v2': (randint, -2, 2),
+                'v3': (randint, -3, -1),
+                'v4': (randint, 1, 3),
+            },
+            image={
+                'axis_limits': {'xmin': '{{v3-1}}',
+                                'xmax': '{{v4+1}}',
+                                'ymin': '{{v1*v3+v2-1}}',
+                                'ymax': '{{v1*v4+v2+1}}'},
+                'dots': [
+                    {'x': '{{v3}}', 'y': '{{v1*v3+v2}}', 'color': 'orange', 'text': 'P1'},
+                    {'x': '{{v4}}', 'y': '{{v1*v4+v2}}', 'color': 'orange', 'text': 'P2'},
+                ],
+                'charts': [
+                    {'chart': 'x*{{v1}}+({{v2}})'},
+                ],
+            },
+        ),
+        Question(
+            instruction='Wie lautet der y-Achsenabschnitt b?',
+            formula='b = ___ ',
+            correct='{{v2}}',
+            variables={
+                'v1': (randint, 1, 2),
+                'v2': (randint, -2, 2),
+                'v3': (randint, -3, -1),
+                'v4': (randint, 1, 3),
+            },
+            image={
+                'axis_limits': {'xmin': '{{v3-1}}',
+                                'xmax': '{{v4+1}}',
+                                'ymin': '{{v1*v3+v2-1}}',
+                                'ymax': '{{v1*v4+v2+1}}'},
+                'dots': [
+                    {'x': '{{v3}}', 'y': '{{v1*v3+v2}}', 'color': 'orange', 'text': 'P1'},
+                    {'x': '{{v4}}', 'y': '{{v1*v4+v2}}', 'color': 'orange', 'text': 'P2'},
+                ],
+                'charts': [
+                    {'chart': 'x*{{v1}}+({{v2}})'},
+                ],
+            },
+        ),
+        Question(
+            instruction='Wie lautet die dazugehörige Zuordnungsvorschrift?',
+            formula='y = ___ * x + ___ ',
+            correct='{{v1}};{{v2}}',
+            variables={
+                'v1': (randint, 1, 2),
+                'v2': (randint, -2, 2),
+                'v3': (randint, -3, -1),
+                'v4': (randint, 1, 3),
+            },
+            image={
+                'axis_limits': {'xmin': '{{v3-1}}',
+                                'xmax': '{{v4+1}}',
+                                'ymin': '{{v1*v3+v2-1}}',
+                                'ymax': '{{v1*v4+v2+1}}'},
+                'dots': [
+                    {'x': '{{v3}}', 'y': '{{v1*v3+v2}}', 'color': 'orange', 'text': 'P1'},
+                    {'x': '{{v4}}', 'y': '{{v1*v4+v2}}', 'color': 'orange', 'text': 'P2'},
+                ],
+                'charts': [
+                    {'chart': 'x*{{v1}}+({{v2}})'},
+                ],
+            },
+        ),
+    ]
+)
+
+punkte_prufen_2 = QuestionSet(
+    capital='Funktionen',
+    subcapital='Geraden durch Punkte',
+    title='Punkte prüfen',
+    instruction='Überprüfe, ob der Punkt P(x|y) auf dem jeweiligen Graphen liegt. '
+                'Setze dazu den x-Wert in die Gleichung ein.',
+    question_type='gap',
+    questions=[
+        Question(
+            formula='<mat>f(x) = {{v1}} * x + {{v2}}</mat><br><br>P({{v3}}|{{v1*v3+v2}})'
+                    '<br><br><mat>y = ___ * ___ + ___ = ____ </mat>',
+            correct='{{v1}};{{v3}};{{v2}};{{v1*v3+v2}}',
+            variables={
+                'v1': (randint, -4, -1),
+                'v2': (randint, 2, 7),
+                'v3': (randint, 1, 4),
+            }),
+        Question(
+            formula='<mat>f(x) = {{v1}} * x + {{v2}}</mat><br><br>P({{v3}}|{{v1*v3+v2}})'
+                    '<br><br><mat>y = ___ * ___ + ___ = ____ </mat>',
+            correct='{{v1}};{{v3}};{{v2}};{{v1*v3+v2}}',
+            variables={
+                'v1': (randint, 1, 3),
+                'v2': (randint, 2, 7),
+                'v3': (randint, 1, 4),
+            }),
+    ]
+)
+
 question_sets = [
-    sachsituationen_zuordnen,
-    allgemeine_und_scheitelform,
-    proportionale_funktionen_gap,
-    punkte_prufen,
-    funktionswerte_bestimmen_1,
-    funktionswerte_bestimmen_2,
-    funktionsvorschrift_erkennen,
-    lineare_zuordnen,
-    proportionale_funktionen_gap_2,
-    steigungsdreieck,
+    # sachsituationen_zuordnen,
+    # allgemeine_und_scheitelform,
+    # proportionale_funktionen_gap,
+    # punkte_prufen,
+    # funktionswerte_bestimmen_1,
+    # funktionswerte_bestimmen_2,
+    # funktionsvorschrift_erkennen,
+    # lineare_zuordnen,
+    # proportionale_funktionen_gap_2,
+    # quotientengleichheit,
+    # steigungsdreieck,
+    # schnittpunkte_berechnen,
+    # funktionswerte_bestimmen_1_2,
+    # funktionswerte_bestimmen_2_2,
+    funktionswerte_bestimmen_3,
+    punkte_prufen_2,
 ]

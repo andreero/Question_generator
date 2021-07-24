@@ -14,10 +14,13 @@ class Image:
         self.output_directory = output_directory
 
     def draw_image(self):
-        if self.axis_limits is None:
+        if not self.axis_limits:
             xmin, xmax, ymin, ymax = -4, 4, -4, 4
         else:
-            xmin, xmax, ymin, ymax = [round(float(value)) for value in self.axis_limits]
+            xmin = round(float(self.axis_limits['xmin']))
+            xmax = round(float(self.axis_limits['xmax']))
+            ymin = round(float(self.axis_limits['ymin']))
+            ymax = round(float(self.axis_limits['ymax']))
         ticks_frequency = 1
 
         fig, ax = plt.subplots(figsize=(10, 10))
@@ -53,19 +56,24 @@ class Image:
         if self.dots:
             dot_xs = list()
             dot_ys = list()
+            dot_colors = list()
             for dot in self.dots:
-                dot_x, dot_y = dot.split(';')
-                dot_xs.append(float(dot_x))
-                dot_ys.append(float(dot_y))
-            ax.scatter(dot_xs, dot_ys, c='orange', zorder=10)
+                dot_xs.append(float(dot['x']))
+                dot_ys.append(float(dot['y']))
+                dot_colors.append(dot.get('color', 'orange'))
+                if dot.get('text'):
+                    ax.text(float(dot['x']), float(dot['y']), '  '+dot['text'], color=dot.get('color', 'orange'),
+                            ha='left', va='center', fontweight='bold', fontsize='large', zorder=100)
+            ax.scatter(dot_xs, dot_ys, c=dot_colors, zorder=10)
 
         # draw charts
         if self.charts:
             chart_xs = np.linspace(xmin-1, xmax+1, 200)
             for chart in self.charts:
-                chart_expression = chart.replace('x', 'chart_xs')
+                chart_expression = chart['chart'].replace('x', 'chart_xs')
                 chart_ys = ne.evaluate(chart_expression)
-                ax.plot(chart_xs, chart_ys)
+                chart_color = chart.get('color') or None
+                ax.plot(chart_xs, chart_ys, c=chart_color)
 
         # draw arrows
         if self.arrows:
