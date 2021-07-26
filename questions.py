@@ -45,7 +45,7 @@ class Question:
     def render_image_definition(self, vars):
         """ Replace {{variables}} in image templates with actual values, so the image can be generated."""
         if not self.image:
-            return {}
+            return
         generated_image_dict = {}
         for field_name, field_templates in self.image.items():
             if isinstance(field_templates, list):
@@ -74,7 +74,7 @@ class Question:
         """ Return a randomized question string from the provided question definition. """
         generated_variables = self.generate_variables()
         generated_strings = {
-            'instruction': self.instruction,  # special case for questions with changed instruction
+            'instruction': self.render_template(template_string=self.instruction, template_variables=generated_variables),
             'answer': self.render_template(template_string=self.formula, template_variables=generated_variables),
             'correct': self.render_template(template_string=self.correct, template_variables=generated_variables),
             'wrong_1': self.render_template(template_string=self.wrong_1, template_variables=generated_variables),
@@ -148,8 +148,8 @@ class QuestionSet:
             question['instruction'] = question.get('instruction') or self.instruction
             question['type'] = self.question_type
             question['hint'] = question.get('hint') or self.hint
-            if question.get('image'):
-                image_dict = question.get('image')
+            if question.get('image') and question['image']:
+                image_dict = question['image']
                 image = Image(axis_limits=image_dict.get('axis_limits'),
                               dots=image_dict.get('dots'),
                               charts=image_dict.get('charts'),

@@ -838,21 +838,318 @@ punkte_prufen_2 = QuestionSet(
     ]
 )
 
+parabeln_erkennen = QuestionSet(
+    capital='Funktionen',
+    subcapital='Quadratische Funktionen',
+    title='Parabeln erkennen',
+    question_type='MC',
+    instruction='',
+    questions=[
+        Question(
+            instruction='Ist der Betrag von a kleiner, gleich oder größer als {{v2}}?',
+            hint='Allgemeine Form: <mat>f(x) = ax^2 + bx + c</mat><br>Scheitelform: <mat>f(x) = a(xd)^2+e</mat>',
+            formula='',
+            correct='|a| > {{v2}}',
+            wrong_1='|a| < {{v2}}',
+            wrong_2='|a| = {{v2}}',
+            variables={
+                'v1': (randdecimal, 0.5, 2, 0.5),
+                'v2': (randint, 1, 5),
+            },
+            image={
+                'axis_limits': {'xmin': '-4',
+                                'xmax': '4',
+                                'ymin': '{{v2-4}}',
+                                'ymax': '{{v2+4}}'},
+                'charts': [
+                    {'chart': '{{v1}}*x**2 + {{v2}}'},
+                ],
+            },
+        ),
+        Question(
+            instruction='Welche Formel gehört zu der Parabel?',
+            formula='',
+            correct='y = {{v1}}x^2+{{v2}}',  # -x^2 + {{v1}}
+            wrong_1='y = -{{v1}}x^2+{{v2}}',
+            variables={
+                'v1': (randdecimal, 0.5, 2, 0.5),
+                'v2': (randint, 1, 5),
+            },
+            image={
+                'axis_limits': {'xmin': '-4',
+                                'xmax': '4',
+                                'ymin': '{{v2-4}}',
+                                'ymax': '{{v2+4}}'},
+                'charts': [
+                    {'chart': '{{v1}}*x**2 + {{v2}}'},
+                ],
+            },
+        ),
+    ]
+)
+
+scheitelpunkt_ablesen = QuestionSet(
+    capital='Funktionen',
+    subcapital='Quadratische Funktionen',
+    title='Scheitelpunkt ablesen',
+    question_type='gap',
+    instruction='Wie lautet der Scheitelpunkt?',
+    questions=[
+        Question(
+            hint='Die Scheitelform lautet <br><mat>f(x) = a*(xd)^2+e</mat>.<br> Dabei ist d die Verschiebung auf der '
+                 'x-Achse und e die Verschiebung auf der y-Achse. Bei Normalparabeln hat a entweder den Wert 1 oder -1.',
+            formula='S = ( ___ | ___ )',
+            correct='{{v1}};{{v2}}',
+            variables={
+                'v1': (randint, -4, -1),
+                'v2': (randint, 1, 4),
+            },
+            image={
+                'axis_limits': {'xmin': '{{v1-4}}',
+                                'xmax': '{{v1+4}}',
+                                'ymin': '{{v2-6}}',
+                                'ymax': '{{v2+2}}'},
+                'charts': [
+                    {'chart': '-(x-{{v1}})**2 + {{v2}}'},
+                ],
+            },
+        ),
+        Question(
+            instruction='Wie lautet die Funktionsvorschrift?',
+            formula='f(x) = ___ ( x - ___ )^2 + ___',
+            correct='-;{{(-v1)}};{{v2}}',
+            variables={
+                'v1': (randint, -4, -1),
+                'v2': (randint, 1, 4),
+            },
+            image={
+                'axis_limits': {'xmin': '{{v1-4}}',
+                                'xmax': '{{v1+4}}',
+                                'ymin': '{{v2-6}}',
+                                'ymax': '{{v2+2}}'},
+                'charts': [
+                    {'chart': '-(x-{{v1}})**2 + {{v2}}'},
+                ],
+            },
+        ),
+    ]
+)
+
+funktionsvorschrift_erkennen_2 = QuestionSet(
+    capital='Funktionen',
+    subcapital='Quadratische Funktionen',
+    title='Funktionsvorschrift erkennen',
+    question_type='MC',
+    instruction='Welche Funktionsvorschrift passt zu der angezeigten Parabel?',
+    questions=[
+        Question(
+            formula='',
+            correct='f(x) = -{{v1}}*(x - {{v2}})^2 + {{v3}}',
+            wrong_1='f(x) = 4*(x + 3)^2 - 2',
+            wrong_2='f(x) = -0,5*(x - {{v2}})^2 - {{v3}}',
+            wrong_3='f(x) = 1,5*(x - 2)^2 + 2',
+            variables={
+                'v1': (randdecimal, 0.5, 1.5, 0.5),
+                'v2': (randint, 1, 3),
+                'v3': (randint, 1, 3),
+            },
+            image={
+                'axis_limits': {'xmin': '{{v2-4}}',
+                                'xmax': '{{v2+4}}',
+                                'ymin': '{{v3-6}}',
+                                'ymax': '{{v3+2}}'},
+                'charts': [
+                    {'chart': '-{{v1}}*(x - {{v2}})**2 + {{v3}}'},
+                ],
+            },
+        ),
+    ]
+)
+
+in_die_allgemeine_form_umrechnen = QuestionSet(
+    capital='Funktionen',
+    subcapital='Quadratische Funktionen',
+    title='In die allgemeine Form umrechnen',
+    question_type='MC',
+    instruction='Rechne die Scheitelform in die allgemeine Form um. '
+                'Rechne in kleinen Schritten und benutze die binomischen Formeln.',
+    hint='Die ersten beiden binomischen Formeln lauten: <br>'
+         '<mat>(a+b)^2 = a^2 + 2ab + b^2</mat>,<br><mat>(ab)^2 = a^2 - 2ab + b^2</mat>.',
+    questions=[
+        Question(
+            formula='<mat>f(x) = {{v1}}(x-{{v2}})^2+{{v3}}</mat><br>'
+                    '<mat>f(x) = {{v1}}( ___ ) + {{v3}}</mat><br>'
+                    '<mat>f(x)= ___ + {{v3}}</mat><br>'
+                    '<mat>f(x)= ___</mat>',
+            correct='x^2-{{2*v2}}x+{{v2**2}};'
+                    '{{v1}}x^2-{{v1*2*v2}}x+{{v1*v2**2}};'
+                    '{{v1}}x^2-{{v1*2*v2}}x+{{v1*v2**2+v3}}',
+            variables={
+                'v1': (randint, 2, 3),
+                'v2': (randint, 1, 5),
+                'v3': (randint, 1, 5),
+            },
+        ),
+    ]
+)
+
+wertetabelle_auslesen = QuestionSet(
+    capital='Funktionen',
+    subcapital='Potenzfunktionen',
+    title='Wertetabelle auslesen',
+    question_type='gap',
+    instruction='Berechne für die Funktionsvorschrift für den vorgegebenen x-Wert den dazugehörigen Funktionswert.',
+    questions=[
+        Question(
+            formula='f(x) = {{v1}}*x^{{v2}} <br> x = {{v3}}',
+            correct='{{v1*v3**v2}}',
+            variables={
+                'v1': (randint, 2, 5),
+                'v2': (randint, 3, 3),
+                'v3': (randint, 1, 3),
+            },
+        ),
+        Question(
+            formula='f(x) = {{v1}}*x^{{v2}} <br> x = {{v3}}',
+            correct='{{v1*v3**v2}}',
+            variables={
+                'v1': (randint, 2, 5),
+                'v2': (randint, 3, 3),
+                'v3': (randint, -3, -1),
+            },
+        ),
+        Question(
+            formula='f(x) = {{v1}}*x^{{v2}} <br> x = {{v3}}',
+            correct='{{v1*v3**v2}}',
+            variables={
+                'v1': (randint, 2, 4),
+                'v2': (randint, 4, 4),
+                'v3': (randint, 1, 2),
+            },
+        ),
+        Question(
+            formula='f(x) = {{v1}}*x^{{v2}} <br> x = {{v3}}',
+            correct='{{v1*v3**v2}}',
+            variables={
+                'v1': (randint, 2, 4),
+                'v2': (randint, 3, 4),
+                'v3': (randint, -2, -1),
+            },
+        ),
+    ]
+)
+
+funktionvorschriften_zuordnen = QuestionSet(
+    capital='Funktionen',
+    subcapital='Potenzfunktionen',
+    title='Funktionvorschriften zuordnen',
+    question_type='MC',
+    instruction='Ordne dem Graph die richtige Funktionsvorschrift zu.',
+    questions=[
+        Question(
+            formula='Welche Funktionsvorschrift gehört zum lila Graph?',
+            correct='<mat>f(x) = -{{v1}}x^3</mat>',
+            wrong_1='<mat>f(x) = x^5</mat>',
+            wrong_2='<mat>f(x) = {{v2}}x^4</mat>',
+            wrong_3='<mat>f(x) = -{{v3}}x^2</mat>',
+            variables={
+                'v1': (randdecimal, 0.1, 0.5, 0.1),
+                'v2': (randint, 1, 3),
+                'v3': (randdecimal, 0.2, 0.8, 0.2),
+            },
+            image={
+                'charts': [
+                    {'chart': '-{{v1}}*(x**3)', 'color': 'purple'},
+                    {'chart': 'x**5', 'color': 'C0'},
+                    {'chart': '{{v2}}*(x**4)', 'color': 'orange'},
+                    {'chart': '-{{v3}}*(x**2)', 'color': 'green'},
+                ],
+            },
+        ),
+        Question(
+            formula='Welche Funktionsvorschrift gehört zum blau Graph?',
+            correct='<mat>f(x) = -x^5</mat>',
+            wrong_1='<mat>f(x) = {{v1}}x^3</mat>',
+            wrong_2='<mat>f(x) = -{{v3}}x^2</mat>',
+            wrong_3='<mat>f(x) = {{v2}}x^4</mat>',
+            variables={
+                'v1': (randdecimal, 0.1, 0.5, 0.1),
+                'v2': (randint, 1, 3),
+                'v3': (randdecimal, 0.1, 0.5, 0.1),
+            },
+            image={
+                'charts': [
+                    {'chart': '{{v1}}*(x**3)', 'color': 'purple'},
+                    {'chart': '-x**5', 'color': 'C0'},
+                    {'chart': '{{v2}}*(x**4)', 'color': 'orange'},
+                    {'chart': '-{{v3}}*(x**2)', 'color': 'green'},
+                ],
+            },
+        ),
+        Question(
+            formula='Welche Funktionsvorschrift gehört zum orange Graph?',
+            correct='<mat>f(x) = -{{v2}}x^4</mat>',
+            wrong_1='<mat>f(x) = -x^5</mat>',
+            wrong_2='<mat>f(x) = {{v1}}x^3</mat>',
+            wrong_3='<mat>f(x) = {{v3}}x^2</mat>',
+            variables={
+                'v1': (randint, 1, 3),
+                'v2': (randdecimal, 0.2, 0.8, 0.2),
+                'v3': (randint, 1, 3),
+            },
+            image={
+                'charts': [
+                    {'chart': '{{v1}}*(x**3)', 'color': 'purple'},
+                    {'chart': '-x**5', 'color': 'C0'},
+                    {'chart': '-{{v2}}*(x**4)', 'color': 'orange'},
+                    {'chart': '{{v3}}*(x**2)', 'color': 'green'},
+                ],
+            },
+        ),
+        Question(
+            formula='Welche Funktionsvorschrift gehört zum grün Graph?',
+            correct='<mat>f(x) = {{v3}}x^2</mat>',
+            wrong_1='<mat>f(x) = x^5</mat>',
+            wrong_2='<mat>f(x) = -{{v2}}x^4</mat>',
+            wrong_3='<mat>f(x) = -{{v1}}x^3</mat>',
+            variables={
+                'v1': (randint, 1, 3),
+                'v2': (randdecimal, 0.2, 0.6, 0.2),
+                'v3': (randdecimal, 0.2, 0.5, 0.1),
+            },
+            image={
+                'charts': [
+                    {'chart': '-{{v1}}*(x**3)', 'color': 'purple'},
+                    {'chart': 'x**5', 'color': 'C0'},
+                    {'chart': '-{{v2}}*(x**4)', 'color': 'orange'},
+                    {'chart': '{{v3}}*(x**2)', 'color': 'green'},
+                ],
+            },
+        ),
+    ]
+)
+
 question_sets = [
-    # sachsituationen_zuordnen,
-    # allgemeine_und_scheitelform,
-    # proportionale_funktionen_gap,
-    # punkte_prufen,
-    # funktionswerte_bestimmen_1,
-    # funktionswerte_bestimmen_2,
-    # funktionsvorschrift_erkennen,
-    # lineare_zuordnen,
-    # proportionale_funktionen_gap_2,
-    # quotientengleichheit,
-    # steigungsdreieck,
-    # schnittpunkte_berechnen,
-    # funktionswerte_bestimmen_1_2,
-    # funktionswerte_bestimmen_2_2,
+    sachsituationen_zuordnen,
+    allgemeine_und_scheitelform,
+    proportionale_funktionen_gap,
+    punkte_prufen,
+    funktionswerte_bestimmen_1,
+    funktionswerte_bestimmen_2,
+    funktionsvorschrift_erkennen,
+    lineare_zuordnen,
+    proportionale_funktionen_gap_2,
+    quotientengleichheit,
+    steigungsdreieck,
+    schnittpunkte_berechnen,
+    funktionswerte_bestimmen_1_2,
+    funktionswerte_bestimmen_2_2,
     funktionswerte_bestimmen_3,
     punkte_prufen_2,
+    parabeln_erkennen,
+    scheitelpunkt_ablesen,
+    funktionsvorschrift_erkennen_2,
+    in_die_allgemeine_form_umrechnen,
+    wertetabelle_auslesen,
+    funktionvorschriften_zuordnen,
 ]
