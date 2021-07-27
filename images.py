@@ -1,5 +1,7 @@
 import numpy as np
 import numexpr as ne
+import matplotlib
+matplotlib.use('TKAgg')
 import matplotlib.pyplot as plt
 import hashlib
 import os
