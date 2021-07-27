@@ -11,6 +11,7 @@ def randdecimal(low, high, step=0.1):
 
 
 sachsituationen_zuordnen = QuestionSet(
+    grade='8',
     capital='Funktionen',
     subcapital='Funktionsgleichungen',
     title='Sachsituationen zuordnen',
@@ -57,6 +58,7 @@ sachsituationen_zuordnen = QuestionSet(
 )
 
 allgemeine_und_scheitelform = QuestionSet(
+    grade='8',
     capital='Funktionen',
     subcapital='Quadratische Funktionen',
     title='Allgemeine und Scheitelform',
@@ -91,6 +93,7 @@ allgemeine_und_scheitelform = QuestionSet(
 )
 
 proportionale_funktionen_gap = QuestionSet(
+    grade='8',
     capital='Funktionen',
     subcapital='Proportionale Funktionen',
     title='Proportionale Funktionen',
@@ -108,6 +111,7 @@ proportionale_funktionen_gap = QuestionSet(
 )
 
 punkte_prufen = QuestionSet(
+    grade='8',
     capital='Funktionen',
     subcapital='Funktionsgleichungen',
     title='Punkte prüfen',
@@ -152,6 +156,7 @@ punkte_prufen = QuestionSet(
 )
 
 funktionswerte_bestimmen_1 = QuestionSet(
+    grade='8',
     capital='Funktionen',
     subcapital='Funktionsgleichungen',
     title='Funktionswerte bestimmen (1)',
@@ -198,6 +203,7 @@ funktionswerte_bestimmen_1 = QuestionSet(
 )
 
 funktionswerte_bestimmen_2 = QuestionSet(
+    grade='8',
     capital='Funktionen',
     subcapital='Funktionsgleichungen',
     title='Funktionswerte bestimmen (2)',
@@ -231,6 +237,7 @@ funktionswerte_bestimmen_2 = QuestionSet(
 )
 
 funktionsvorschrift_erkennen = QuestionSet(
+    grade='8',
     capital='Funktionen',
     subcapital='Funktionsgleichungen',
     title='Funktionsvorschrift erkennen',
@@ -326,6 +333,7 @@ funktionsvorschrift_erkennen = QuestionSet(
 )
 
 lineare_zuordnen = QuestionSet(
+    grade='8',
     capital='Funktionen',
     subcapital='Lineare Funktionen',
     title='Funktionsvorschrift erkennen',
@@ -420,6 +428,7 @@ lineare_zuordnen = QuestionSet(
 )
 
 proportionale_funktionen_gap_2 = QuestionSet(
+    grade='8',
     capital='Funktionen',
     subcapital='Proportionale Funktionen',
     title='Proportionale Funktionen',
@@ -440,6 +449,7 @@ proportionale_funktionen_gap_2 = QuestionSet(
 )
 
 quotientengleichheit = QuestionSet(
+    grade='8',
     capital='Funktionen',
     subcapital='Proportionale Funktionen',
     title='Quotientengleichheit',
@@ -466,6 +476,7 @@ quotientengleichheit = QuestionSet(
 )
 
 steigungsdreieck = QuestionSet(
+    grade='8',
     capital='Funktionen',
     subcapital='Proportionale Funktionen',
     title='Steigungsdreieck',
@@ -564,6 +575,7 @@ steigungsdreieck = QuestionSet(
 )
 
 antiproportionale_funktionen = QuestionSet(
+    grade='8',
     capital='Funktionen',
     subcapital='Antiproportionale Funktionen',
     title='Antiproportionale Funktionen',
@@ -588,6 +600,7 @@ antiproportionale_funktionen = QuestionSet(
 )
 
 schnittpunkte_berechnen = QuestionSet(
+    grade='8',
     capital='Funktionen',
     subcapital='Lineare Funktion',
     title='Schnittpunkte berechnen',
@@ -633,6 +646,7 @@ schnittpunkte_berechnen = QuestionSet(
 )
 
 funktionswerte_bestimmen_1_2 = QuestionSet(
+    grade='8',
     capital='Funktionen',
     subcapital='Geraden durch Punkte',
     title='Funktionswerte bestimmen (1)',
@@ -677,6 +691,7 @@ funktionswerte_bestimmen_1_2 = QuestionSet(
 )
 
 funktionswerte_bestimmen_2_2 = QuestionSet(
+    grade='8',
     capital='Funktionen',
     subcapital='Geraden durch Punkte',
     title='Funktionswerte bestimmen (2)',
@@ -704,6 +719,7 @@ funktionswerte_bestimmen_2_2 = QuestionSet(
 )
 
 funktionswerte_bestimmen_3 = QuestionSet(
+    grade='8',
     capital='Funktionen',
     subcapital='Geraden durch Punkte',
     title='Funktionswerte bestimmen (2)',
@@ -810,6 +826,7 @@ funktionswerte_bestimmen_3 = QuestionSet(
 )
 
 punkte_prufen_2 = QuestionSet(
+    grade='8',
     capital='Funktionen',
     subcapital='Geraden durch Punkte',
     title='Punkte prüfen',
@@ -839,6 +856,7 @@ punkte_prufen_2 = QuestionSet(
 )
 
 parabeln_erkennen = QuestionSet(
+    grade='8',
     capital='Funktionen',
     subcapital='Quadratische Funktionen',
     title='Parabeln erkennen',
@@ -889,6 +907,7 @@ parabeln_erkennen = QuestionSet(
 )
 
 scheitelpunkt_ablesen = QuestionSet(
+    grade='8',
     capital='Funktionen',
     subcapital='Quadratische Funktionen',
     title='Scheitelpunkt ablesen',
@@ -936,6 +955,7 @@ scheitelpunkt_ablesen = QuestionSet(
 )
 
 funktionsvorschrift_erkennen_2 = QuestionSet(
+    grade='8',
     capital='Funktionen',
     subcapital='Quadratische Funktionen',
     title='Funktionsvorschrift erkennen',
@@ -967,6 +987,7 @@ funktionsvorschrift_erkennen_2 = QuestionSet(
 )
 
 in_die_allgemeine_form_umrechnen = QuestionSet(
+    grade='8',
     capital='Funktionen',
     subcapital='Quadratische Funktionen',
     title='In die allgemeine Form umrechnen',
@@ -994,6 +1015,7 @@ in_die_allgemeine_form_umrechnen = QuestionSet(
 )
 
 wertetabelle_auslesen = QuestionSet(
+    grade='8',
     capital='Funktionen',
     subcapital='Potenzfunktionen',
     title='Wertetabelle auslesen',
@@ -1040,6 +1062,7 @@ wertetabelle_auslesen = QuestionSet(
 )
 
 funktionvorschriften_zuordnen = QuestionSet(
+    grade='8',
     capital='Funktionen',
     subcapital='Potenzfunktionen',
     title='Funktionvorschriften zuordnen',

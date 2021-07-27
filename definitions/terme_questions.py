@@ -10,6 +10,7 @@ def randdecimal(a, b):
 
 
 terme_mit_potenzen = QuestionSet(
+    grade='8',
     capital='Terme',
     subcapital='Terme multiplizieren und dividieren',
     title='Terme mit Potenzen',
@@ -58,6 +59,7 @@ terme_mit_potenzen = QuestionSet(
 )
 
 variablen_ausklammern = QuestionSet(
+    grade='8',
     capital='Terme',
     subcapital='Ausklammern',
     title='Variablen ausklammern',
@@ -92,6 +94,7 @@ variablen_ausklammern = QuestionSet(
 )
 
 variable_richtig_ausgeklammert = QuestionSet(
+    grade='8',
     capital='Terme',
     subcapital='Ausklammern',
     title='Variablen ausklammern',
@@ -130,6 +133,7 @@ variable_richtig_ausgeklammert = QuestionSet(
 )
 
 nennergleiche_bruchterme_addieren = QuestionSet(
+    grade='8',
     capital='Terme',
     subcapital='Bruchterme',
     title='Nennergleiche Bruchterme addieren',
@@ -171,6 +175,7 @@ nennergleiche_bruchterme_addieren = QuestionSet(
 )
 
 terme_vereinfachen_2 = QuestionSet(
+    grade='8',
     capital='Terme',
     subcapital='Terme mit Variablen',
     title='Terme vereinfachen (2)',
@@ -209,6 +214,7 @@ terme_vereinfachen_2 = QuestionSet(
 )
 
 multiplizieren_und_dividieren = QuestionSet(
+    grade='8',
     capital='Terme',
     subcapital='Bruchterme',
     title='Multiplizieren und dividieren',
@@ -253,6 +259,7 @@ multiplizieren_und_dividieren = QuestionSet(
 )
 
 produkte_ausklammern = QuestionSet(
+    grade='8',
     capital='Terme',
     subcapital='Ausklammern',
     title='Produkte ausklammern',
@@ -293,6 +300,7 @@ produkte_ausklammern = QuestionSet(
 )
 
 produkt_richtig_ausgeklammert = QuestionSet(
+    grade='8',
     capital='Terme',
     subcapital='Ausklammern',
     title='Produkte ausklammern',
@@ -319,6 +327,7 @@ produkt_richtig_ausgeklammert = QuestionSet(
 )
 
 terme_multiplizieren = QuestionSet(
+    grade='8',
     capital='Terme',
     subcapital='Terme multiplizieren und dividieren',
     title='Terme multiplizieren',
@@ -383,6 +392,7 @@ terme_multiplizieren = QuestionSet(
 )
 
 vorrangregeln = QuestionSet(
+    grade='8',
     capital='Terme',
     subcapital='Terme addieren und subtrahieren',
     title='Vorrangregeln',
@@ -422,6 +432,7 @@ vorrangregeln = QuestionSet(
 )
 
 faktorisieren_2 = QuestionSet(
+    grade='8',
     capital='Terme',
     subcapital='Binomische Formeln',
     title='Faktorisieren (2)',
@@ -456,6 +467,7 @@ faktorisieren_2 = QuestionSet(
 )
 
 wertgleiche_terme_zuordnen = QuestionSet(
+    grade='8',
     capital='Terme',
     subcapital='Terme vereinfachen und umformen',
     title='Wertgleiche Terme zuordnen',
@@ -501,6 +513,7 @@ wertgleiche_terme_zuordnen = QuestionSet(
 )
 
 zahlen_ausklammern = QuestionSet(
+    grade='8',
     capital='Terme',
     subcapital='Ausklammern',
     title='Zahlen ausklammern',
@@ -533,6 +546,7 @@ zahlen_ausklammern = QuestionSet(
 )
 
 zahl_richtig_ausgeklammert = QuestionSet(
+    grade='8',
     capital='Terme',
     subcapital='Ausklammern',
     title='Zahlen ausklammern',
@@ -557,6 +571,7 @@ zahl_richtig_ausgeklammert = QuestionSet(
 )
 
 bruchterme = QuestionSet(
+    grade='8',
     capital='Terme',
     subcapital='Bruchterme',
     title='Bruchterme',
@@ -584,6 +599,7 @@ bruchterme = QuestionSet(
 )
 
 minusklammern_berechnen = QuestionSet(
+    grade='8',
     capital='Terme',
     subcapital='Subtrahieren einer Klammer',
     title='Minusklammern berechnen',
@@ -614,6 +630,7 @@ minusklammern_berechnen = QuestionSet(
 )
 
 terme_dividieren = QuestionSet(
+    grade='8',
     capital='Terme',
     subcapital='Terme multiplizieren und dividieren',
     title='Terme dividieren',
@@ -671,6 +688,7 @@ terme_dividieren = QuestionSet(
 )
 
 terme_vereinfachen = QuestionSet(
+    grade='8',
     capital='Terme',
     subcapital='Terme addieren und subtrahieren',
     title='Terme vereinfachen',
@@ -707,6 +725,7 @@ terme_vereinfachen = QuestionSet(
 )
 
 terme_vereinfachen_buttons = QuestionSet(
+    grade='8',
     capital='Terme',
     subcapital='Terme addieren und subtrahieren',
     title='Terme vereinfachen',
@@ -748,6 +767,7 @@ terme_vereinfachen_buttons = QuestionSet(
 )
 
 minusklammern = QuestionSet(
+    grade='8',
     capital='Terme',
     subcapital='Ausklammern',
     title='Minusklammern',
@@ -789,6 +809,7 @@ minusklammern = QuestionSet(
 )
 
 definitionsmenge_2 = QuestionSet(
+    grade='8',
     capital='Terme',
     subcapital='Bruchterme',
     title='Definitionsmenge (2)',
@@ -828,6 +849,7 @@ definitionsmenge_2 = QuestionSet(
 )
 
 rechengesetze_anwenden = QuestionSet(
+    grade='8',
     capital='Terme',
     subcapital='Terme vereinfachen und umformen',
     title='Rechengesetze anwenden',
@@ -868,6 +890,7 @@ rechengesetze_anwenden = QuestionSet(
 )
 
 terme_vereinfachen_2_2 = QuestionSet(
+    grade='8',
     capital='Terme',
     subcapital='Terme multiplizieren und dividieren',
     title='Terme vereinfachen (2)',
@@ -904,6 +927,7 @@ terme_vereinfachen_2_2 = QuestionSet(
 )
 
 textaufgaben = QuestionSet(
+    grade='8',
     capital='Terme',
     subcapital='Terme addieren und subtrahieren',
     title='Textaufgaben',
@@ -949,6 +973,7 @@ textaufgaben = QuestionSet(
 )
 
 terme_zuordnen_dragGroup = QuestionSet(
+    grade='8',
     capital='Terme',
     subcapital='Binomische Formeln',
     title='Terme zuordnen',
@@ -972,6 +997,7 @@ terme_zuordnen_dragGroup = QuestionSet(
 )
 
 terme_zuordnen_dragMatch = QuestionSet(
+    grade='8',
     capital='Terme',
     subcapital='Binomische Formeln',
     title='Terme zuordnen',
@@ -1002,6 +1028,7 @@ terme_zuordnen_dragMatch = QuestionSet(
 )
 
 vereinfachen_und_umformen = QuestionSet(
+    grade='8',
     capital='Terme',
     subcapital='Terme vereinfachen und umformen',
     title='Vereinfachen und umformen',
@@ -1039,6 +1066,7 @@ vereinfachen_und_umformen = QuestionSet(
 )
 
 faktorisierung_kennenlernen = QuestionSet(
+    grade='8',
     capital='Terme',
     subcapital='Ausklammern',
     title='Faktorisierung kennenlernen',
@@ -1074,6 +1102,7 @@ faktorisierung_kennenlernen = QuestionSet(
 )
 
 subtrahieren_einer_klammer = QuestionSet(
+    grade='8',
     capital='Terme',
     subcapital='Subtrahieren einer Klammer',
     title='Minusklammern kennenlernen',
@@ -1114,6 +1143,7 @@ subtrahieren_einer_klammer = QuestionSet(
 )
 
 summen_und_differenzen_ausklammern = QuestionSet(
+    grade='8',
     capital='Terme',
     subcapital='Ausklammern',
     title='Summen und Differenzen ausklammern',
@@ -1143,6 +1173,7 @@ summen_und_differenzen_ausklammern = QuestionSet(
 )
 
 gemischte_ubungen = QuestionSet(
+    grade='8',
     capital='Terme',
     subcapital='Ausklammern',
     title='Gemischte Übungen',
@@ -1182,6 +1213,7 @@ gemischte_ubungen = QuestionSet(
 )
 
 gemischte_ubungen_lineCombineRight = QuestionSet(
+    grade='8',
     capital='Terme',
     subcapital='Ausklammern',
     title='Gemischte Übungen',
@@ -1213,6 +1245,7 @@ gemischte_ubungen_lineCombineRight = QuestionSet(
 )
 
 gleichartige_terme = QuestionSet(
+    grade='8',
     capital='Terme',
     subcapital='Terme addieren und subtrahieren',
     title='Gleichartige Terme',

@@ -2,20 +2,29 @@ import os
 import subprocess
 import sys
 
-# Install jinja2 and matplotlib, if it's not already installed
+# Install necessary libraries, if they're not already installed
 try:
     import jinja2
     import matplotlib
     import numexpr
+    from slugify import slugify
 except ImportError:
     print('Jinja2 or matplotlib are not installed, trying to install...')
     subprocess.check_call([sys.executable, '-m', 'pip', 'install', '-r', 'requirements.txt'])
     import jinja2
+    from slugify import slugify
 
 
 from question_definitions import question_sets
 from config import Config as cfg
 import csv
+
+
+def slugify_file_name(file_path):
+    """ Slugify only the file name while keeping the rest of the path intact """
+    dirname = os.path.dirname(file_path)
+    filename, extension = os.path.splitext(os.path.basename(file_path))
+    return os.path.join(dirname, slugify(filename)+extension)
 
 
 def write_questions_to_csv_file(csv_file_path, headers, questions):
@@ -30,9 +39,10 @@ def write_questions_to_csv_file(csv_file_path, headers, questions):
 
 def main(config):
     for question_set in question_sets:
-        question_set.output_directory = os.path.dirname(config.CSV_FILE_PATH)
+        output_path = config.CSV_FILE_PATH.format(grade=question_set.grade, capital=question_set.capital)
+        question_set.output_directory = os.path.dirname(output_path)
         generated_questions = question_set.render_questions(n=config.QUESTIONS_PER_QUESTION_SET)
-        write_questions_to_csv_file(csv_file_path=config.CSV_FILE_PATH,
+        write_questions_to_csv_file(csv_file_path=slugify_file_name(output_path),
                                     headers=config.CSV_HEADERS,
                                     questions=generated_questions)
 

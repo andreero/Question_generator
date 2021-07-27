@@ -87,8 +87,9 @@ class Question:
 
 
 class QuestionSet:
-    def __init__(self, capital, subcapital, title, instruction, question_type, questions,
+    def __init__(self, grade, capital, subcapital, title, instruction, question_type, questions,
                  function_name=None, hint=None, output_directory=''):
+        self.grade = grade
         self.function_name = function_name
         self.capital = capital
         self.subcapital = subcapital

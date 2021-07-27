@@ -11,6 +11,7 @@ def randdecimal(low, high, step=0.1):
 
 
 definitionsmenge_2_dragmatch = QuestionSet(
+    grade='8',
     capital='Gleichungen und Ungleichungen',
     subcapital='Bruchgleichungen',
     title='Definitionsmenge (2)',
@@ -62,6 +63,7 @@ definitionsmenge_2_dragmatch = QuestionSet(
 )
 
 null_als_produkt_1 = QuestionSet(
+    grade='8',
     capital='Gleichungen und Ungleichungen',
     subcapital='Gleichungen lösen',
     title='Null als Produkt (1)',
@@ -91,6 +93,7 @@ null_als_produkt_1 = QuestionSet(
 )
 
 null_als_produkt_dragmatch = QuestionSet(
+    grade='8',
     capital='Gleichungen und Ungleichungen',
     subcapital='Gleichungen lösen',
     title='Null als Produkt (1)',
@@ -118,6 +121,7 @@ null_als_produkt_dragmatch = QuestionSet(
 )
 
 ruckwartsrechnen_mit_probe_1_dragmatch = QuestionSet(
+    grade='8',
     capital='Gleichungen und Ungleichungen',
     subcapital='Gleichungen lösen',
     title='Rückwärtsrechnen mit Probe (1)',
@@ -140,6 +144,7 @@ ruckwartsrechnen_mit_probe_1_dragmatch = QuestionSet(
 )
 
 ruckwartsrechnen_mit_probe_1 = QuestionSet(
+    grade='8',
     capital='Gleichungen und Ungleichungen',
     subcapital='Gleichungen lösen',
     title='Rückwärtsrechnen mit Probe (1)',
@@ -177,17 +182,17 @@ ruckwartsrechnen_mit_probe_1 = QuestionSet(
             }),
         Question(
             instruction='Führe die Probe für diese Gleichung durch.',
-            formula='x : {{v1}} = {{v2}} | ___    x = ___'
-            'x : {{v1}} = {{v2}} x = {{v1*v2}}    ___ : {{v1}} = {{v2}}    ___ = {{v2}}',
-            correct='{{v1*v2}};{{v2}}',
+            formula='x : {{v1}} = {{v2}}  x = {{v1*v2}}   '
+            '___ : {{v1}} = {{v2}}   ___ = {{v2}}',
+            correct='{{v1*v2}};{{v1*v2}}',
             variables={
                 'v1': (randint, 2, 9),
                 'v2': (randint, 2, 10),
             }),
         Question(
             instruction='Führe die Probe für diese Gleichung durch.',
-            formula='-{{v1}}x = {{v1*v2}} | ___    x = ___'
-            '-{{v1}}x = {{v1*v2}} x = -{{v2}}    -{{v1}} ___ = {{v1*v2}}    ___ = {{v1*v2}}',
+            formula='-{{v1}}x = {{v1*v2}}   x = ___   '
+            '-{{v1}} * ___ = {{v1*v2}}    ___ = {{v1*v2}}',
             correct='-{{v2}};{{v1*v2}}',
             variables={
                 'v1': (randint, 2, 9),
@@ -197,6 +202,7 @@ ruckwartsrechnen_mit_probe_1 = QuestionSet(
 )
 
 verhaltnisgleichungen = QuestionSet(
+    grade='8',
     capital='Gleichungen und Ungleichungen',
     subcapital='Gleichungen lösen',
     title='Verhältnisgleichungen',
@@ -248,6 +254,7 @@ verhaltnisgleichungen = QuestionSet(
 )
 
 aussagen_und_aussageformen_draggroup = QuestionSet(
+    grade='8',
     capital='Gleichungen und Ungleichungen',
     subcapital='Gleichungen und Ungleichungen aufstellen',
     title='Aussagen und Aussageformen',
@@ -275,6 +282,7 @@ aussagen_und_aussageformen_draggroup = QuestionSet(
 )
 
 gleichungen_aufstellen = QuestionSet(
+    grade='8',
     capital='Gleichungen und Ungleichungen',
     subcapital='Gleichungen und Ungleichungen aufstellen',
     title='Gleichungen aufstellen',
@@ -302,6 +310,7 @@ gleichungen_aufstellen = QuestionSet(
 
 
 ungleichungen_draggroup = QuestionSet(
+    grade='8',
     capital='Gleichungen und Ungleichungen',
     subcapital='Gleichungen und Ungleichungen aufstellen',
     title='Ungleichungen',
@@ -332,6 +341,7 @@ ungleichungen_draggroup = QuestionSet(
 )
 
 losungen_der_gleichung_mc = QuestionSet(
+    grade='8',
     capital='Gleichungen und Ungleichungen',
     subcapital='Gleichungen und Ungleichungen aufstellen',
     title='Lösungen der Gleichung',
@@ -368,6 +378,7 @@ losungen_der_gleichung_mc = QuestionSet(
 )
 
 losungen_der_gleichung_gap = QuestionSet(
+    grade='8',
     capital='Gleichungen und Ungleichungen',
     subcapital='Gleichungen und Ungleichungen aufstellen',
     title='Lösungen der Gleichung',
@@ -401,6 +412,7 @@ losungen_der_gleichung_gap = QuestionSet(
 )
 
 ungleichungen_dragmatch = QuestionSet(
+    grade='8',
     capital='Gleichungen und Ungleichungen',
     subcapital='Gleichungen und Ungleichungen aufstellen',
     title='Ungleichungen',
@@ -445,6 +457,7 @@ ungleichungen_dragmatch = QuestionSet(
 )
 
 aquivalenzumformungen_mit_mehreren_variablen = QuestionSet(
+    grade='8',
     capital='Gleichungen und Ungleichungen',
     subcapital='Lineare Gleichungen und Ungleichungen',
     title='Äquivalenzumformungen mit mehreren Variablen',
@@ -469,6 +482,7 @@ aquivalenzumformungen_mit_mehreren_variablen = QuestionSet(
 )
 
 aquivalenzumformungen_mit_klammern = QuestionSet(
+    grade='8',
     capital='Gleichungen und Ungleichungen',
     subcapital='Lineare Gleichungen und Ungleichungen',
     title='Äquivalenzumformungen mit Klammern',
@@ -495,6 +509,7 @@ aquivalenzumformungen_mit_klammern = QuestionSet(
 )
 
 aquivalenzumformungen_mit_klammern_gap = QuestionSet(
+    grade='8',
     capital='Gleichungen und Ungleichungen',
     subcapital='Lineare Gleichungen und Ungleichungen',
     title='Äquivalenzumformungen mit Klammern',
@@ -533,6 +548,7 @@ aquivalenzumformungen_mit_klammern_gap = QuestionSet(
 )
 
 aquivalenzumformungen_erkennen_1 = QuestionSet(
+    grade='8',
     capital='Gleichungen und Ungleichungen',
     subcapital='Lineare Gleichungen und Ungleichungen',
     title='Äquivalenzumformungen erkennen (1)',
@@ -573,6 +589,7 @@ aquivalenzumformungen_erkennen_1 = QuestionSet(
 )
 
 aquivalenzumformungen_erkennen_1_2 = QuestionSet(
+    grade='8',
     capital='Gleichungen und Ungleichungen',
     subcapital='Lineare Gleichungen und Ungleichungen',
     title='Äquivalenzumformungen erkennen (1)',
@@ -612,6 +629,7 @@ aquivalenzumformungen_erkennen_1_2 = QuestionSet(
 )
 
 aquivalenzumformungen_erkennen_2 = QuestionSet(
+    grade='8',
     capital='Gleichungen und Ungleichungen',
     subcapital='Lineare Gleichungen und Ungleichungen',
     title='Äquivalenzumformungen erkennen (2)',
@@ -647,6 +665,7 @@ aquivalenzumformungen_erkennen_2 = QuestionSet(
 )
 
 lineare_gleichungen_mit_zwei_variablen = QuestionSet(
+    grade='8',
     capital='Gleichungen und Ungleichungen',
     subcapital='Lineare Gleichungen und Ungleichungen',
     title='Lineare Gleichungen mit zwei Variablen',
@@ -674,6 +693,7 @@ lineare_gleichungen_mit_zwei_variablen = QuestionSet(
 )
 
 zahlenpaare_prufen = QuestionSet(
+    grade='8',
     capital='Gleichungen und Ungleichungen',
     subcapital='Lineare Gleichungen und Ungleichungen',
     title='Zahlenpaare prüfen',
@@ -712,6 +732,7 @@ zahlenpaare_prufen = QuestionSet(
 )
 
 zahlenpaare_berechnen = QuestionSet(
+    grade='8',
     capital='Gleichungen und Ungleichungen',
     subcapital='Lineare Gleichungen und Ungleichungen',
     title='Zahlenpaare berechnen',
@@ -746,6 +767,7 @@ zahlenpaare_berechnen = QuestionSet(
 )
 
 gleichungen_aufstellen_2 = QuestionSet(
+    grade='8',
     capital='Gleichungen und Ungleichungen',
     subcapital='Lineare Gleichungen und Ungleichungen',
     title='Gleichungen aufstellen',
@@ -789,7 +811,8 @@ gleichungen_aufstellen_2 = QuestionSet(
         ]
 )
 
-gleichsetzungsver_1 = QuestionSet(
+gleichsetzungsverfahren_1 = QuestionSet(
+    grade='8',
     capital='Gleichungen und Ungleichungen',
     subcapital='Lineare Gleichungen und Ungleichungen',
     title='Gleichsetzungsverfahren (1)',
@@ -821,7 +844,113 @@ gleichsetzungsver_1 = QuestionSet(
         ]
 )
 
+gleichsetzungsverfahren_2 = QuestionSet(
+    grade='8',
+    capital='Gleichungen und Ungleichungen',
+    subcapital='Lineare Gleichungen und Ungleichungen',
+    title='Gleichsetzungsverfahren (2)',
+    instruction='Löse mit Hilfe des Gleichsetzungsverfahren.',
+    question_type='gap',
+    questions=[
+        Question(
+            formula='(1) y = {{v1}}x + {{v3-v1*v4}}   '  # y = v3; x=v4;
+                    '(2) y = {{v2}}x + {{v3-v2*v4}}   '
+                    '{{v1}}x + {{v3-v1*v4}} = ___ | -{{v3-v1*v4}}   '
+                    '___ = ___ | :{{v1-v2}}  '
+                    'x = ___',
+            correct='{{v2}}x - {{v3-v2*v4}};'
+                    '{{v1-v2}}x;{{v4*(v1-v2)}};'
+                    '{{v4}}',
+            variables={
+                'v1': (randint, 6, 9),
+                'v2': (randint, 2, 5),
+                'v3': (randdecimal, 50, 70, 5),
+                'v4': (randint, 2, 5),
+            }),
+        Question(
+            instruction='Führe die Probe durch',
+            formula='(1) y = {{v1}}x + {{v2}}   (2) x = {{v3}}   y = {{v1}} * ( ___ ) + {{v2}}  = ___ + {{v2}}  = ___',
+            correct='{{v3}};{{v1*v3}};{{v1*v3+v2}}',
+            variables={
+                'v1': (randint, 2, 6),
+                'v2': (randint, 1, 9),
+                'v3': (randint, -10, -1),
+            }),
+        ]
+)
+
+Einsetzungsverfahren_1 = QuestionSet(
+    grade='8',
+    capital='Gleichungen und Ungleichungen',
+    subcapital='Lineare Gleichungen und Ungleichungen',
+    title='Einsetzungsverfahren (1)',
+    instruction='Was ist die korrekte Umformung für die Gleichung 2 nach x',
+    question_type='MC',
+    questions=[
+        Question(
+            formula='(1) {{v1}}x - {{v2}}y = 0  (2) x + y = {{v3}}',
+            correct='x = {{v3}} - y',
+            wrong_1='x = y - {{v3}}',
+            wrong_2='y = {{v3}} - x',
+            wrong_3='x = y + {{v3}}',
+            variables={
+                'v1': (randint, 2, 9),
+                'v2': (randint, 2, 9),
+                'v3': (randint, 2, 9),
+            }),
+        Question(
+            formula='(1) {{v1}}x - {{v2}}y = 0  (2) {{v4}}x + y = {{v3}}',
+            correct='x = ({{v3}} - y)/{{v4}}',
+            wrong_1='x = (y - {{v3}})/{{v4}}',
+            wrong_2='y = {{v3}} - {{v4}}x',
+            wrong_3='x = (y + {{v3}})/{{v4}}',
+            variables={
+                'v1': (randint, 2, 9),
+                'v2': (randint, 2, 9),
+                'v3': (randint, 2, 9),
+                'v4': (randint, 2, 9),
+            }),
+        ]
+)
+
+einsetzungsverfahren_1_gap = QuestionSet(
+    grade='8',
+    capital='Gleichungen und Ungleichungen',
+    subcapital='Lineare Gleichungen und Ungleichungen',
+    title='Einsetzungsverfahren (1)',
+    instruction='Löse die Gleichung nach x auf.',
+    question_type='gap',
+    questions=[
+        Question(
+            formula='(1) {{v1}}x + {{v2}}y = 0   '
+                    '(2) x = {{v1-v2}} - y   '
+                    '{{v1}}({{v1-v2}} - y) + {{v2}}y = 0   '
+                    '{{v1*(v1-v2)}} - ___ + {{v2}}y = 0   '
+                    '{{v1*(v1-v2)}} - ___ = 0 | + ___   '
+                    '___ = ___ | :___   '
+                    '___ = ___ ',
+            correct='{{v1}}y;{{v1-v2}}y;{{v1-v2}}y;{{v1*(v1-v2)}};{{v1-v2}}y;{{v1-v2}};{{v1}};y',
+            variables={
+                'v1': (randint, 5, 9),
+                'v2': (randint, 1, 4),
+            }),
+        Question(
+            instruction='Löse die Gleichung indem du den folgenden Wert für y einsetzt.',
+            formula='y = {{v1}}   '
+                    '(1) {{v1}}x + {{v2}}y = 0   '
+                    '(2) x = {{v1-v2}} - y    '
+                    'x = {{v1-v2}} - ___    '
+                    'x = ___',
+            correct='{{v1}}; {{-v2}}',
+            variables={
+                'v1': (randint, 5, 9),
+                'v2': (randint, 1, 4),
+            }),
+        ]
+)
+
 additionsverfahren_1 = QuestionSet(
+    grade='8',
     capital='Gleichungen und Ungleichungen',
     subcapital='Lineare Gleichungen und Ungleichungen',
     title='Additionsverfahren (1)',
@@ -876,7 +1005,33 @@ additionsverfahren_1 = QuestionSet(
         ]
 )
 
+additionsverfahren_2 = QuestionSet(
+    grade='8',
+    capital='Gleichungen und Ungleichungen',
+    subcapital='Lineare Gleichungen und Ungleichungen',
+    title='Additionsverfahren (2)',
+    instruction='Mit welchem Wert musst die eine Gleichung multiplizieren, '
+                'damit die Vorfaktoren gleich sind und wir das Additionsverfahren anwenden können?',
+    question_type='MC',
+    questions=[
+        Question(
+            formula='(1) {{v1}}x + {{v2}}y = {{v1*v3+v2*v4}}   (2) x + {{v5}}y = {{v3+v5*v4}}',
+            correct='{{(-v1)}}',
+            wrong_1='{{v1}}',
+            wrong_2='{{v2}}',
+            wrong_3='{{(-v2)}}',
+            variables={
+                'v1': (randint, 2, 5),
+                'v2': (randint, 6, 9),
+                'v3': (randint, 2, 5),
+                'v4': (randint, 2, 5),
+                'v5': (randint, 1, 5),
+            }),
+        ]
+)
+
 allgemeine_form = QuestionSet(
+    grade='8',
     capital='Gleichungen und Ungleichungen',
     subcapital='Quadratische Gleichungen',
     title='Allgemeine Form',
@@ -938,6 +1093,7 @@ allgemeine_form = QuestionSet(
 )
 
 normalform = QuestionSet(
+    grade='8',
     capital='Gleichungen und Ungleichungen',
     subcapital='Quadratische Gleichungen',
     title='Normalform',
@@ -996,7 +1152,38 @@ normalform = QuestionSet(
         ]
 )
 
+quadratische_gleichungen = QuestionSet(
+    grade='8',
+    capital='Gleichungen und Ungleichungen',
+    subcapital='Quadratische Gleichungen',
+    title='Quadratische Gleichungen',
+    instruction='Ziehe die Gleichungen in die richtigen Kategorien.',
+    question_type='dragGroup',
+    questions=[
+        Question(
+            formula='',
+            correct='quadratische Gleichung|{{v1}}x^2+{{v2}}x+{{v3}}=0~{{v4}}x^2+y^2={{v5}}~(x-{{v6}})^2={{v7**2}};'
+                    'nicht-quadratische Gleichung|{{v8}}x+{{v9}}=0~x+y=-{{v10}}~{{v12}}/x={{v13}}',
+            variables={
+                'v1': (randint, 2, 15),
+                'v2': (randint, 2, 9),
+                'v3': (randint, 2, 9),
+                'v4': (randint, 2, 9),
+                'v5': (randint, 2, 9),
+                'v6': (randint, 2, 9),
+                'v7': (randint, 2, 9),
+                'v8': (randint, 2, 9),
+                'v9': (randint, 2, 9),
+                'v10': (randint, 2, 9),
+                'v11': (randint, 2, 9),
+                'v12': (randint, 2, 9),
+                'v13': (randint, 2, 9),
+            }),
+        ]
+)
+
 ungleichungen_losen_1 = QuestionSet(
+    grade='8',
     capital='Gleichungen und Ungleichungen',
     subcapital='Ungleichungen lösen',
     title='Ungleichungen lösen (1)',
@@ -1082,6 +1269,7 @@ ungleichungen_losen_1 = QuestionSet(
 )
 
 ungleichungen_losen_2 = QuestionSet(
+    grade='8',
     capital='Gleichungen und Ungleichungen',
     subcapital='Ungleichungen lösen',
     title='Ungleichungen lösen (2)',
@@ -1130,6 +1318,7 @@ ungleichungen_losen_2 = QuestionSet(
 )
 
 ungleichungen_losen_3 = QuestionSet(
+    grade='8',
     capital='Gleichungen und Ungleichungen',
     subcapital='Ungleichungen lösen',
     title='Ungleichungen lösen (3)',
@@ -1197,10 +1386,14 @@ question_sets = [
     zahlenpaare_prufen,
     zahlenpaare_berechnen,
     gleichungen_aufstellen_2,
-    gleichsetzungsver_1,
+    gleichsetzungsverfahren_1,
+    gleichsetzungsverfahren_2,
+    einsetzungsverfahren_1_gap,
     additionsverfahren_1,
+    additionsverfahren_2,
     allgemeine_form,
     normalform,
+    quadratische_gleichungen,
     ungleichungen_losen_1,
     ungleichungen_losen_2,
     ungleichungen_losen_3,
