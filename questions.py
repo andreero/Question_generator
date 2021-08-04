@@ -25,50 +25,55 @@ class Question:
             {'v1': 4} (where 4 is the actual random int).
         """
         generated_variables = {}
+        random.seed()
         for variable_name, variable_values in self.variables.items():
-            random.seed()
-            function, *arguments = variable_values
-            generated_variables[variable_name] = function(*arguments)
+            if isinstance(variable_values, (tuple, list, dict)):
+                function, *arguments = variable_values
+                generated_variables[variable_name] = function(*arguments)
+            else:
+                generated_variables[variable_name] = variable_values
         return generated_variables
 
     @staticmethod
     def render_template(template_string: str, template_variables: Dict[str, str]) -> str:
         """ Render jinja2 template string with provided parameters"""
-        if template_string is None:
-            return ''
+        if not isinstance(template_string, str):
+            return template_string
         try:
             template = Template(template_string, undefined=StrictUndefined)
             return template.render(template_variables)
         except UndefinedError as e:
             raise ValueError(f'Error in template {template_string}: {e}')
 
-    def render_image_definition(self, vars):
+    def render_list(self, template_list, template_variables):
+        rendered_list = list()
+        for template in template_list:
+            if isinstance(template, list):
+                rendered_field = self.render_list(template_list=template, template_variables=template_variables)
+            elif isinstance(template, dict):
+                rendered_field = self.render_dict(template_dict=template, template_variables=template_variables)
+            else:
+                rendered_field = self.render_template(template_string=template, template_variables=template_variables)
+            rendered_list.append(rendered_field)
+        return rendered_list
+
+    def render_dict(self, template_dict, template_variables):
+        rendered_dict = dict()
+        for key, value in template_dict.items():
+            if isinstance(value, list):
+                rendered_field = self.render_list(template_list=value, template_variables=template_variables)
+            elif isinstance(value, dict):
+                rendered_field = self.render_dict(template_dict=value, template_variables=template_variables)
+            else:
+                rendered_field = self.render_template(template_string=value, template_variables=template_variables)
+            rendered_dict[key] = rendered_field
+        return rendered_dict
+
+    def render_image_definition(self, template_variables):
         """ Replace {{variables}} in image templates with actual values, so the image can be generated."""
         if not self.image:
             return
-        generated_image_dict = {}
-        for field_name, field_templates in self.image.items():
-            if isinstance(field_templates, list):
-                field_list = list()
-                for template in field_templates:
-                    if isinstance(template, dict):
-                        rendered_entry = dict()
-                        for key, value in template.items():
-                            rendered_field = self.render_template(template_string=value, template_variables=vars)
-                            rendered_entry[key] = rendered_field
-                    else:
-                        rendered_entry = self.render_template(template_string=template, template_variables=vars)
-                    field_list.append(rendered_entry)
-                generated_image_dict[field_name] = field_list
-            elif isinstance(field_templates, dict):
-                field_dict = dict()
-                for key, value in field_templates.items():
-                    rendered_field = self.render_template(template_string=value, template_variables=vars)
-                    field_dict[key] = rendered_field
-                generated_image_dict[field_name] = field_dict
-            else:
-                generated_image_dict[field_name] = self.render_template(template_string=field_templates, template_variables=vars)
-        return generated_image_dict
+        return self.render_dict(self.image, template_variables=template_variables)
 
     def render(self) -> Dict[str, str]:
         """ Return a randomized question string from the provided question definition. """
@@ -81,7 +86,7 @@ class Question:
             'wrong_2': self.render_template(template_string=self.wrong_2, template_variables=generated_variables),
             'wrong_3': self.render_template(template_string=self.wrong_3, template_variables=generated_variables),
             'hint': self.hint,
-            'image': self.render_image_definition(vars=generated_variables),
+            'image': self.render_image_definition(template_variables=generated_variables),
         }
         return generated_strings
 
@@ -121,9 +126,11 @@ class QuestionSet:
                 seen_questions.add(unique_part)
                 question_list.append(question)
 
-            elif self.question_type in ['dragGroup', 'dragMatch']:  # Those types have multiple parts
+            elif self.question_type in ['dragGroup', 'dragMatch', 'dragSort']:  # Those types have multiple parts
                 if self.question_type == 'dragGroup':
                     drag_parts = question['correct'].replace('~', ';').split(';')
+                elif self.question_type == 'dragSort':
+                    drag_parts = [question['correct']]  # some parts can repeat
                 else:
                     drag_parts = question['correct'].replace('|', ';').split(';')
                 for part in drag_parts:
@@ -155,6 +162,9 @@ class QuestionSet:
                               dots=image_dict.get('dots'),
                               charts=image_dict.get('charts'),
                               arrows=image_dict.get('arrows'),
+                              table=image_dict.get('table'),
+                              pie_chart=image_dict.get('pie_chart'),
+                              draw_grid=image_dict.get('draw_grid', True),
                               )
                 image.output_directory = self.output_directory
                 question['image'] = image.draw_image()
