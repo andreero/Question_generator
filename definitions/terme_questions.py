@@ -1,12 +1,6 @@
-import random
-
 from questions import Question, QuestionSet
 from random import randint
-
-
-def randdecimal(a, b):
-    """ Return random decimal between a and b with 1 digit precision."""
-    return round(random.uniform(a, b), 1)
+from definitions.common import randdecimal
 
 
 terme_mit_potenzen = QuestionSet(

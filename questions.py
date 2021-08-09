@@ -71,8 +71,8 @@ class Question:
 
     def render_image_definition(self, template_variables):
         """ Replace {{variables}} in image templates with actual values, so the image can be generated."""
-        if not self.image:
-            return
+        if not isinstance(self.image, dict):
+            return self.image
         return self.render_dict(self.image, template_variables=template_variables)
 
     def render(self) -> Dict[str, str]:
@@ -118,7 +118,7 @@ class QuestionSet:
 
             if self.question_type in ['MC', 'buttons', 'gap', 'lineCombineRight']:
                 if question.get('image'):
-                    unique_part = question['correct']
+                    unique_part = question['correct'] + question['image'].get('dots', [{}])[0].get('y', '')
                 else:
                     unique_part = question['answer']
                 if unique_part in seen_questions:
@@ -156,7 +156,7 @@ class QuestionSet:
             question['instruction'] = question.get('instruction') or self.instruction
             question['type'] = self.question_type
             question['hint'] = question.get('hint') or self.hint
-            if question.get('image') and question['image']:
+            if question.get('image') and isinstance(question['image'], dict):
                 image_dict = question['image']
                 image = Image(axis_limits=image_dict.get('axis_limits'),
                               dots=image_dict.get('dots'),

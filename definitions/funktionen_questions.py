@@ -1,13 +1,6 @@
-from math import ceil, floor
 from questions import Question, QuestionSet
 from random import randint
-
-
-def randdecimal(low, high, step=0.1):
-    low_scaled = ceil(float(low)/step)
-    high_scaled = floor(float(high)/step)
-    result = round(randint(low_scaled, high_scaled) * step, 1)
-    return int(result) if float(result).is_integer() else result
+from definitions.common import randdecimal
 
 
 sachsituationen_zuordnen = QuestionSet(
