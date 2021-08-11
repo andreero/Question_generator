@@ -5,6 +5,7 @@ import numexpr as ne
 import matplotlib
 matplotlib.use('TKAgg')
 import matplotlib.pyplot as plt
+from ast import literal_eval
 
 
 def generate_table_cell_colors(nrows, ncols, cells_filled):
@@ -20,15 +21,16 @@ def generate_table_cell_colors(nrows, ncols, cells_filled):
 
 class Image:
     def __init__(self, axis_limits=None, dots=None, charts=None, arrows=None, table=None, pie_chart=None,
-                 draw_grid=True, output_directory=''):
+                 y_scale=1, draw_grid=True, output_directory=''):
         self.axis_limits = axis_limits
         self.dots = dots
         self.charts = charts
         self.arrows = arrows
-        self.output_directory = output_directory
-        self.draw_grid = draw_grid
         self.table = table
         self.pie_chart = pie_chart
+        self.y_scale = y_scale
+        self.draw_grid = draw_grid
+        self.output_directory = output_directory
 
     def draw_image(self):
         if not self.axis_limits:
@@ -56,13 +58,11 @@ class Image:
             ax.set_ylabel('y', size=14, labelpad=-21, y=1.02, rotation=0)
             # Create custom major ticks to determine position of tick labels
             x_ticks = np.arange(xmin, xmax + 1, ticks_frequency)
-            y_ticks = np.arange(ymin, ymax + 1, ticks_frequency)
+            y_ticks = np.arange(ymin, (ymax + 1), ticks_frequency)
             ax.set_xticks(x_ticks[x_ticks != 0])
             ax.set_yticks(y_ticks[y_ticks != 0])
-            # Create minor ticks placed at each integer to enable drawing of minor grid
-            # lines: note that this has no effect in this example with ticks_frequency=1
-            ax.set_xticks(np.arange(xmin, xmax + 1), minor=True)
-            ax.set_yticks(np.arange(ymin, ymax + 1), minor=True)
+            if self.y_scale != 1:
+                ax.set_yticklabels([str(y_tick*self.y_scale) for y_tick in y_ticks[y_ticks != 0]])
             # Draw major and minor grid lines
             ax.grid(which='both', color='grey', linewidth=1, linestyle='-', alpha=0.2)
             arrow_fmt = dict(markersize=4, color='black', clip_on=False)
@@ -85,10 +85,14 @@ class Image:
 
         # draw charts
         if self.charts:
-            chart_xs = np.linspace(xmin-1, xmax+1, 200)
             for chart in self.charts:
-                chart_expression = chart['chart'].replace('x', 'chart_xs')
-                chart_ys = ne.evaluate(chart_expression)
+                chart_xs = np.linspace(xmin - 1, xmax + 1, 200)
+                if chart.get('chart_xs') and chart.get('chart_ys'):
+                    chart_xs = literal_eval(str(chart.get('chart_xs')))
+                    chart_ys = literal_eval(str(chart.get('chart_ys')))
+                else:
+                    chart_expression = chart['chart'].replace('x', 'chart_xs')
+                    chart_ys = ne.evaluate(chart_expression)
                 chart_color = chart.get('color') or None
                 ax.plot(chart_xs, chart_ys, c=chart_color)
 
@@ -129,7 +133,7 @@ class Image:
         canvas.draw()
 
         image_hash = hashlib.sha1(np.array(canvas.buffer_rgba())).hexdigest()
-        filepath = os.path.join(self.output_directory, 'images', image_hash + '.png')
+        filepath = os.path.join(self.output_directory, image_hash + '.png')
         os.makedirs(os.path.dirname(filepath), exist_ok=True)
         plt.savefig(filepath, bbox_inches='tight')
         plt.close('all')

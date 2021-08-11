@@ -1,7 +1,11 @@
-from jinja2 import Template, StrictUndefined
-from jinja2.exceptions import UndefinedError
+import os
 import random
 from typing import Dict, List
+
+from jinja2 import Template, StrictUndefined
+from jinja2.exceptions import UndefinedError
+from slugify import slugify
+
 from images import Image
 
 
@@ -27,7 +31,7 @@ class Question:
         generated_variables = {}
         random.seed()
         for variable_name, variable_values in self.variables.items():
-            if isinstance(variable_values, (tuple, list, dict)):
+            if isinstance(variable_values, tuple):
                 function, *arguments = variable_values
                 generated_variables[variable_name] = function(*arguments)
             else:
@@ -118,7 +122,8 @@ class QuestionSet:
 
             if self.question_type in ['MC', 'buttons', 'gap', 'lineCombineRight']:
                 if question.get('image'):
-                    unique_part = question['correct'] + question['image'].get('dots', [{}])[0].get('y', '')
+                    unique_part = question['correct'] + question['image'].get('dots', [{}])[0].get('y', '') + \
+                                  question['image'].get('charts', [{}])[0].get('chart', '')
                 else:
                     unique_part = question['answer']
                 if unique_part in seen_questions:
@@ -165,8 +170,9 @@ class QuestionSet:
                               table=image_dict.get('table'),
                               pie_chart=image_dict.get('pie_chart'),
                               draw_grid=image_dict.get('draw_grid', True),
+                              y_scale=image_dict.get('y_scale', 1),
                               )
-                image.output_directory = self.output_directory
+                image.output_directory = os.path.join(self.output_directory, slugify(self.capital))
                 question['image'] = image.draw_image()
             questions_with_extra_data.append(question)
         return questions_with_extra_data
