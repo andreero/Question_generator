@@ -133,8 +133,9 @@ class Image:
         canvas.draw()
 
         image_hash = hashlib.sha1(np.array(canvas.buffer_rgba())).hexdigest()
-        filepath = os.path.join(self.output_directory, image_hash + '.png')
+        filepath = os.path.join(self.output_directory, 'images', image_hash + '.png')
         os.makedirs(os.path.dirname(filepath), exist_ok=True)
         plt.savefig(filepath, bbox_inches='tight')
         plt.close('all')
+        canvas.get_tk_widget().destroy()
         return os.path.relpath(filepath, self.output_directory)
