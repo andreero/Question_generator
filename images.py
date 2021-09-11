@@ -3,7 +3,7 @@ import os
 import numpy as np
 import numexpr as ne
 import matplotlib
-matplotlib.use('qt5Agg')
+matplotlib.use('agg')
 import matplotlib.pyplot as plt
 from ast import literal_eval
 
@@ -20,12 +20,12 @@ def generate_table_cell_colors(nrows, ncols, cells_filled):
 
 
 class Image:
-    def __init__(self, axis_limits=None, dots=None, charts=None, arrows=None, table=None, pie_chart=None,
+    def __init__(self, axis_limits=None, dots=None, charts=None, arrows=None, polygons=None, table=None, pie_chart=None,
                  y_scale=1, draw_grid=True, output_directory=''):
-        self.axis_limits = axis_limits
         self.dots = dots
         self.charts = charts
         self.arrows = arrows
+        self.polygons = polygons
         self.table = table
         self.pie_chart = pie_chart
         self.y_scale = y_scale
@@ -38,10 +38,10 @@ class Image:
             self._ymin = -4
             self._ymax = 4
         else:
-            self._xmin = round(float(self.axis_limits['xmin']))
-            self._xmax = round(float(self.axis_limits['xmax']))
-            self._ymin = round(float(self.axis_limits['ymin']))
-            self._ymax = round(float(self.axis_limits['ymax']))
+            self._xmin = round(float(axis_limits['xmin']))
+            self._xmax = round(float(axis_limits['xmax']))
+            self._ymin = round(float(axis_limits['ymin']))
+            self._ymax = round(float(axis_limits['ymax']))
 
     def _draw_grid(self, ax):
         ticks_frequency = 1
@@ -126,14 +126,13 @@ class Image:
             fig.set_size_inches(5, 5, forward=True)
 
     def save_to_file(self) -> str:
-        """ Save current image to file and return its path """
+        """ Save current image to png file and return its path """
         canvas = plt.gcf().canvas
         canvas.draw()
         image_hash = hashlib.sha1(np.array(canvas.buffer_rgba())).hexdigest()
         filepath = os.path.join(self.output_directory, 'images', image_hash + '.png')
         os.makedirs(os.path.dirname(filepath), exist_ok=True)
         plt.savefig(filepath, bbox_inches='tight')
-        plt.close('all')
         return filepath
 
     def draw_image(self):
@@ -154,4 +153,6 @@ class Image:
             self._draw_pie_chart(ax, fig)
 
         filepath = self.save_to_file()
+        fig.clear()
+        plt.close('all')
         return os.path.relpath(filepath, self.output_directory)
