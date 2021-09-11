@@ -12,7 +12,7 @@ koordinaten_zuordnen = QuestionSet(
     question_type='MC',
     questions=[
         Question(
-            instruction='Bestimme den richtigen Quadranten für den lila Punkt',
+            instruction='Bestimme den richtigen Quadranten für den lila Punkt.',
             formula='',
             correct='I',
             wrong_1='II',
@@ -40,7 +40,7 @@ koordinaten_zuordnen = QuestionSet(
                 ],
             }),
         Question(
-            instruction='Bestimme den richtigen Quadranten für den brauner Punkt',
+            instruction='Bestimme den richtigen Quadranten für den brauner Punkt.',
             formula='',
             correct='III',
             wrong_1='IV',
@@ -68,7 +68,7 @@ koordinaten_zuordnen = QuestionSet(
                 ],
             }),
         Question(
-            instruction='Bestimme den richtigen Quadranten für den gelber Punkt',
+            instruction='Bestimme den richtigen Quadranten für den gelber Punkt.',
             formula='',
             correct='II',
             wrong_1='I',
@@ -96,7 +96,7 @@ koordinaten_zuordnen = QuestionSet(
                 ],
             }),
         Question(
-            instruction='Bestimme den richtigen Quadranten für den blauer Punkt',
+            instruction='Bestimme den richtigen Quadranten für den blauer Punkt.',
             formula='',
             correct='IV',
             wrong_1='II',
@@ -404,7 +404,7 @@ rechenubungen_mit_bruchen_1_gap = QuestionSet(
          'und nehme das als Zähler. Der Nenner wird vom anderen Bruch einfach übernommen.',
     questions=[
         Question(
-            formula='{{v1}}/{{v2}}+{{v3}} <br> = ___+{{v3}}<br> = ___ ',
+            formula='<mat>{{v1}}/{{v2}}+{{v3}} <br> = ___+{{v3}}<br> = ___ </mat>',
             correct='{{"%.1f"|format(v1/v2)}};{{"%.1f"|format(v1/v2+v3)}}',
             variables={
                 'v1': (randint, 1, 9),
@@ -412,7 +412,7 @@ rechenubungen_mit_bruchen_1_gap = QuestionSet(
                 'v3': (randdecimal, 2, 9),
             }),
         Question(
-            formula='-{{v1}}/{{v2}}+{{v3}} <br> = ___+{{v3}}<br> = ___ ',
+            formula='<mat>-{{v1}}/{{v2}}+{{v3}} <br> = ___+{{v3}}<br> = ___</mat>',
             correct='{{"%.1f"|format((-v1/v2))}};{{"%.1f"|format((-v1/v2)+v3)}}',
             variables={
                 'v1': (randint, 1, 9),
@@ -431,7 +431,7 @@ rechenubungen_mit_bruchen_1_mc = QuestionSet(
     question_type='MC',
     questions=[
         Question(
-            formula='-{{v1}}+{{v2}}+{{"%.1f"|format(v1-v2)}} ___ 0 ',
+            formula='<mat>-{{v1}}+{{v2}}+{{"%.1f"|format(v1-v2)}} ___ 0 </mat>',
             correct='=',
             wrong_1='>',
             wrong_2='<',
@@ -440,7 +440,7 @@ rechenubungen_mit_bruchen_1_mc = QuestionSet(
                 'v2': (randdecimal, 1.1, 2.9),
             }),
         Question(
-            formula='1 ___ {{v2}}/{{v1}}+{{v1-v2-1}}/{{v1}} ',
+            formula='<mat>1 ___ {{v2}}/{{v1}}+{{v1-v2-1}}/{{v1}} </mat>',
             correct='>',
             wrong_1='=',
             wrong_2='<',
@@ -460,14 +460,14 @@ rechenubungen_mit_bruchen_2 = QuestionSet(
     question_type='gap',
     questions=[
         Question(
-            formula='{{v1}}/{{v2}}+{{v2-v1}}/{{v1}} = ___ ',
+            formula='<mat>{{v1}}/{{v2}}+{{v2-v1}}/{{v1}} = ___ </mat>',
             correct='1',
             variables={
                 'v1': (randint, 5, 15),
                 'v2': (randint, 1, 4),
             }),
         Question(
-            formula='-{{v1}}/{{v2}} + {{v1+v3}}/{{v2}}',
+            formula='<mat>-{{v1}}/{{v2}} + {{v1+v3}}/{{v2}}</mat>',
             correct='{{v3}}/{{v2}}',
             variables={
                 'v1': (randint, 11, 29),
@@ -476,7 +476,7 @@ rechenubungen_mit_bruchen_2 = QuestionSet(
             }),
         Question(
             instruction='Mache die Brüche gleichnamig und löse die Aufgabe.',
-            formula='{{v1}}/{{v2*v3}} + {{v4}}/{{v2}}<br> = {{v1}}/{{v2*v3}}+___/{{v2*v3}} <br> = ___',
+            formula='<mat>{{v1}}/{{v2*v3}} + {{v4}}/{{v2}}<br> = {{v1}}/{{v2*v3}}+___/{{v2*v3}} <br> = ___</mat>',
             correct='{{v4*v3}};{{(v4*v3+v1)}}/{{v2*v3}}',
             variables={
                 'v1': (randint, -15, -5),
@@ -486,7 +486,7 @@ rechenubungen_mit_bruchen_2 = QuestionSet(
             }),
         Question(
             instruction='Mache die Brüche gleichnamig und löse die Aufgabe.',
-            formula='{{v1}}/{{v2}} + 1/{{v3}}<br> = ___/{{v2*v3}}+___/{{v2*v3}} <br> = ___',
+            formula='<mat>{{v1}}/{{v2}} + 1/{{v3}}<br> = ___/{{v2*v3}}+___/{{v2*v3}} <br> = ___</mat>',
             correct='{{v1*v3}};{{v2}};{{v1*v3+v2}}/{{v2*v3}}',
             variables={
                 'v1': (randint, -6, -4),
@@ -505,7 +505,7 @@ rechenubungen_mit_bruchen_3 = QuestionSet(
     question_type='gap',
     questions=[
         Question(
-            formula='-{{v1}} +(-{{v2}}/{{v3}})<br> = -{{v1}} +( ___ )<br> = ___',
+            formula='<mat>-{{v1}} +(-{{v2}}/{{v3}})<br> = -{{v1}} +( ___ )<br> = ___</mat>',
             correct='-{{"%.1f"|format(v2/v3)}};-{{"%.1f"|format(v1+v2/v3)}};',
             variables={
                 'v1': (randint, 15, 60),
@@ -513,7 +513,7 @@ rechenubungen_mit_bruchen_3 = QuestionSet(
                 'v3': (choice, [5, 10]),
             }),
         Question(
-            formula='{{v1}} +(-{{v2}}/{{v3}})<br> = {{v1}} +( ___ )<br> = ___',
+            formula='<mat>{{v1}} +(-{{v2}}/{{v3}})<br> = {{v1}} +( ___ )<br> = ___</mat>',
             correct='-{{"%.1f"|format(v2/v3)}};{{"%.1f"|format(v1-v2/v3)}};',
             variables={
                 'v1': (randint, 15, 60),
@@ -521,14 +521,14 @@ rechenubungen_mit_bruchen_3 = QuestionSet(
                 'v3': (choice, [5, 10]),
             }),
         Question(
-            formula='-{{v1}} +(-{{v2}}/4)<br> = -{{v1}} +( ___ )<br> = ___',
+            formula='<mat>-{{v1}} +(-{{v2}}/4)<br> = -{{v1}} +( ___ )<br> = ___</mat>',
             correct='-{{"%.2f"|format(v2/4)}};-{{"%.2f"|format(v1+v2/4)}};',
             variables={
                 'v1': (randint, 15, 60),
                 'v2': (choice, [1, 3]),
             }),
         Question(
-            formula='{{v1}} +(-{{v2}}/4)<br> = {{v1}} +( ___ )<br> = ___',
+            formula='<mat>{{v1}} +(-{{v2}}/4)<br> = {{v1}} +( ___ )<br> = ___</mat>',
             correct='-{{"%.2f"|format(v2/4)}};{{"%.2f"|format(v1-v2/4)}};',
             variables={
                 'v1': (randint, 15, 60),
@@ -546,7 +546,7 @@ rechenubungen_mit_bruchen_4 = QuestionSet(
     question_type='gap',
     questions=[
         Question(
-            formula='{{v1}}/{{v3}}+(-{{v2}}/{{v3}}) = ___ ',
+            formula='<mat>{{v1}}/{{v3}}+(-{{v2}}/{{v3}}) = ___ </mat>',
             correct='{{v1-v2}}/{{v3}}',
             variables={
                 'v1': (randint, 2, 9),
@@ -554,7 +554,7 @@ rechenubungen_mit_bruchen_4 = QuestionSet(
                 'v3': (randint, 3, 20),
             }),
         Question(
-            formula='{{v1}}/{{v3}}+{{v2}}/{{v3}} = ___ ',
+            formula='<mat>{{v1}}/{{v3}}+{{v2}}/{{v3}} = ___ </mat>',
             correct='{{v1+v2}}/{{v3}}',
             variables={
                 'v1': (randint, 2, 9),
@@ -575,14 +575,14 @@ vorzeichen_bestimmen = QuestionSet(
          'Sind die Vorzeichen beider Faktoren dagegen unterschiedlich, ist das Ergebnis negativ.',
     questions=[
         Question(
-            formula='(-{{v1}}):(-{{v1*2}}) = ___0.5',
+            formula='<mat>(-{{v1}}):(-{{v1*2}}) = ___0.5</mat>',
             correct='+',
             wrong_1='-',
             variables={
                 'v1': (randint, 2, 9),
             }),
         Question(
-            formula='{{"%.1f"|format(v1*v2)}}:(-{{v1}}) = ___{{v2}}',
+            formula='<mat>{{"%.1f"|format(v1*v2)}}:(-{{v1}}) = ___{{v2}}</mat>',
             correct='-',
             wrong_1='+',
             variables={
@@ -590,7 +590,7 @@ vorzeichen_bestimmen = QuestionSet(
                 'v2': (choice, [0.2, 0.4, 0.6, 0.8]),
             }),
         Question(
-            formula='{{"%.1f"|format(v1*v2)}}:{{v2}} = ___{{v1}}',
+            formula='<mat>{{"%.1f"|format(v1*v2)}}:{{v2}} = ___{{v1}}</mat>',
             correct='+',
             wrong_1='-',
             variables={
@@ -660,7 +660,7 @@ division_mir_bruchen = QuestionSet(
     question_type='MC',
     questions=[
         Question(
-            formula='{{v1*v2}}/{{v3}}:{{v2}} = ___<br> = ___',
+            formula='<mat>{{v1*v2}}/{{v3}}:{{v2}} = ___<br> = ___</mat>',
             correct='({{v1*v2}}:{{v2}})/{{v3}}~{{v1*v2}}/({{v3}}:{{v2}});{{v1}}/{{v3}}~{{v1*v2*v2}}/{{v3}}',
             variables={
                 'v1': (randint, 2, 5),
@@ -668,15 +668,15 @@ division_mir_bruchen = QuestionSet(
                 'v3': (randint, 2, 5),
             }),
         Question(
-            formula='{{v1*v2}}/{{v3}}:{{v2}} = ___<br> = ___',
-            correct='{{v1*v2}}/({{v3}}*{{v2}})~({{v1*v2}}*{{v2}})/{{v3}};{{v1}}/{{v3}}~{{v1*v2*v2}}/{{v3}}',
+            formula='<mat>{{v1*v2}}/{{v3}}:{{v2}} = ___<br> = ___',
+            correct='{{v1*v2}}/({{v3}}*{{v2}})~({{v1*v2}}*{{v2}})/{{v3}};{{v1}}/{{v3}}~{{v1*v2*v2}}/{{v3}}</mat>',
             variables={
                 'v1': (randint, 2, 5),
                 'v2': (randint, 2, 4),
                 'v3': (randint, 2, 5),
             }),
         Question(
-            formula='{{v1}}/{{v2}}:{{v3}}/{{v4}} = {{v1}}/{{v2}}*___<br> = ___/___<br> = ___',
+            formula='<mat>{{v1}}/{{v2}}:{{v3}}/{{v4}} = {{v1}}/{{v2}}*___<br> = ___/___<br> = ___',
             correct='{{v4}}/{{v3}}~{{v3}}/{{v4}};'
                     '{{v1}}*{{v4}}~{{(-v1)}}*{{v4}};'
                     '{{v2}}*{{v3}}~{{v2}}*{{v4}};'
@@ -699,14 +699,14 @@ bruche_dividieren = QuestionSet(
     question_type='gap',
     questions=[
         Question(
-            formula='5/{{v1}} : {{v2}}',
+            formula='<mat>5/{{v1}} : {{v2}}</mat>',
             correct='5/{{v1*v2}}',
             variables={
                 'v1': (randint, 7, 9),
                 'v2': (randint, 7, 9),
             }),
         Question(
-            formula='{{v1*v2}}/{{v2*v3}} : (-{{v1}})',
+            formula='<mat>{{v1*v2}}/{{v2*v3}} : (-{{v1}})</mat>',
             correct='-1/{{v3}}',
             variables={
                 'v1': (randint, 2, 5),
@@ -714,14 +714,14 @@ bruche_dividieren = QuestionSet(
                 'v3': (randint, 2, 5),
             }),
         Question(
-            formula='-{{v1*4}}/{{v1*2}} : {{v2*4}}/{{v1*2}}',
+            formula='<mat>-{{v1*4}}/{{v1*2}} : {{v2*4}}/{{v1*2}}</mat>',
             correct='-{{v1}}/{{v2}}',
             variables={
                 'v1': (choice, [3, 5]),
                 'v2': (choice, [4, 6, 7, 8]),
             }),
         Question(
-            formula='{{v1*5}}/{{v3}} : {{v2*5}}/{{v2*v2}}',
+            formula='<mat>{{v1*5}}/{{v3}} : {{v2*5}}/{{v2*v2}}</mat>',
             correct='{{v1*v2}}/{{v3}}',
             variables={
                 'v1': (randint, 2, 4),
@@ -740,7 +740,7 @@ umkehraufgaben_bilden_1_mc = QuestionSet(
     question_type='MC',
     questions=[
         Question(
-            formula='Aufgabe: {{v1}} : Divisor = -{{v2}} <br> Umkehraufgabe: ___ : ___ = ___',
+            formula='<mat>{{v1}} : Divisor = -{{v2}} <br> Umkehraufgabe: ___ : ___ = ___</mat>',
             correct='{{v1}}~{{v2}}~-{{v1}}~Divisor;'
                     '(-{{v2}})~{{v2}}~(-{{v1}})~Divisor;'
                     'Divisor~(-{{v2}})~{{v1}}~-{{v1}}',
@@ -760,7 +760,7 @@ umkehraufgaben_bilden_1_gap = QuestionSet(
     question_type='gap',
     questions=[
         Question(
-            formula='Aufgabe: -{{v1}} : ? = 1/{{v2}} <br> Umkehraufgabe: ___ : ___ = ?',
+            formula='<mat>-{{v1}} : ? = 1/{{v2}} <br> Umkehraufgabe: ___ : ___ = ?</mat>',
             correct='-{{v1}};1/{{v2}};-{{v2}}/{{(1/v1)|round|int}}',
             variables={
                 'v1': (choice, [0.1, 0.2, 0.25, 0.5]),
@@ -778,7 +778,7 @@ umkehraufgaben_bilden_2_mc = QuestionSet(
     question_type='MC',
     questions=[
         Question(
-            formula='Aufgabe: Dividend : (-{{v1}}) = {{v2}}.5 Umkehraufgabe: ___ __ ___= ___',
+            formula='<mat>Dividend : (-{{v1}}) = {{v2}}.5<br> Umkehraufgabe: ___ __ ___= ___</mat>',
             correct='-{{v1}}~{{v1}}~-{{v2}}.5~Dividend;'
                     '*~:~+~-;'
                     '{{v2}}.5~-{{v2}}.5~{{v1}}~-{{v1}};'
@@ -799,7 +799,7 @@ umkehraufgaben_bilden_2_gap = QuestionSet(
     question_type='gap',
     questions=[
         Question(
-            formula='Aufgabe: ? : (-{{v2}}) = {{v1}} Umkehraufgabe: {{v1}} __ (-{{v2}}) = ___',
+            formula='<mat>? : (-{{v2}}) = {{v1}}<br> Umkehraufgabe: {{v1}} __ (-{{v2}}) = ___</mat>',
             correct='*;-{{v1*v2}}',
             variables={
                 'v1': (randint, 1, 5),
@@ -817,14 +817,14 @@ rechenubungen_mit_rationalen_zahlen_2 = QuestionSet(
     question_type='gap',
     questions=[
         Question(
-            formula='-{{v1}}-{{v2}} = ___ ',
+            formula='<mat>-{{v1}}-{{v2}} = ___</mat> ',
             correct='-{{"%.1f"|format(v1+v2)}}',
             variables={
                 'v1': (randdecimal, 2, 5),
                 'v2': (randdecimal, 2, 5),
             }),
         Question(
-            formula='{{v1}}-{{v2}} = ___ ',
+            formula='<mat>{{v1}}-{{v2}} = ___ </mat>',
             correct='{{"%.1f"|format(v1-v2)}}',
             variables={
                 'v1': (randdecimal, 21, 29),
@@ -832,7 +832,7 @@ rechenubungen_mit_rationalen_zahlen_2 = QuestionSet(
             }),
         Question(
             instruction='Subtrahiere die rationalen Zahlen.',
-            formula='{{v1}}-(-{{v2}}) = ___ ',
+            formula='<mat>{{v1}}-(-{{v2}}) = ___ </mat>',
             correct='{{"%.1f"|format(v1+v2)}}',
             variables={
                 'v1': (randdecimal, 11, 15),
@@ -840,7 +840,7 @@ rechenubungen_mit_rationalen_zahlen_2 = QuestionSet(
             }),
         Question(
             instruction='Subtrahiere die rationalen Zahlen.',
-            formula='-{{v1}}-(-{{v2}}) = ___ ',
+            formula='<mat>-{{v1}}-(-{{v2}}) = ___ </mat>',
             correct='{{"%.1f"|format(v2-v1)}}',
             variables={
                 'v1': (randdecimal, 120, 125),
@@ -858,7 +858,7 @@ rechenubungen_mit_rationalen_zahlen_2_mc = QuestionSet(
     question_type='MC',
     questions=[
         Question(
-            formula='{{v1}} ___ {{"%.1f"|format(v2+v1)}}-{{v2}}',
+            formula='<mat>{{v1}} ___ {{"%.1f"|format(v2+v1)}}-{{v2}}</mat>',
             correct='=',
             wrong_1='>',
             wrong_2='<',
@@ -867,7 +867,7 @@ rechenubungen_mit_rationalen_zahlen_2_mc = QuestionSet(
                 'v2': (randdecimal, 45, 49),
             }),
         Question(
-            formula='{{"%.1f"|format(v1+v2+v3)}}-{{v1}} ___ {{v2}}',
+            formula='<mat>{{"%.1f"|format(v1+v2+v3)}}-{{v1}} ___ {{v2}}</mat>',
             correct='>',
             wrong_1='=',
             wrong_2='<',
@@ -888,10 +888,10 @@ rechenubungen_mit_bruchen_1_subtraktion = QuestionSet(
     question_type='gap',
     questions=[
         Question(
-            formula='{{"%.1f"|format(v1/v3)}}-{{v2}}/{{v3*v4}}'
+            formula='<mat>{{"%.1f"|format(v1/v3)}}-{{v2}}/{{v3*v4}}'
                     '<br> = (___*{{v3*v4}})/___-{{v2}}/{{v3*v4}}'
                     '<br> = ___/{{v3*v4}}-{{v2}}/{{v3*v4}} = ___',
-            correct='{{"%.1f"|format(v1/v3)}};{{v3*v4}};{{v1*v4}};{{v1*v4-v2}}/{{v3*v4}}',
+            correct='{{"%.1f"|format(v1/v3)}};{{v3*v4}};{{v1*v4}};{{v1*v4-v2}}/{{v3*v4}}</mat>',
             variables={
                 'v1': (randint, 3, 7),
                 'v2': (randint, 2, 9),
@@ -899,10 +899,10 @@ rechenubungen_mit_bruchen_1_subtraktion = QuestionSet(
                 'v4': (choice, [2, 3, 4]),
             }),
         Question(
-            formula='-{{v1}}/{{v2}}-{{v3}}<br> '
+            formula='<mat>-{{v1}}/{{v2}}-{{v3}}<br> '
                     '= ___-{{v3}}<br> '
                     '= ___',
-            correct='-{{"%.1f"|format(v1/v2)}};{{"%.1f"|format(v1/v2+v3)}}',
+            correct='-{{"%.1f"|format(v1/v2)}};{{"%.1f"|format(v1/v2+v3)}}</mat>',
             variables={
                 'v1': (randint, 2, 9),
                 'v2': (choice, [2, 5, 10]),
@@ -920,7 +920,7 @@ rechenubungen_mit_bruchen_2_subtraktion = QuestionSet(
     question_type='gap',
     questions=[
         Question(
-            formula='{{v1}}/{{v2}}-{{v3}}/{{v2}} = ___',
+            formula='<mat>{{v1}}/{{v2}}-{{v3}}/{{v2}} = ___</mat>',
             correct='-{{v3-v1}}/{{v2}}',
             variables={
                 'v1': (randint, 1, 5),
@@ -928,7 +928,7 @@ rechenubungen_mit_bruchen_2_subtraktion = QuestionSet(
                 'v3': (randint, 6, 9),
             }),
         Question(
-            formula='{{v1}}/{{v2}}-{{v3}}/{{v2}} = ___',
+            formula='<mat>{{v1}}/{{v2}}-{{v3}}/{{v2}} = ___</mat>',
             correct='{{v1-v3}}/{{v2}}',
             variables={
                 'v1': (randint, 11, 19),
@@ -937,7 +937,7 @@ rechenubungen_mit_bruchen_2_subtraktion = QuestionSet(
             }),
         Question(
             instruction='Mache die Brüche gleichnamig und Subtrahiere die rationalen Zahlen',
-            formula='{{v1}}/{{v2}}-{{v3}}/{{v2*v4}}<br> = ___/{{v2*v4}}-{{v3}}/{{v2*v4}}<br> = ___',
+            formula='<mat>{{v1}}/{{v2}}-{{v3}}/{{v2*v4}}<br> = ___/{{v2*v4}}-{{v3}}/{{v2*v4}}<br> = ___</mat>',
             correct='{{v1*v4}};{{v1*v4-v3}}/{{v2*v4}}',
             variables={
                 'v1': (randint, 2, 7),
@@ -947,7 +947,7 @@ rechenubungen_mit_bruchen_2_subtraktion = QuestionSet(
             }),
         Question(
             instruction='Mache die Brüche gleichnamig und Subtrahiere die rationalen Zahlen',
-            formula='{{v1}}/{{v2}}-{{v3}}/{{v4}}<br> = ___/{{v2*v4}}-___/{{v2*v4}}<br> = ___',
+            formula='<mat>{{v1}}/{{v2}}-{{v3}}/{{v4}}<br> = ___/{{v2*v4}}-___/{{v2*v4}}<br> = ___</mat>',
             correct='{{v1*v4}};{{v3*v2}};{{v1*v4-v3*v2}}/{{v2*v4}}',
             variables={
                 'v1': (randint, 1, 4),
@@ -967,14 +967,14 @@ rechenubungen_mit_bruchen_3_subtraktion = QuestionSet(
     question_type='gap',
     questions=[
         Question(
-            formula='{{v1}} -(-{{v2}}/4)<br>= {{v1}}  - (___)<br> = ___',
+            formula='<mat>{{v1}} -(-{{v2}}/4)<br>= {{v1}}  - (___)<br> = ___</mat>',
             correct='{{"%.2f"|format(-v2/4)}};{{"%.2f"|format(v1+v2/4)}}',
             variables={
                 'v1': (randint, 1, 5),
                 'v2': (choice, [1, 3, 5]),
             }),
         Question(
-            formula='{{v1}} -(-{{v2}}/{{v3}})<br>= {{v1}}  - (___)<br> = ___',
+            formula='<mat>{{v1}} -(-{{v2}}/{{v3}})<br>= {{v1}}  - (___)<br> = ___</mat>',
             correct='{{"%.1f"|format(-v2/v3)}};{{"%.1f"|format(v1+v2/v3)}}',
             variables={
                 'v1': (randint, 1, 5),
@@ -982,11 +982,11 @@ rechenubungen_mit_bruchen_3_subtraktion = QuestionSet(
                 'v3': (choice, [2, 5, 10])
             }),
         Question(
-            formula='{{v1}}-(-{{v2}}/{{v3}})'
+            formula='<mat>{{v1}}-(-{{v2}}/{{v3}})'
                     '<br> = (___*{{v3}})/___ - (-{{v2}}/{{v3}})'
                     '<br> = ___/{{v3}} -(-{{v2}}/{{v3}})'
                     '<br> = ___',
-            correct='{{v1}};{{v3}};{{v1*v3}};{{v1*v3+v2}}/{{v3}}',
+            correct='{{v1}};{{v3}};{{v1*v3}};{{v1*v3+v2}}/{{v3}}</mat>',
             variables={
                 'v1': (randint, 1, 4),
                 'v2': (randint, 1, 5),
@@ -1004,7 +1004,7 @@ rechenubungen_mit_bruchen_4_subtraktion = QuestionSet(
     question_type='gap',
     questions=[
         Question(
-            formula='{{v1}}/{{v2}}-(-{{v3}}/{{v2}}) = ___',
+            formula='<mat>{{v1}}/{{v2}}-(-{{v3}}/{{v2}}) = ___</mat>',
             correct='{{v3+v1}}/{{v2}}',
             variables={
                 'v1': (randint, 1, 5),
@@ -1023,7 +1023,7 @@ multiplikation_rationaler_zahlen = QuestionSet(
     question_type='gap',
     questions=[
         Question(
-            formula='{{v1}}+{{v1}}+{{v1}} = ____________',
+            formula='<mat>{{v1}}+{{v1}}+{{v1}} = ____________</mat>',
             correct='3*{{v1}}',
             wrong_1='{{v1}}^3',
             wrong_2='3/{{v1}}',
@@ -1031,7 +1031,7 @@ multiplikation_rationaler_zahlen = QuestionSet(
                 'v1': (randdecimal, 3, 6),
             }),
         Question(
-            formula='{{v1}}+{{v1}}+{{v1}}+{{v1}} = ____________',
+            formula='<mat>{{v1}}+{{v1}}+{{v1}}+{{v1}} = ____________</mat>',
             correct='4*{{v1}}',
             wrong_1='{{v1}}^4',
             wrong_2='4/{{v1}}',
@@ -1039,14 +1039,14 @@ multiplikation_rationaler_zahlen = QuestionSet(
                 'v1': (randdecimal, 3, 6),
             }),
         Question(
-            formula='{{v1}}/{{v2}}+{{v1}}/{{v2}}+{{v1}}/{{v2}}+{{v1}}/{{v2}} = ___ * ___',
+            formula='<mat>{{v1}}/{{v2}}+{{v1}}/{{v2}}+{{v1}}/{{v2}}+{{v1}}/{{v2}} = ___ * ___</mat>',
             correct='4;{{v1}}/{{v2}}',
             variables={
                 'v1': (randint, 2, 4),
                 'v2': (randint, 5, 7),
             }),
         Question(
-            formula='{{v1}}/{{v2}}+{{v1}}/{{v2}}+{{v1}}/{{v2}}+{{v1}}/{{v2}}+{{v1}}/{{v2}} = = ___ * ___',
+            formula='<mat>{{v1}}/{{v2}}+{{v1}}/{{v2}}+{{v1}}/{{v2}}+{{v1}}/{{v2}}+{{v1}}/{{v2}} = = ___ * ___</mat>',
             correct='5;{{v1}}/{{v2}}',
             variables={
                 'v1': (randint, 2, 4),
@@ -1085,14 +1085,14 @@ rationale_zahlen_umwandeln = QuestionSet(
          'Daher lässt sich ein Bruch in eine Dezimalzahl umwandeln, indem der Zähler durch den Nenner geteilt wird.',
     questions=[
         Question(
-            formula='___ = = {{"%.1f"|format(v1/2)}}',
+            formula='<mat>___ = = {{"%.1f"|format(v1/2)}}</mat>',
             correct='{{v1}}/2;{{v1*2}}/4;{{v1*4}}/8',
             wrong_1='{{v1*2}}/6;{{v1*2+5}}/10',
             variables={
                 'v1': (choice, [3, 5, 7, 9, 11])
             }),
         Question(
-            formula='___ = = -{{"%.2f"|format(v1/4)}}',
+            formula='<mat>___ = = -{{"%.2f"|format(v1/4)}}</mat>',
             correct='-{{v1}}/4;-{{v1*2}}/8;-{{v1*25}}/100',
             wrong_1='-{{v1-2}}/2;-{{v1}}/10',
             variables={
@@ -1110,7 +1110,7 @@ vorzeichen_bestimmen_multiplikation = QuestionSet(
     question_type='MC',
     questions=[
         Question(
-            formula='(-{{v1}})*(-{{v2}})=__{{"%.1f"|format(v1*v2)}}',
+            formula='<mat>(-{{v1}})*(-{{v2}})=__{{"%.1f"|format(v1*v2)}}</mat>',
             correct='+',
             wrong_1='-',
             variables={
@@ -1118,7 +1118,7 @@ vorzeichen_bestimmen_multiplikation = QuestionSet(
                 'v2': (randdecimal, 11, 19),
             }),
         Question(
-            formula='{{v2}}*(-{{v1}})=__{{"%.1f"|format(v1*v2)}}',
+            formula='<mat>{{v2}}*(-{{v1}})=__{{"%.1f"|format(v1*v2)}}</mat>',
             correct='-',
             wrong_1='+',
             variables={
@@ -1126,7 +1126,7 @@ vorzeichen_bestimmen_multiplikation = QuestionSet(
                 'v2': (randdecimal, 0.1, 0.9),
             }),
         Question(
-            formula='-{{v1}}/{{v2}} * {{v3}} = __{{v1*v3}}/{{v2}}',
+            formula='<mat>-{{v1}}/{{v2}} * {{v3}} = __{{v1*v3}}/{{v2}}</mat>',
             correct='-',
             wrong_1='+',
             variables={
@@ -1135,7 +1135,7 @@ vorzeichen_bestimmen_multiplikation = QuestionSet(
                 'v3': (randint, 2, 5),
             }),
         Question(
-            formula='{{v1}}/{{v2}} * {{v3}}/{{v4}} = __{{v1*v3}}/{{v2*v4}}',
+            formula='<mat>{{v1}}/{{v2}} * {{v3}}/{{v4}} = __{{v1*v3}}/{{v2*v4}}</mat>',
             correct='+',
             wrong_1='-',
             variables={
@@ -1148,7 +1148,7 @@ vorzeichen_bestimmen_multiplikation = QuestionSet(
             instruction='Setze den korrekten Faktor ein.',
             hint='Ist die Anzahl negativer Faktoren gerade, ist das Ergebnis positiv. '
                  'Bei ungerader Anzahl ist das Ergebnis negativ',
-            formula='{{v1}} * (-{{v2}}) * (-{{v3}}) * 100 * ___ = {{(v1*v2*v3*v4*100)|round|int}}',
+            formula='<mat>{{v1}} * (-{{v2}}) * (-{{v3}}) * 100 * ___ = {{(v1*v2*v3*v4*100)|round|int}}</mat>',
             correct='{{v4}}',
             wrong_1='-{{v4}}',
             variables={
@@ -1161,7 +1161,7 @@ vorzeichen_bestimmen_multiplikation = QuestionSet(
             instruction='Setze den korrekten Faktor ein.',
             hint='Ist die Anzahl negativer Faktoren gerade, ist das Ergebnis positiv. '
                  'Bei ungerader Anzahl ist das Ergebnis negativ',
-            formula='{{v1}}/{{v2}} * ___ * (-{{v5}}/{{v6}}) = {{v1*v3*v5}}/{{v2*v4*v6}}<br>',
+            formula='<mat>{{v1}}/{{v2}} * ___ * (-{{v5}}/{{v6}}) = {{v1*v3*v5}}/{{v2*v4*v6}}<br></mat>',
             correct='-{{v3}}/{{v4}}',
             wrong_1='{{v3}}/{{v4}}',
             variables={
@@ -1176,7 +1176,7 @@ vorzeichen_bestimmen_multiplikation = QuestionSet(
             instruction='Setze den korrekten Faktor ein.',
             hint='Ist die Anzahl negativer Faktoren gerade, ist das Ergebnis positiv. '
                  'Bei ungerader Anzahl ist das Ergebnis negativ',
-            formula='___ * {{v2}} * (-{{v3}}) * {{v4}} = {{"%.2f"|format(v1*v2*v3*v4)}}',
+            formula='<mat>___ * {{v2}} * (-{{v3}}) * {{v4}} = {{"%.2f"|format(v1*v2*v3*v4)}}</mat>',
             correct='-{{v1}}',
             wrong_1='{{v1}}',
             variables={
@@ -1199,14 +1199,14 @@ rationale_dezimalzahlen_multiplizieren = QuestionSet(
          'Ist nur einer der beiden Faktoren negativ, ist das Ergebnis ebenfalls negativ.',
     questions=[
         Question(
-            formula='(-{{v1}}) * (-{{v2}}) = ___',
+            formula='<mat>(-{{v1}}) * (-{{v2}}) = ___</mat>',
             correct='+{{v1*v2}}',
             variables={
                 'v1': (randint, 7, 15),
                 'v2': (randint, 2, 6),
             }),
         Question(
-            formula='{{"%.1f"|format(v1/2)}} * (-{{v2*2}}) = ___',
+            formula='<mat>{{"%.1f"|format(v1/2)}} * (-{{v2*2}}) = ___</mat>',
             correct='-{{v1*v2}}',
             variables={
                 'v1': (choice, [3, 5, 7, 9, 11]),
@@ -1226,7 +1226,7 @@ multiplikation_von_bruchen_1 = QuestionSet(
          'in dem die rationale Zahl mit dem Zähler multipliziert wird. Der Nenner bleibt gleich.',
     questions=[
         Question(
-            formula='-{{v1}} * {{v2}}/{{v3}} = (___ * ___)/{{v3}} <br>= ___',
+            formula='<mat>-{{v1}} * {{v2}}/{{v3}} = (___ * ___)/{{v3}} <br>= ___</mat>',
             correct='-{{v1}};{{v2}};-{{v1*v2}}/{{v3}}',
             variables={
                 'v1': (randint, 2, 7),
@@ -1234,7 +1234,7 @@ multiplikation_von_bruchen_1 = QuestionSet(
                 'v3': (randint, 2, 7),
             }),
         Question(
-            formula='{{v1}} * -{{v2}}/{{v3}} = (___ * ___)/{{v3}} <br>= ___',
+            formula='<mat>{{v1}} * -{{v2}}/{{v3}} = (___ * ___)/{{v3}} <br>= ___</mat>',
             correct='{{v1}};-{{v2}};-{{v1*v2}}/{{v3}}',
             variables={
                 'v1': (randint, 2, 7),
@@ -1242,7 +1242,7 @@ multiplikation_von_bruchen_1 = QuestionSet(
                 'v3': (randint, 2, 7),
             }),
         Question(
-            formula='(-{{v1}}) * (-{{v2}}/{{v3}}) = ((___) * (___))/(___)<br> = ___',
+            formula='<mat>(-{{v1}}) * (-{{v2}}/{{v3}}) = ((___) * (___))/(___)<br> = ___</mat>',
             correct='-{{v1}};-{{v2}};{{v3}};{{(v1*v2)|round|int}}/{{v3}}',
             variables={
                 'v1': (choice, [1.5, 2.5, 3.5, 4.5]),
@@ -1261,7 +1261,7 @@ multiplikation_von_bruchen_2 = QuestionSet(
     question_type='gap',
     questions=[
         Question(
-            formula='{{v1}}/{{v2}} * {{v3}}/{{v4}} = (___ * ___)/(___ * ___) = ___',
+            formula='<mat>{{v1}}/{{v2}} * {{v3}}/{{v4}} = (___ * ___)/(___ * ___) = ___</mat>',
             correct='{{v1}};{{v3}};{{v2}};{{v4}};{{v1*v3}}/{{v2*v4}}',
             variables={
                 'v1': (randint, 1, 7),
@@ -1282,7 +1282,7 @@ multiplikation_von_summen_und_differenzen = QuestionSet(
     hint='Faktoren dürfen vertauscht werden.',
     questions=[
         Question(
-            formula='-{{v1}} * ({{v2}} + {{v3}}) <br> = ___ + ___<br> = ___',
+            formula='<mat>-{{v1}} * ({{v2}} + {{v3}}) <br> = ___ + ___<br> = ___</mat>',
             correct='-{{v1*v2}};{{"%.1f"|format(-v1*v3)}};{{"%.1f"|format(-v1*v2-v1*v3)}}',
             variables={
                 'v1': (choice, [1.5, 2.5, 3.5, 4.5]),
@@ -1290,7 +1290,7 @@ multiplikation_von_summen_und_differenzen = QuestionSet(
                 'v3': (randdecimal, 0.2, 0.8, 0.2),
             }),
         Question(
-            formula='-{{v1}}/{{v2}} * ({{v2}}/{{v1}} - {{v2*v3}}) <br> = ___ + ___<br> = ___',
+            formula='<mat>-{{v1}}/{{v2}} * ({{v2}}/{{v1}} - {{v2*v3}}) <br> = ___ + ___<br> = ___</mat>',
             correct='-1;{{v3}};{{v3-1}}',
             variables={
                 'v1': (randint, 2, 5),
@@ -1386,7 +1386,7 @@ division_durch_0 = QuestionSet(
     question_type='MC',
     questions=[
         Question(
-            formula='{{v1}}*{{v2}}:0',
+            formula='<mat>{{v1}}*{{v2}}:0</mat>',
             correct='wrong',
             wrong_1='correct',
             variables={
@@ -1394,7 +1394,7 @@ division_durch_0 = QuestionSet(
                 'v2': (randint, 2, 5),
             }),
         Question(
-            formula='({{v1}}/{{v2}}-{{"%.1f"|format(v1/v2)}}):({{v3}}*{{v4}})',
+            formula='<mat>({{v1}}/{{v2}}-{{"%.1f"|format(v1/v2)}}):({{v3}}*{{v4}})</mat>',
             correct='correct',
             wrong_1='wrong',
             variables={
@@ -1404,7 +1404,7 @@ division_durch_0 = QuestionSet(
                 'v4': (randint, 2, 5),
             }),
         Question(
-            formula='{{v1}}/{{v2}}*{{v2}}/{{v1}}:({{v3}}/{{v4}}-{{v3}}/{{v4}})',
+            formula='<mat>{{v1}}/{{v2}}*{{v2}}/{{v1}}:({{v3}}/{{v4}}-{{v3}}/{{v4}})</mat>',
             correct='wrong',
             wrong_1='correct',
             variables={
@@ -1414,7 +1414,7 @@ division_durch_0 = QuestionSet(
                 'v4': (randint, 6, 9),
             }),
         Question(
-            formula='{{v1}}/{{v2}}-{{v3}}/{{v4}}:({{v5}}*0)',
+            formula='<mat>{{v1}}/{{v2}}-{{v3}}/{{v4}}:({{v5}}*0)</mat>',
             correct='wrong',
             wrong_1='correct',
             variables={
@@ -1425,7 +1425,7 @@ division_durch_0 = QuestionSet(
                 'v5': (randdecimal, 2, 5),
             }),
         Question(
-            formula='{{v1}}*1/{{v2}}:1/{{v3}}-{{v4}}/{{v5}}',
+            formula='<mat>{{v1}}*1/{{v2}}:1/{{v3}}-{{v4}}/{{v5}}</mat>',
             correct='correct',
             wrong_1='wrong',
             variables={
@@ -1447,7 +1447,7 @@ vorteilhaftes_rechnen = QuestionSet(
     question_type='MC',
     questions=[
         Question(
-            formula='{{v1}}*{{v2}}/{{v3}}-{{v4}}/{{v5}}*{{v2}}/{{v3}}+{{v6}}/{{v7}}*{{v2}}/{{v3}}',
+            formula='<mat>{{v1}}*{{v2}}/{{v3}}-{{v4}}/{{v5}}*{{v2}}/{{v3}}+{{v6}}/{{v7}}*{{v2}}/{{v3}}</mat>',
             correct='ausklammern',
             wrong_1='ausmultiplizieren',
             variables={
@@ -1460,7 +1460,7 @@ vorteilhaftes_rechnen = QuestionSet(
                 'v7': (randint, 2, 9),
             }),
         Question(
-            formula='({{"%.2f"|format(v5/v1)}}+{{v2*v5}}-{{v5*v3}}/{{v4*v3}}):{{v5}}',
+            formula='<mat>({{"%.2f"|format(v5/v1)}}+{{v2*v5}}-{{v5*v3}}/{{v4*v3}}):{{v5}}</mat>',
             correct='ausmultiplizieren',
             wrong_1='ausklammern',
             variables={
@@ -1471,7 +1471,7 @@ vorteilhaftes_rechnen = QuestionSet(
                 'v5': (choice, [3, 5, 6, 7, 9]),
             }),
         Question(
-            formula='{{v1}}/{{v2}}*{{v3}}-{{v4}}*{{v3}}+{{v5}}/{{v6}}*{{v3}}',
+            formula='<mat>{{v1}}/{{v2}}*{{v3}}-{{v4}}*{{v3}}+{{v5}}/{{v6}}*{{v3}}</mat>',
             correct='ausklammern',
             wrong_1='ausmultiplizieren',
             variables={

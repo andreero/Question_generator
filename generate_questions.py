@@ -12,8 +12,6 @@ except ImportError:
     print('Necessary libraries are not installed, trying to install...')
     subprocess.check_call([sys.executable, '-m', 'pip', 'install', '-r', 'requirements.txt'])
     import jinja2
-    import matplotlib
-    import numexpr
     from slugify import slugify
 
 

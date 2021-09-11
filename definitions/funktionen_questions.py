@@ -13,36 +13,36 @@ sachsituationen_zuordnen = QuestionSet(
     questions=[
         Question(
             formula='Eine Taxifahrt kostet pro Kilometer {{v1}} €. Der Grundpreis beträgt {{v2}} €.',
-            correct='y={{v1}}*x+{{v2}}',
-            wrong_1='y={{v1+1}}*x+{{v2-2}}',
-            wrong_2='y={{v2*3}}-{{v1}}*x',
+            correct='<mat>y={{v1}}*x+{{v2}}</mat>',
+            wrong_1='<mat>y={{v1+1}}*x+{{v2-2}}</mat>',
+            wrong_2='<mat>y={{v2*3}}-{{v1}}*x</mat>',
             variables={
                 'v1': (randdecimal, 1.5, 5, 0.5),
                 'v2': (randint, 2, 9)
             }),
         Question(
             formula='Ein Paar Socken kostet im Internet {{v1}} €. Der Versand kostet {{v2}} €.',
-            correct='y={{v1}}*x+{{v2}}',
-            wrong_1='y={{v1*2}}*x+{{v2}}',
-            wrong_2='y={{10*v1}}*x-{{v2}}',
+            correct='<mat>y={{v1}}*x+{{v2}}</mat>',
+            wrong_1='<mat>y={{v1*2}}*x+{{v2}}</mat>',
+            wrong_2='<mat>y={{10*v1}}*x-{{v2}}</mat>',
             variables={
                 'v1': (randint, 2, 9),
                 'v2': (randint, 2, 9),
             }),
         Question(
             formula='Ein Kilogramm Kartoffeln kostet im Supermarkt {{v1}} €.',
-            correct='y={{v1}}*x',
-            wrong_1='y={{v1*2}}*x+{{v2}}',
-            wrong_2='y={{v1*5}}-{{v2}}*x',
+            correct='<mat>y={{v1}}*x</mat>',
+            wrong_1='<mat>y={{v1*2}}*x+{{v2}}</mat>',
+            wrong_2='<mat>y={{v1*5}}-{{v2}}*x</mat>',
             variables={
                 'v1': (randdecimal, 1, 5, 0.5),
                 'v2': (randint, 2, 9),
             }),
         Question(
             formula='Ein Auto mit einem {{10*v1}} Liter Tank verbraucht {{v2}} Liter Benzin pro km.',
-            correct='y={{10*v1}}-{{v2}}*x',
-            wrong_1='y={{v2}}*x+{{v1}}',
-            wrong_2='y={{v1}}*x',
+            correct='<mat>y={{10*v1}}-{{v2}}*x</mat>',
+            wrong_1='<mat>y={{v2}}*x+{{v1}}</mat>',
+            wrong_2='<mat>y={{v1}}*x</mat>',
             variables={
                 'v1': (randint, 3, 15),
                 'v2': (randdecimal, 0.1, 0.8, 0.1),
@@ -58,12 +58,12 @@ allgemeine_und_scheitelform = QuestionSet(
     instruction='Welche der Funktionsvorschrift en stehen in der allgemeinen Form und welche in der Scheitelform? '
                 'Ziehe in die richtige Kategorie.',
     question_type='dragGroup',
-    hint='Allgemeine Form: f(x) = ax^2+bx+c <br>Scheitelform: f(x) = a(x-d)^2+e',
+    hint='Allgemeine Form: <mat>f(x) = ax^2+bx+c <br>Scheitelform: f(x) = a(x-d)^2+e</mat>',
     questions=[
         Question(
             formula='',
-            correct='allgemeine Form|f(x) = {{v1}}x^2+{{v2}}x-{{v3}}~f(x) = {{v4}}x^2-x+{{v5}}~f(x) = -{{v6}}x^2+{{v7}}x-{{v8}};' +
-                    'Scheitelform|f(x) = -(x-{{v9}})^2+{{v10}}~f(x) = {{v11}}(x+{{v12}})^2-{{v13}}~f(x) = -{{v14}}(x+{{v15}})^2 - {{v16}}',
+            correct='allgemeine Form|<mat>f(x) = {{v1}}x^2+{{v2}}x-{{v3}}</mat>~<mat>f(x) = {{v4}}x^2-x+{{v5}}</mat>~<mat>f(x) = -{{v6}}x^2+{{v7}}x-{{v8}}</mat>;' +
+                    'Scheitelform|<mat>f(x) = -(x-{{v9}})^2+{{v10}}</mat>~<mat>f(x) = {{v11}}(x+{{v12}})^2-{{v13}}</mat>~<mat>f(x) = -{{v14}}(x+{{v15}})^2 - {{v16}}</mat>',
             variables={
                 'v1': (randint, 2, 15),
                 'v2': (randint, 2, 15),
@@ -153,12 +153,11 @@ funktionswerte_bestimmen_1 = QuestionSet(
     capital='Funktionen',
     subcapital='Funktionsgleichungen',
     title='Funktionswerte bestimmen (1)',
-    instruction='',
+    instruction='Setze die x-Werte in die Funktionsgleichung ein und bestimme so die dazugehörigen y-Werte.',
     question_type='gap',
     questions=[
         Question(
-            formula='Setze die x-Werte in die Funktionsgleichung ein und bestimme so die dazugehörigen y-Werte.<br><br>'
-                    '<mat>y = {{v1}}x - {{v2}}</mat><br><br><math>x = {{v3}}<br>y = ___</mat>',
+            formula='<mat>y = {{v1}}x - {{v2}}</mat><br><br><math>x = {{v3}}<br>y = ___</mat>',
             correct='{{v1*v3 - v2}}',
             variables={
                 'v1': (randint, 2, 7),
@@ -166,8 +165,7 @@ funktionswerte_bestimmen_1 = QuestionSet(
                 'v3': (randint, 2, 7),
             }),
         Question(
-            formula='Setze die x-Werte in die Funktionsgleichung ein und bestimme so die dazugehörigen y-Werte.<br><br>'
-                    '<mat>y = {{v1}}x + {{v2}}</mat><br><br><math>x = {{v3}}<br>y = ___</mat>',
+            formula='<mat>y = {{v1}}x + {{v2}}</mat><br><br><math>x = {{v3}}<br>y = ___</mat>',
             correct='{{v1*v3 + v2}}',
             variables={
                 'v1': (randint, 2, 7),
@@ -175,8 +173,7 @@ funktionswerte_bestimmen_1 = QuestionSet(
                 'v3': (randint, 2, 7),
             }),
         Question(
-            formula='Setze die x-Werte in die Funktionsgleichung ein und bestimme so die dazugehörigen y-Werte.<br><br>'
-                    '<mat>y = {{v1}} - {{v2}}x</mat><br><br><math>x = {{v3}}<br>y = ___</mat>',
+            formula='<mat>y = {{v1}} - {{v2}}x</mat><br><br><math>x = {{v3}}<br>y = ___</mat>',
             correct='{{v1 - v2*v3}}',
             variables={
                 'v1': (randint, 15, 30),
@@ -184,8 +181,7 @@ funktionswerte_bestimmen_1 = QuestionSet(
                 'v3': (randint, 1, 5),
             }),
         Question(
-            formula='Setze die x-Werte in die Funktionsgleichung ein und bestimme so die dazugehörigen y-Werte.<br><br>'
-                    '<mat>y = {{v1}}x - {{v2}}</mat><br><br><math>x = {{v3}}<br>y = ___</mat>',
+            formula='<mat>y = {{v1}}x - {{v2}}</mat><br><br><math>x = {{v3}}<br>y = ___</mat>',
             correct='{{v1*v3 - v2}}',
             variables={
                 'v1': (randint, -7, -2),
@@ -200,28 +196,25 @@ funktionswerte_bestimmen_2 = QuestionSet(
     capital='Funktionen',
     subcapital='Funktionsgleichungen',
     title='Funktionswerte bestimmen (2)',
-    instruction='',
+    instruction='Setze die x-Werte in die Funktionsgleichung ein und bestimme so die dazugehörigen y-Werte.',
     question_type='gap',
     questions=[
         Question(
-            formula='Setze die x-Werte in die Funktionsgleichung ein und bestimme so die dazugehörigen y-Werte.<br><br>'
-                    '<mat>y = x^2 - {{v1}}</mat><br><br><math>x = {{v2}}<br>y = ___</mat>',
+            formula='<mat>y = x^2 - {{v1}}</mat><br><br><math>x = {{v2}}<br>y = ___</mat>',
             correct='{{v2**2 - v1}}',
             variables={
                 'v1': (randint, 1, 9),
                 'v2': (randint, -5, -1),
             }),
         Question(
-            formula='Setze die x-Werte in die Funktionsgleichung ein und bestimme so die dazugehörigen y-Werte.<br><br>'
-                    '<mat>>y = ({{v1}} + x)x</mat><br><br><math>x = {{v2}}<br>y = ___</mat>',
+            formula='<mat>>y = ({{v1}} + x)x</mat><br><br><math>x = {{v2}}<br>y = ___</mat>',
             correct='{{v1*v2 + v2**2}}',
             variables={
                 'v1': (randint, 3, 15),
                 'v2': (randint, -5, -1),
             }),
         Question(
-            formula='Setze die x-Werte in die Funktionsgleichung ein und bestimme so die dazugehörigen y-Werte.<br><br>'
-                    '<mat>y = x^3</mat><br><br><math>x = {{v1}}<br>y = ___</mat>',
+            formula='<mat>y = x^3</mat><br><br><math>x = {{v1}}<br>y = ___</mat>',
             correct='{{v1**3}}',
             variables={
                 'v1': (randint, -4, -1),
@@ -234,16 +227,16 @@ funktionsvorschrift_erkennen = QuestionSet(
     capital='Funktionen',
     subcapital='Funktionsgleichungen',
     title='Funktionsvorschrift erkennen',
-    instruction='',
+    instruction='Welche Funktionsvorschrift gehört zu dem Graphen? ',
     question_type='MC',
     hint='Setze in jede Funktionsvorschrift den x-Wert des eingezeichneten Punktes ein und überprüfe, '
          'ob der berechnete y-Wert mit dem y-Wert aus dem Graphen übereinstimmt.',
     questions=[
         Question(
-            formula='Welche Funktionsvorschrift gehört zu dem Graphen? Der eingezeichnete Punkt kann dir helfen.',
-            correct='y = x^2 + {{v1}}',
-            wrong_1='y = -x(x - {{v1}})',
-            wrong_2='y = {{v2}}x + {{v1}}',
+            formula='Der eingezeichnete Punkt kann dir helfen.',
+            correct='<mat>y = x^2 + {{v1}}</mat>',
+            wrong_1='<mat>y = -x(x - {{v1}})</mat>',
+            wrong_2='<mat>y = {{v2}}x + {{v1}}</mat>',
             variables={
                 'v1': (randint, 1, 5),
                 'v2': (randint, 2, 6),
@@ -262,10 +255,10 @@ funktionsvorschrift_erkennen = QuestionSet(
             },
         ),
         Question(
-            formula='Welche Funktionsvorschrift gehört zu dem Graphen? Der eingezeichnete Punkt kann dir helfen.',
-            correct='y = -x(x - {{v1}})',  # -x^2 + {{v1}}
-            wrong_1='y = {{v2}}x + {{v1}}',
-            wrong_2='y = x^2 + {{v1}}',
+            formula='Der eingezeichnete Punkt kann dir helfen.',
+            correct='<mat>y = -x(x - {{v1}})</mat>',  # -x^2 + {{v1}}
+            wrong_1='<mat>y = {{v2}}x + {{v1}}</mat>',
+            wrong_2='<mat>y = x^2 + {{v1}}</mat>',
             variables={
                 'v1': (randint, 1, 4),
                 'v2': (randint, 2, 6),
@@ -284,10 +277,10 @@ funktionsvorschrift_erkennen = QuestionSet(
             },
         ),
         Question(
-            formula='Welche Funktionsvorschrift gehört zu dem Graphen? Der eingezeichnete Punkt kann dir helfen.',
-            correct='y = {{v1}}/x',
-            wrong_1='y = x^2 + {{v1}}',
-            wrong_2='y = -x(x - {{v1}})',
+            formula='Der eingezeichnete Punkt kann dir helfen.',
+            correct='<mat>y = {{v1}}/x</mat>',
+            wrong_1='<mat>y = x^2 + {{v1}}</mat>',
+            wrong_2='<mat>y = -x(x - {{v1}})</mat>',
             variables={
                 'v1': (randint, 1, 3),
             },
@@ -301,10 +294,10 @@ funktionsvorschrift_erkennen = QuestionSet(
             },
         ),
         Question(
-            formula='Welche Funktionsvorschrift gehört zu dem Graphen? Der eingezeichnete Punkt kann dir helfen.',
-            correct='y = {{v1}}x+{{v2}}',
-            wrong_1='y = x^2 + {{v1}}',
-            wrong_2='y = {{v1}}/x',
+            formula='Der eingezeichnete Punkt kann dir helfen.',
+            correct='<mat>y = {{v1}}x+{{v2}}</mat>',
+            wrong_1='<mat>y = x^2 + {{v1}}</mat>',
+            wrong_2='<mat>y = {{v1}}/x</mat>',
             variables={
                 'v1': (randint, 1, 3),
                 'v2': (randint, 1, 4),
@@ -330,14 +323,14 @@ lineare_zuordnen = QuestionSet(
     capital='Funktionen',
     subcapital='Lineare Funktionen',
     title='Funktionsvorschrift erkennen',
-    instruction='',
+    instruction='Welche Funktionsvorschrift gehört zu der angezeigten linearen Funktion?',
     question_type='MC',
     questions=[
         Question(
-            formula='Welche Funktionsvorschrift gehört zu der angezeigten linearen Funktion?',
-            correct='y = -x + {{v1}} ',
-            wrong_1='y = {{v2}} * x - {{v1}}',
-            wrong_2='y = {{v3}} * x + {{v4}}',
+            formula='',
+            correct='<mat>y = -x + {{v1}}</mat>',
+            wrong_1='<mat>y = {{v2}} * x - {{v1}}</mat>',
+            wrong_2='<mat>y = {{v3}} * x + {{v4}}</mat>',
             variables={
                 'v1': (randint, 1, 5),
                 'v2': (randint, 2, 4),
@@ -355,10 +348,10 @@ lineare_zuordnen = QuestionSet(
             },
         ),
         Question(
-            formula='Welche Funktionsvorschrift gehört zu der angezeigten linearen Funktion?',
-            correct='y = -{{v1}} * x - {{v2}}',
-            wrong_1='y = {{v2}} * x + {{v3}}',
-            wrong_2='y = -x + {{v4}}',
+            formula='',
+            correct='<mat>y = -{{v1}} * x - {{v2}}</mat>',
+            wrong_1='<mat>y = {{v2}} * x + {{v3}}</mat>',
+            wrong_2='<mat>y = -x + {{v4}}</mat>',
             variables={
                 'v1': (randint, 2, 4),
                 'v2': (randint, 1, 3),
@@ -376,10 +369,10 @@ lineare_zuordnen = QuestionSet(
             },
         ),
         Question(
-            formula='Welche Funktionsvorschrift gehört zu der angezeigten linearen Funktion?',
-            correct='y = {{v1}} * x + {{v2}}',
-            wrong_1='y = {{v2}} * x - {{v3}}',
-            wrong_2='y = -x + {{v4}}',
+            formula='',
+            correct='<mat>y = {{v1}} * x + {{v2}}</mat>',
+            wrong_1='<mat>y = {{v2}} * x - {{v3}}</mat>',
+            wrong_2='<mat>y = -x + {{v4}}</mat>',
             variables={
                 'v1': (randdecimal, 0.5, 1.5, 0.5),
                 'v2': (randint, 1, 3),
@@ -397,10 +390,10 @@ lineare_zuordnen = QuestionSet(
             },
         ),
         Question(
-            formula='Welche Funktionsvorschrift gehört zu der angezeigten linearen Funktion?',
-            correct='y = {{v1}} * x - {{v2}}',
-            wrong_1='y = {{v2}} * x + {{v3}}',
-            wrong_2='y = -x + {{v4}}',
+            formula='',
+            correct='<mat>y = {{v1}} * x - {{v2}}</mat>',
+            wrong_1='<mat>y = {{v2}} * x + {{v3}}</mat>',
+            wrong_2='<mat>y = -x + {{v4}}</mat>',
             variables={
                 'v1': (randdecimal, 0.5, 1.5, 0.5),
                 'v2': (randint, 1, 3),
@@ -452,14 +445,14 @@ quotientengleichheit = QuestionSet(
          'zu berechnen, muss folgende Gleichung gelöst werden: <br><mat>(-7.5)/(-3)</mat>',
     questions=[
         Question(
-            formula='x = {{v1}}   y = {{v1*v2}}',
+            formula='<mat>x = {{v1}}   y = {{v1*v2}}</mat>',
             correct='{{v2}}',
             variables={
                 'v1': (randint, 2, 9),
                 'v2': (randdecimal, 1.5, 4, 0.5),
             }),
         Question(
-            formula='x = {{v1}}   y = {{v1*v2}}',
+            formula='<mat>x = {{v1}}   y = {{v1*v2}}</mat>',
             correct='{{v2}}',
             variables={
                 'v1': (randint, -9, -2),
@@ -576,14 +569,14 @@ antiproportionale_funktionen = QuestionSet(
     question_type='gap',
     questions=[
         Question(
-            formula='x = {{v1}} <br> y = {{v2}}',
+            formula='<mat>x = {{v1}} <br> y = {{v2}}</mat>',
             correct='{{v1*v2}}',
             variables={
                 'v1': (randint, 2, 5),
                 'v2': (randint, 11, 25),
             }),
         Question(
-            formula='x = {{v1}} <br> y = {{v1*v2}}',
+            formula='<mat>x = {{v1}} <br> y = {{v1*v2}}</mat>',
             correct='{{v2}}',
             variables={
                 'v1': (randint, -9, -2),
@@ -602,7 +595,7 @@ schnittpunkte_berechnen = QuestionSet(
     question_type='gap',
     questions=[
         Question(
-            formula='f(x) = {{v1}}*x - {{v2}}<br>b = ___',
+            formula='<mat>f(x) = {{v1}}*x - {{v2}}<br>b = ___</mat>',
             correct='{{v2}}',
             variables={
                 'v1': (randint, 2, 9),
@@ -612,7 +605,7 @@ schnittpunkte_berechnen = QuestionSet(
             instruction='Bestimme für jede Funktionsvorschrift die Nullstelle.',
             hint='Die Formel für die Nullstelle <mat>x_0</mat>, also den Schnittpunkt mit der x-Achse, '
                  'lautet: <br> <mat>x = -b/m</mat>.',
-            formula='f(x) = {{v1}}*x - {{v1*v2}} <br> x_0 = - ___/___ = ___',
+            formula='<mat>f(x) = {{v1}}*x - {{v1*v2}} <br> x_0 = - ___/___ = ___</mat>',
             correct='{{(-v1*v2)}};{{v1}};{{v2}}',
             variables={
                 'v1': (randint, 2, 9),
@@ -629,7 +622,7 @@ schnittpunkte_berechnen = QuestionSet(
             instruction='Bestimme für jede Funktionsvorschrift die Nullstelle.',
             hint='Die Formel für die Nullstelle <mat>x_0</mat>, also den Schnittpunkt mit der x-Achse, '
                  'lautet: <br> <mat>x = -b/m</mat>.',
-            formula='f(x) = {{v1}}*x + {{v1*v2}} <br> x_0 = - ___/___ = ___',
+            formula='<mat>f(x) = {{v1}}*x + {{v1*v2}} <br> x_0 = - ___/___ = ___</mat>',
             correct='{{v1*v2}};{{v1}};{{v2}}',
             variables={
                 'v1': (randint, -8, -2),
@@ -647,7 +640,7 @@ funktionswerte_bestimmen_1_2 = QuestionSet(
     question_type='gap',
     questions=[
         Question(
-            formula='m = {{v1}}<br>P = ({{v2}}|{{v3}})<br><br>b = ___ - ___ * ___ = ___',
+            formula='<mat>m = {{v1}}<br>P = ({{v2}}|{{v3}})<br><br>b = ___ - ___ * ___ = ___</mat>',
             correct='{{v3}};{{v1}};{{v2}};{{v3-v1*v2}}',
             variables={
                 'v1': (randint, 1, 4),
@@ -656,7 +649,7 @@ funktionswerte_bestimmen_1_2 = QuestionSet(
             }),
         Question(
             instruction='Bestimme die gesamte Funktionsvorschrift an.',
-            formula='m = {{v1}}<br>P = ({{v2}}|{{v3}})<br><br>f(x) = ___ * ___ + ___',
+            formula='<mat>m = {{v1}}<br>P = ({{v2}}|{{v3}})<br><br>f(x) = ___ * ___ + ___</mat>',
             correct='x;{{v1}};{{v3-v1*v2}}',
             variables={
                 'v1': (randint, 1, 4),
@@ -664,7 +657,7 @@ funktionswerte_bestimmen_1_2 = QuestionSet(
                 'v3': (randint, 1, 4),
             }),
         Question(
-            formula='m = {{v1}}<br>P = ({{v2}}|{{v3}})<br><br>b = ___ - ___ * ___ = ___',
+            formula='<mat>m = {{v1}}<br>P = ({{v2}}|{{v3}})<br><br>b = ___ - ___ * ___ = ___</mat>',
             correct='{{v3}};{{v1}};{{v2}};{{v3-v1*v2}}',
             variables={
                 'v1': (randint, 1, 4),
@@ -673,7 +666,7 @@ funktionswerte_bestimmen_1_2 = QuestionSet(
             }),
         Question(
             instruction='Bestimme die gesamte Funktionsvorschrift an.',
-            formula='m = {{v1}}<br>P = ({{v2}}|{{v3}})<br><br>f(x) = ___ * ___ + ___',
+            formula='<mat>m = {{v1}}<br>P = ({{v2}}|{{v3}})<br><br>f(x) = ___ * ___ + ___</mat>',
             correct='x;{{v1}};{{v3-v1*v2}}',
             variables={
                 'v1': (randint, 1, 4),
@@ -692,7 +685,7 @@ funktionswerte_bestimmen_2_2 = QuestionSet(
     question_type='gap',
     questions=[
         Question(
-            formula='b = {{v1}}<br>P = ({{v2}}|{{v2*v3+v1}})<br><br>m = ( ___ - ___ ) / ___ = ___',
+            formula='<mat>b = {{v1}}<br>P = ({{v2}}|{{v2*v3+v1}})<br><br>m = ( ___ - ___ ) / ___ = ___</mat>',
             correct='{{v2*v3-v1}};{{v1}};{{v2}};{{v3}}',
             variables={
                 'v1': (randint, 1, 6),
@@ -701,7 +694,7 @@ funktionswerte_bestimmen_2_2 = QuestionSet(
             }),
         Question(
             instruction='Bestimme die gesamte Funktionsvorschrift an.',
-            formula='b = {{v1}}<br>P = ({{v2}}|{{v2*v3+v1}})<br><br>f(x) = ___ * ___ + ___ ',
+            formula='<mat>b = {{v1}}<br>P = ({{v2}}|{{v2*v3+v1}})<br><br>f(x) = ___ * ___ + ___ </mat>',
             correct='x;{{v3}};{{v1}}',
             variables={
                 'v1': (randint, 1, 6),
@@ -769,7 +762,7 @@ funktionswerte_bestimmen_3 = QuestionSet(
         ),
         Question(
             instruction='Wie lautet der y-Achsenabschnitt b?',
-            formula='b = ___ ',
+            formula='<mat>b = ___ </mat>',
             correct='{{v2}}',
             variables={
                 'v1': (randint, 1, 2),
@@ -793,7 +786,7 @@ funktionswerte_bestimmen_3 = QuestionSet(
         ),
         Question(
             instruction='Wie lautet die dazugehörige Zuordnungsvorschrift?',
-            formula='y = ___ * x + ___ ',
+            formula='<mat>y = ___ * x + ___</mat>',
             correct='{{v1}};{{v2}}',
             variables={
                 'v1': (randint, 1, 2),
@@ -860,9 +853,9 @@ parabeln_erkennen = QuestionSet(
             instruction='Ist der Betrag von a kleiner, gleich oder größer als {{v2}}?',
             hint='Allgemeine Form: <mat>f(x) = ax^2 + bx + c</mat><br>Scheitelform: <mat>f(x) = a(xd)^2+e</mat>',
             formula='',
-            correct='|a| > {{v2}}',
-            wrong_1='|a| < {{v2}}',
-            wrong_2='|a| = {{v2}}',
+            correct='<mat>|a| > {{v2}}</mat>',
+            wrong_1='<mat>|a| < {{v2}}</mat>',
+            wrong_2='<mat>|a| = {{v2}}</mat>',
             variables={
                 'v1': (randdecimal, 0.5, 2, 0.5),
                 'v2': (randint, 1, 5),
@@ -880,8 +873,8 @@ parabeln_erkennen = QuestionSet(
         Question(
             instruction='Welche Formel gehört zu der Parabel?',
             formula='',
-            correct='y = {{v1}}x^2+{{v2}}',  # -x^2 + {{v1}}
-            wrong_1='y = -{{v1}}x^2+{{v2}}',
+            correct='<mat>y = {{v1}}x^2+{{v2}}</mat>',  # -x^2 + {{v1}}
+            wrong_1='<mat>y = -{{v1}}x^2+{{v2}}</mat>',
             variables={
                 'v1': (randdecimal, 0.5, 2, 0.5),
                 'v2': (randint, 1, 5),
@@ -910,7 +903,7 @@ scheitelpunkt_ablesen = QuestionSet(
         Question(
             hint='Die Scheitelform lautet <br><mat>f(x) = a*(xd)^2+e</mat>.<br> Dabei ist d die Verschiebung auf der '
                  'x-Achse und e die Verschiebung auf der y-Achse. Bei Normalparabeln hat a entweder den Wert 1 oder -1.',
-            formula='S = ( ___ | ___ )',
+            formula='<mat>S = ( ___ | ___ )</mat>',
             correct='{{v1}};{{v2}}',
             variables={
                 'v1': (randint, -4, -1),
@@ -928,7 +921,7 @@ scheitelpunkt_ablesen = QuestionSet(
         ),
         Question(
             instruction='Wie lautet die Funktionsvorschrift?',
-            formula='f(x) = ___ ( x - ___ )^2 + ___',
+            formula='<mat>f(x) = ___ ( x - ___ )^2 + ___</mat>',
             correct='-;{{(-v1)}};{{v2}}',
             variables={
                 'v1': (randint, -4, -1),
@@ -957,10 +950,10 @@ funktionsvorschrift_erkennen_2 = QuestionSet(
     questions=[
         Question(
             formula='',
-            correct='f(x) = -{{v1}}*(x - {{v2}})^2 + {{v3}}',
-            wrong_1='f(x) = 4*(x + 3)^2 - 2',
-            wrong_2='f(x) = -0,5*(x - {{v2}})^2 - {{v3}}',
-            wrong_3='f(x) = 1,5*(x - 2)^2 + 2',
+            correct='<mat>f(x) = -{{v1}}*(x - {{v2}})^2 + {{v3}}</mat>',
+            wrong_1='<mat>f(x) = 4*(x + 3)^2 - 2</mat>',
+            wrong_2='<mat>f(x) = -0,5*(x - {{v2}})^2 - {{v3}}</mat>',
+            wrong_3='<mat>f(x) = 1,5*(x - 2)^2 + 2</mat>',
             variables={
                 'v1': (randdecimal, 0.5, 1.5, 0.5),
                 'v2': (randint, 1, 3),
@@ -995,9 +988,9 @@ in_die_allgemeine_form_umrechnen = QuestionSet(
                     '<mat>f(x) = {{v1}}( ___ ) + {{v3}}</mat><br>'
                     '<mat>f(x)= ___ + {{v3}}</mat><br>'
                     '<mat>f(x)= ___</mat>',
-            correct='x^2-{{2*v2}}x+{{v2**2}};'
-                    '{{v1}}x^2-{{v1*2*v2}}x+{{v1*v2**2}};'
-                    '{{v1}}x^2-{{v1*2*v2}}x+{{v1*v2**2+v3}}',
+            correct='<mat>x^2-{{2*v2}}x+{{v2**2}}</mat>;'
+                    '<mat>{{v1}}x^2-{{v1*2*v2}}x+{{v1*v2**2}}</mat>;'
+                    '<mat>{{v1}}x^2-{{v1*2*v2}}x+{{v1*v2**2+v3}}</mat>',
             variables={
                 'v1': (randint, 2, 3),
                 'v2': (randint, 1, 5),
@@ -1016,7 +1009,7 @@ wertetabelle_auslesen = QuestionSet(
     instruction='Berechne für die Funktionsvorschrift für den vorgegebenen x-Wert den dazugehörigen Funktionswert.',
     questions=[
         Question(
-            formula='f(x) = {{v1}}*x^{{v2}} <br> x = {{v3}}',
+            formula='<mat>f(x) = {{v1}}*x^{{v2}} <br> x = {{v3}}</mat>',
             correct='{{v1*v3**v2}}',
             variables={
                 'v1': (randint, 2, 5),
@@ -1025,7 +1018,7 @@ wertetabelle_auslesen = QuestionSet(
             },
         ),
         Question(
-            formula='f(x) = {{v1}}*x^{{v2}} <br> x = {{v3}}',
+            formula='<mat>f(x) = {{v1}}*x^{{v2}} <br> x = {{v3}}</mat>',
             correct='{{v1*v3**v2}}',
             variables={
                 'v1': (randint, 2, 5),
@@ -1034,7 +1027,7 @@ wertetabelle_auslesen = QuestionSet(
             },
         ),
         Question(
-            formula='f(x) = {{v1}}*x^{{v2}} <br> x = {{v3}}',
+            formula='<mat>f(x) = {{v1}}*x^{{v2}} <br> x = {{v3}}</mat>',
             correct='{{v1*v3**v2}}',
             variables={
                 'v1': (randint, 2, 4),
@@ -1043,7 +1036,7 @@ wertetabelle_auslesen = QuestionSet(
             },
         ),
         Question(
-            formula='f(x) = {{v1}}*x^{{v2}} <br> x = {{v3}}',
+            formula='<mat>f(x) = {{v1}}*x^{{v2}} <br> x = {{v3}}</mat>',
             correct='{{v1*v3**v2}}',
             variables={
                 'v1': (randint, 2, 4),

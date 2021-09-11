@@ -6,6 +6,7 @@ from jinja2 import Template, StrictUndefined
 from jinja2.exceptions import UndefinedError
 from slugify import slugify
 
+# from question_generator.images import Image
 from images import Image
 
 
@@ -30,12 +31,15 @@ class Question:
         """
         generated_variables = {}
         random.seed()
+        
         for variable_name, variable_values in self.variables.items():
             if isinstance(variable_values, tuple):
                 function, *arguments = variable_values
                 generated_variables[variable_name] = function(*arguments)
             else:
                 generated_variables[variable_name] = variable_values
+                
+        
         return generated_variables
 
     @staticmethod
@@ -81,6 +85,7 @@ class Question:
 
     def render(self) -> Dict[str, str]:
         """ Return a randomized question string from the provided question definition. """
+        
         generated_variables = self.generate_variables()
         generated_strings = {
             'instruction': self.render_template(template_string=self.instruction, template_variables=generated_variables),
@@ -98,6 +103,7 @@ class Question:
 class QuestionSet:
     def __init__(self, grade, capital, subcapital, title, instruction, question_type, questions,
                  function_name=None, hint=None, output_directory=''):
+        self.leitidee = ''
         self.grade = grade
         self.function_name = function_name
         self.capital = capital
@@ -115,11 +121,13 @@ class QuestionSet:
         question_list = []
         seen_questions = set()
         max_retries = n*50
-        for i in range(max_retries):  # try to generate n questions, but give up after max_retries attempts
+       
+        for i in range(max_retries):  # try to generate n questions, but give up after 10*n attempts
             if len(question_list) >= n:
                 break
             question = random.choice(self.questions).render()
-
+ 
+            
             if self.question_type in ['MC', 'buttons', 'gap', 'lineCombineRight']:
                 if question.get('image'):
                     if isinstance(question['image'], dict):
@@ -130,6 +138,8 @@ class QuestionSet:
                     unique_part = question['correct'] + unique_image_part
                 else:
                     unique_part = question['answer'] + question['correct']
+                    # unique_part = question['answer']
+ 
                 if unique_part in seen_questions:
                     continue
                 seen_questions.add(unique_part)
@@ -158,13 +168,18 @@ class QuestionSet:
         questions = self.generate_questions(n)
         questions_with_extra_data = list()
         for question in questions:
-            question['functionname'] = self.function_name
+            question['leitidee'] = ''
+            question['grade'] = self.grade
             question['capital'] = self.capital
             question['subcapital'] = self.subcapital
             question['title'] = self.title
             question['instruction'] = question.get('instruction') or self.instruction
             question['type'] = self.question_type
             question['hint'] = question.get('hint') or self.hint
+            question['visual'] = 'Nein'
+            question['solution'] = ''
+            question['niveau_start'] = 'G'
+            question['niveau_end'] = 'M'
             if question.get('image') and isinstance(question['image'], dict):
                 image_dict = question['image']
                 image = Image(axis_limits=image_dict.get('axis_limits'),
@@ -178,5 +193,6 @@ class QuestionSet:
                               )
                 image.output_directory = self.output_directory
                 question['image'] = image.draw_image()
+                question['visual'] = 'Ja'
             questions_with_extra_data.append(question)
         return questions_with_extra_data

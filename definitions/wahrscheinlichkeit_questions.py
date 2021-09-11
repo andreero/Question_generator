@@ -1,6 +1,6 @@
 from questions import Question, QuestionSet
 from random import randint, choice
-from definitions.common import randdecimal, male_names, female_names
+from definitions.common import randdecimal, male_names, female_names, get_fakultaet, numbers
 
 baumdiagramme = QuestionSet(
     grade='7',
@@ -609,27 +609,139 @@ zufallsexperimente = QuestionSet(
     ]
 )
 
+kombinatorik_fakultaet = QuestionSet(
+    grade='8',
+    capital='Wahrscheinlichkeit',
+    subcapital='Wahrscheinlichkeit',
+    title='Kombinatorik und Fakultät',
+    instruction='',
+    question_type='MC',
+    questions=[
+        Question(
+            instruction='Wähle die richtige Antwort aus.',
+            formula='In einer Polit-Talkshow sollen {{numbers[v1]}} Gäste auf Sitzplätzen platziert werden. Wie viele Möglichkeiten gibt es, die Gäste anzuordnen?',
+            correct='{{"%.0d"|format(get_fakultaet(v1))}}', # only the calculated field itself is surrounded by {{ }}, the variable v1 is passed normally
+            wrong_1='{{"%.0d"|format(get_fakultaet(v1)/2)}}',
+            wrong_2='{{v1**v1}}',
+            hint='Da jeder Gast nur einen Platz benötigt, berechnet sich die Anzahl der Möglichkeiten wie folgt: <br> Beispielhaft gehen wir von 6 Gästen aus<mat>6! = 6*5*4*3*2*1 =720</mat>',
+            variables={
+                'v1': (randint, 2, 10),
+                'get_fakultaet': get_fakultaet, # also need to pass the function in the variables, so jinja2 can substitute the string "get_fakultaet" with the actual function
+                'numbers': numbers
+            }
+        ),
+        
+    ]
+)
+
+laplace_niete = QuestionSet(
+    grade='8',
+    capital='Wahrscheinlichkeit',
+    subcapital='Wahrscheinlichkeit',
+    title='Laplace Experimente (2)',
+    instruction='',
+    question_type='MC',
+    questions=[
+        Question(
+            instruction='Wähle die richtige Antwort aus.',
+            formula='Aus einer Box mit {{v1}} Hauptpreisen, {{v2}} zweiten Preisen, {{v4}} Trostpreisen und {{v3}} Nieten wird ein Los gezogen. '
+                    'Was ist die Wahrscheinlichkeit vom Ereignis E=„Es wird eine Niete gezogen“?',
+            correct='{{v3}}/{{"%.0d"|format(v1+v2+v3+v4)}}', # only the calculated field itself is surrounded by {{ }}, the variable v1 is passed normally
+            wrong_1='{{v3-50}}/{{"%.0d"|format(v1+v2+v3+v4)}}',
+            wrong_2='{{v3-75}}/{{"%.0d"|format(v1+v2+v3+v4)}}',
+            hint='',
+            variables={
+                'v1': (randint, 5, 25),
+                'v2': (choice, [30,40,50,60,70,80, 90, 100]),
+                'v3': (randint, 650, 1050),
+                'v4': (choice, [30,40,50,60,70,80, 90, 100]),
+            }
+        ),
+        Question(
+            instruction='Wähle die richtige Antwort aus.',
+            formula='Aus einer Box mit {{v1}} Hauptpreisen, {{v2}} zweiten Preisen, {{v4}} Trostpreisen und {{v3}} Nieten wird ein Los gezogen. '
+                    'Was ist die Wahrscheinlichkeit vom Ereignis E=„Es wird eine Trostpreis gezogen“?',
+            correct='{{v4}}/{{"%.0d"|format(v1+v2+v3+v4)}}', # only the calculated field itself is surrounded by {{ }}, the variable v1 is passed normally
+            wrong_1='{{v3-50}}/{{"%.0d"|format(v1+v2+v3+v4)}}',
+            wrong_2='{{v3-75}}/{{"%.0d"|format(v1+v2+v3+v4)}}',
+            hint='',
+            variables={
+                'v1': (randint, 5, 25),
+                'v2': (choice, [30,40,50,60,70,80, 90, 100]),
+                'v3': (randint, 650, 1050),
+                'v4': (choice, [30,40,50,60,70,80, 90, 100]),
+            }
+        ),
+        Question(
+            instruction='Wähle die richtige Antwort aus.',
+            formula='Aus einer Box mit {{v1}} Hauptpreisen, {{v2}} zweiten Preisen, {{v4}} Trostpreisen und {{v3}} Nieten wird ein Los gezogen. '
+                    'Was ist die Wahrscheinlichkeit vom Ereignis E=„Es wird eine Hauptpreis gezogen“?',
+            correct='{{v1}}/{{"%.0d"|format(v1+v2+v3+v4)}}', # only the calculated field itself is surrounded by {{ }}, the variable v1 is passed normally
+            wrong_1='{{v3-50}}/{{"%.0d"|format(v1+v2+v3+v4)}}',
+            wrong_2='{{v3-75}}/{{"%.0d"|format(v1+v2+v3+v4)}}',
+            hint='',
+            variables={
+                'v1': (randint, 5, 25),
+                'v2': (choice, [30,40,50,60,70,80, 90, 100]),
+                'v3': (randint, 650, 1050),
+                'v4': (choice, [30,40,50,60,70,80, 90, 100]),
+            }
+        ),
+    ]
+)
+
+baumdiagramme_8 = QuestionSet(
+    grade='8',
+    capital='Wahrscheinlichkeit',
+    subcapital='Baumdiagramme und Pfadregeln',
+    title='Einführung Baumdiagramme',
+    instruction='Wähle die richtige Antwort aus.',
+    question_type='MC',
+    questions=[
+        Question(
+            formula='Die Münze wird nun zweimal geworfen. Dabei spielt die Reihenfolge keine Rolle. Also ist es egal ob zuerst Kopf und dann Zahl oder umgekehrt geworfen wird. <br><br>'
+                    'Wie sieht eine mögliche Ergebnismenge aus? '
+                    'Der Einfachheit halber bezeichnet man jetzt das Ergebnis Kopf mit einem K und das Ergebnis Zahl mit einem Z.',
+            correct='{{"{"}}KK;ZZ;KZ{{"}"}}',
+            wrong_1='{{"{"}}K;Z;K;Z{{"}"}}',
+            wrong_2='{{"{"}}KZ;ZK;KK{{"}"}}',
+        ),
+        Question(
+            formula='Die Münze wird nun zweimal geworfen. Dabei spielt die Reihenfolge keine Rolle. Also ist es egal ob zuerst Kopf und dann Zahl oder umgekehrt geworfen wird. <br><br>'
+                    'Wie viele mögliche Ergebnisse gibt es somit insgesamt? '
+                    'Der Einfachheit halber bezeichnet man jetzt das Ergebnis Kopf mit einem K und das Ergebnis Zahl mit einem Z.',
+            correct='3',
+            wrong_1='2',
+            wrong_2='4',
+        )
+    ]
+)
+
+
 # Add newly created question sets in that list, so the script can use them
 question_sets = [
-    baumdiagramme,
-    pfadregel_1,
-    ur_und_ranglisten_unterscheiden,
-    ur_und_ranglisten_unterscheiden_dragsort,
-    sachaufgaben_gap,
-    sachaufgaben_mc,
-    gemischte_aufgaben_dragmatch,
-    gemischte_aufgaben,
-    laplace_experimente_1,
-    laplace_experimente_1_dragmatch,
-    laplace_experimente_2,
-    relative_haufigkeit_und_wahrscheinlichkeit_1_dragmatch,
-    relative_haufigkeit_und_wahrscheinlichkeit_1_draggroup,
-    relative_haufigkeit_und_wahrscheinlichkeit_2,
-    ereignisse,
-    ergebnissmengen,
-    spezielle_ereignisse,
-    spezielle_ereignisse_draggroup,
-    spezielle_ereignisse_dragmatch,
-    zufallsexperimente_draggroup,
-    zufallsexperimente,
+    laplace_niete,
+    # baumdiagramme_8,
+    # kombinatorik_fakultaet,
+    # baumdiagramme,
+    # pfadregel_1,
+    # ur_und_ranglisten_unterscheiden,
+    # ur_und_ranglisten_unterscheiden_dragsort,
+    # sachaufgaben_gap,
+    # sachaufgaben_mc,
+    # gemischte_aufgaben_dragmatch,
+    # gemischte_aufgaben,
+    # laplace_experimente_1,
+    # laplace_experimente_1_dragmatch,
+    # laplace_experimente_2,
+    # relative_haufigkeit_und_wahrscheinlichkeit_1_dragmatch,
+    # relative_haufigkeit_und_wahrscheinlichkeit_1_draggroup,
+    # relative_haufigkeit_und_wahrscheinlichkeit_2,
+    # ereignisse,
+    # ergebnissmengen,
+    # spezielle_ereignisse,
+    # spezielle_ereignisse_draggroup,
+    # spezielle_ereignisse_dragmatch,
+    # zufallsexperimente_draggroup,
+    # zufallsexperimente,
 ]
