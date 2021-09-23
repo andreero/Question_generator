@@ -5,6 +5,7 @@ import numexpr as ne
 import matplotlib
 matplotlib.use('agg')
 import matplotlib.pyplot as plt
+import matplotlib.patches as patches
 from ast import literal_eval
 
 
@@ -20,9 +21,11 @@ def generate_table_cell_colors(nrows, ncols, cells_filled):
 
 
 class Image:
-    def __init__(self, axis_limits=None, dots=None, charts=None, arrows=None, polygons=None, table=None, pie_chart=None,
-                 y_scale=1, draw_grid=True, output_directory=''):
+    def __init__(self, axis_limits=None, dots=None, texts=None, charts=None, arrows=None, polygons=None, table=None,
+                 pie_chart=None,
+                 y_scale=1, draw_grid=True, draw_axes=True, output_directory=''):
         self.dots = dots
+        self.texts = texts
         self.charts = charts
         self.arrows = arrows
         self.polygons = polygons
@@ -30,6 +33,7 @@ class Image:
         self.pie_chart = pie_chart
         self.y_scale = y_scale
         self.draw_grid = draw_grid
+        self.draw_axes = draw_axes
         self.output_directory = output_directory
 
         if not axis_limits:
@@ -52,21 +56,38 @@ class Image:
         # Remove top and right spines
         ax.spines['top'].set_visible(False)
         ax.spines['right'].set_visible(False)
-        # Create 'x' and 'y' labels placed at the end of the axes
-        ax.set_xlabel('x', size=14, labelpad=-24, x=1.03)
-        ax.set_ylabel('y', size=14, labelpad=-21, y=1.02, rotation=0)
         # Create custom major ticks to determine position of tick labels
         x_ticks = np.arange(self._xmin, self._xmax + 1, ticks_frequency)
         y_ticks = np.arange(self._ymin, (self._ymax + 1), ticks_frequency)
-        ax.set_xticks(x_ticks[x_ticks != 0])
-        ax.set_yticks(y_ticks[y_ticks != 0])
-        if self.y_scale != 1:
-            ax.set_yticklabels([str(y_tick * self.y_scale) for y_tick in y_ticks[y_ticks != 0]])
-        # Draw major and minor grid lines
+        if self.draw_axes:
+            ax.set_xticks(x_ticks[x_ticks != 0])
+            ax.set_yticks(y_ticks[y_ticks != 0])
+            if self.y_scale != 1:
+                ax.set_yticklabels([str(y_tick * self.y_scale) for y_tick in y_ticks[y_ticks != 0]])
+            # Create 'x' and 'y' labels placed at the end of the axes
+            ax.set_xlabel('x', size=14, labelpad=-24, x=1.03)
+            ax.set_ylabel('y', size=14, labelpad=-21, y=1.02, rotation=0)
+            arrow_fmt = dict(markersize=4, color='black', clip_on=False)
+            ax.plot((1), (0), marker='>', transform=ax.get_yaxis_transform(), **arrow_fmt)
+            ax.plot((0), (1), marker='^', transform=ax.get_xaxis_transform(), **arrow_fmt)
+        else:
+            ax.spines['bottom'].set_visible(False)
+            ax.spines['left'].set_visible(False)
+            ax.set_xticks(x_ticks)
+            ax.set_yticks(y_ticks)
+            ax.set_xticklabels([])
+            ax.set_yticklabels([])
+            ax.tick_params(axis='both', which='both', length=0)
+        # Draw grid lines
         ax.grid(which='both', color='grey', linewidth=1, linestyle='-', alpha=0.2)
-        arrow_fmt = dict(markersize=4, color='black', clip_on=False)
-        ax.plot((1), (0), marker='>', transform=ax.get_yaxis_transform(), **arrow_fmt)
-        ax.plot((0), (1), marker='^', transform=ax.get_xaxis_transform(), **arrow_fmt)
+
+    def _draw_texts(self, ax):
+        for text_dict in self.texts:
+            if isinstance(text_dict['x'], str):
+                text_dict['x'] = float(text_dict['x'])
+            if isinstance(text_dict['y'], str):
+                text_dict['y'] = float(text_dict['y'])
+            ax.text(**text_dict)
 
     def _draw_dots(self, ax):
         dot_xs = list()
@@ -103,6 +124,14 @@ class Image:
             vertical_align = 'bottom' if dy == 0 else 'center'
             ax.text(x_start + dx / 2, y_start + dy / 2, text, color='purple', zorder=100,
                     ha=horizontal_align, va=vertical_align)
+
+    def _draw_polygons(self, ax):
+        for polygon_dict in self.polygons:
+            for i, (x, y) in enumerate(polygon_dict['xy']):
+                if isinstance(x, str) or isinstance(y, str):
+                    polygon_dict['xy'][i] = (float(x), float(y))
+            polygon = patches.Polygon(**polygon_dict)
+            ax.add_patch(polygon)
 
     def _draw_table(self, ax, fig):
         if self.table.get('cells_filled'):
@@ -143,10 +172,14 @@ class Image:
             self._draw_grid(ax)
         if self.dots:
             self._draw_dots(ax)
+        if self.texts:
+            self._draw_texts(ax)
         if self.charts:
             self._draw_charts(ax)
         if self.arrows:
             self._draw_arrows(ax)
+        if self.polygons:
+            self._draw_polygons(ax)
         if self.table:
             self._draw_table(ax, fig)
         if self.pie_chart:

@@ -5,6 +5,7 @@ from definitions.prozente_zinzen_questons import question_sets as prozente_quest
 from definitions.wahrscheinlichkeit_questions import question_sets as wahrscheinlichkeit_question_sets
 from definitions.rationale_zahlen_questions import question_sets as rationale_zahlen_question_sets
 from definitions.zuordnungen_questions import question_sets as zuordnungen_question_sets
+from definitions.flaechen_koerper_questions import question_sets as flaechen_koerper_question_sets
 
 question_sets = [
     *prozente_question_sets,

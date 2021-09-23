@@ -1,6 +1,8 @@
 import os
 import subprocess
 import sys
+import csv
+import traceback
 
 # Install necessary libraries, if they're not already installed
 try:
@@ -17,7 +19,6 @@ except ImportError:
 
 from question_definitions import question_sets
 from config import Config as cfg
-import csv
 
 
 def write_questions_to_csv_file(csv_file_path, headers, questions):
@@ -34,11 +35,15 @@ def main(config):
     for question_set in question_sets:
         output_path = config.CSV_FILE_PATH.format(grade=question_set.grade, capital=slugify(question_set.capital))
         question_set.output_directory = os.path.dirname(output_path)
-        generated_questions = question_set.render_questions(n=config.QUESTIONS_PER_QUESTION_SET)
-        write_questions_to_csv_file(csv_file_path=output_path,
-                                    headers=config.CSV_HEADERS,
-                                    questions=generated_questions)
-
+        try:
+            generated_questions = question_set.render_questions(n=config.QUESTIONS_PER_QUESTION_SET)
+            write_questions_to_csv_file(csv_file_path=output_path,
+                                        headers=config.CSV_HEADERS,
+                                        questions=generated_questions)
+        except Exception as e:
+            print(f'Uncaught exception while generating questions from '
+                  f'set {question_set.title} in {question_set.capital}')
+            raise e
 
 if __name__ == '__main__':
     main(config=cfg)

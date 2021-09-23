@@ -834,7 +834,7 @@ definitionsmenge_2 = QuestionSet(
             formula='<mat>{{v2}}/(x^2-{{v1**2}})</mat>',
             correct='<mat>ℝ \\ {{"{"}}{{v1}}, -{{v1}}{{"}"}}</mat>',
             wrong_1='<mat>ℝ \\ {{"{"}}{{v1}}{{"}"}}</mat>',
-            wrong_2='<mat>ℝ \\ {{"{"}}-{{v1}}{{"}"}</mat>}',
+            wrong_2='<mat>ℝ \\ {{"{"}}-{{v1}}{{"}"}}</mat>',
             variables={
                 'v1': (randint, 2, 5),
                 'v2': (randint, 2, 5),

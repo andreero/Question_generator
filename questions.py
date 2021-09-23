@@ -1,12 +1,9 @@
-import os
 import random
 from typing import Dict, List
 
 from jinja2 import Template, StrictUndefined
 from jinja2.exceptions import UndefinedError
-from slugify import slugify
 
-# from question_generator.images import Image
 from images import Image
 
 
@@ -53,23 +50,25 @@ class Question:
         except UndefinedError as e:
             raise ValueError(f'Error in template {template_string}: {e}')
 
-    def render_list(self, template_list, template_variables):
-        rendered_list = list()
+    def render_list_or_tuple(self, template_list, template_variables):
+        rendered_sequence = list()
         for template in template_list:
-            if isinstance(template, list):
-                rendered_field = self.render_list(template_list=template, template_variables=template_variables)
+            if isinstance(template, (list, tuple)):
+                rendered_field = self.render_list_or_tuple(template_list=template, template_variables=template_variables)
             elif isinstance(template, dict):
                 rendered_field = self.render_dict(template_dict=template, template_variables=template_variables)
             else:
                 rendered_field = self.render_template(template_string=template, template_variables=template_variables)
-            rendered_list.append(rendered_field)
-        return rendered_list
+            rendered_sequence.append(rendered_field)
+        if isinstance(template_list, tuple):
+            rendered_sequence = tuple(rendered_sequence)
+        return rendered_sequence
 
     def render_dict(self, template_dict, template_variables):
         rendered_dict = dict()
         for key, value in template_dict.items():
-            if isinstance(value, list):
-                rendered_field = self.render_list(template_list=value, template_variables=template_variables)
+            if isinstance(value, (list, tuple)):
+                rendered_field = self.render_list_or_tuple(template_list=value, template_variables=template_variables)
             elif isinstance(value, dict):
                 rendered_field = self.render_dict(template_dict=value, template_variables=template_variables)
             else:
@@ -126,8 +125,7 @@ class QuestionSet:
             if len(question_list) >= n:
                 break
             question = random.choice(self.questions).render()
- 
-            
+
             if self.question_type in ['MC', 'buttons', 'gap', 'lineCombineRight']:
                 if question.get('image'):
                     if isinstance(question['image'], dict):
@@ -184,11 +182,14 @@ class QuestionSet:
                 image_dict = question['image']
                 image = Image(axis_limits=image_dict.get('axis_limits'),
                               dots=image_dict.get('dots'),
+                              texts=image_dict.get('texts'),
                               charts=image_dict.get('charts'),
                               arrows=image_dict.get('arrows'),
+                              polygons=image_dict.get('polygons'),
                               table=image_dict.get('table'),
                               pie_chart=image_dict.get('pie_chart'),
                               draw_grid=image_dict.get('draw_grid', True),
+                              draw_axes=image_dict.get('draw_axes', True),
                               y_scale=image_dict.get('y_scale', 1),
                               )
                 image.output_directory = self.output_directory

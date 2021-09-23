@@ -1,7 +1,6 @@
 from questions import Question, QuestionSet
 from random import randint, choice, randrange
-from definitions.common import randdecimal, male_names, female_names, numbers, getValueOfKey, weekdays
-
+from definitions.common import randdecimal, male_names, female_names, numbers, weekdays
 
 anteile_vergleichen = QuestionSet(
     grade='7',
@@ -24,7 +23,7 @@ anteile_vergleichen = QuestionSet(
                 'v6': (randint, 4, 5),
                 'v7': (randint, 81, 99),
             }),
-        ]
+    ]
 )
 
 umwandlung_von_bruchen_und_dezimalzahlen = QuestionSet(
@@ -68,7 +67,7 @@ umwandlung_von_bruchen_und_dezimalzahlen = QuestionSet(
             variables={
                 'v1': (randint, 1, 4),
             }),
-        ]
+    ]
 )
 
 anteile_in_prozent = QuestionSet(
@@ -104,7 +103,7 @@ anteile_in_prozent = QuestionSet(
                 'v1': (randint, 1, 8),
                 'v2': (randint, 2, 5),
             }),
-        ]
+    ]
 )
 
 gangige_prozentangaben = QuestionSet(
@@ -127,7 +126,7 @@ gangige_prozentangaben = QuestionSet(
             variables={
                 'v1': (choice, [3, 6, 8, 30, 40]),
             }),
-        ]
+    ]
 )
 
 prozentzahlen_erkennen = QuestionSet(
@@ -167,7 +166,7 @@ prozentzahlen_erkennen = QuestionSet(
                 'v1': (randint, 2, 9),
                 'v2': (choice, [5, 10, 20])
             }),
-        ]
+    ]
 )
 
 prozentsatz = QuestionSet(
@@ -213,7 +212,7 @@ prozentsatz = QuestionSet(
             variables={
                 'v1': (choice, [3, 6, 12, 15, 30]),
             }),
-        ]
+    ]
 )
 
 prozentwert = QuestionSet(
@@ -238,7 +237,7 @@ prozentwert = QuestionSet(
                 'v1': (randdecimal, 15, 40, 5),
                 'v2': (randdecimal, 20, 80, 20),
             })
-        ]
+    ]
 )
 
 grundwert = QuestionSet(
@@ -270,7 +269,7 @@ grundwert = QuestionSet(
                 'v1': (choice, [10, 20, 25, 40, 50]),
                 'v2': (randint, 1, 4),
             }),
-        ]
+    ]
 )
 
 prozentsatz_erkennen_und_darstellen = QuestionSet(
@@ -314,7 +313,7 @@ prozentsatz_erkennen_und_darstellen = QuestionSet(
                 'draw_grid': False,
             }
         ),
-        ]
+    ]
 )
 
 zinsen = QuestionSet(
@@ -370,7 +369,7 @@ zinsen = QuestionSet(
                 'v1': (randint, 1, 6),
                 'v2': (randdecimal, 0.02, 0.06, 0.005, 3),
             }),
-        ]
+    ]
 )
 
 bankjahr = QuestionSet(
@@ -413,7 +412,7 @@ bankjahr = QuestionSet(
                 'v2': (choice, [2, 4, 6, 8]),
                 'v3': (choice, [36, 72, 108, 144]),
             }),
-        ]
+    ]
 )
 
 tageszins = QuestionSet(
@@ -468,7 +467,7 @@ tageszins = QuestionSet(
                 'v2': (randint, 2, 5),
                 'v3': (randint, 1, 6),
             }),
-        ]
+    ]
 )
 
 zinssatz = QuestionSet(
@@ -497,7 +496,7 @@ zinssatz = QuestionSet(
                 'v1': (randint, 5, 9),
                 'v2': (randint, 2, 6),
             }),
-        ]
+    ]
 )
 
 kapital = QuestionSet(
@@ -545,7 +544,7 @@ kapital = QuestionSet(
                 'v1': (randint, 11, 19),
                 'v2': (randint, 2, 5),
             }),
-        ]
+    ]
 )
 
 faktoren_zuordnen_1 = QuestionSet(
@@ -554,13 +553,13 @@ faktoren_zuordnen_1 = QuestionSet(
     subcapital='Prozentangaben im Alltag',
     title='Faktoren zuordnen',
     instruction='Ordne zu ob sich der Grundwert G bei der Multiplikation mit diesen Faktoren vermehrt oder vermindert.',
-    hint='Ist der Faktor > 1, wird der Grundwert vermehrt. <br>Ist der Faktor <mat 1, wird der Grundwert vermindert.',            
+    hint='Ist der Faktor > 1, wird der Grundwert vermehrt. <br>Ist der Faktor <mat 1, wird der Grundwert vermindert.',
     question_type='dragGroup',
     questions=[
         Question(
             formula='',
-            correct= 'Verminderung|*{{v1}}~*{{v2}}~*{{v3}}'
-                     'Vermehrung|*{{v4}}~*{{v5}}~*{{v6}}',
+            correct='Verminderung|*{{v1}}~*{{v2}}~*{{v3}}'
+                    'Vermehrung|*{{v4}}~*{{v5}}~*{{v6}}',
             variables={
                 'v1': (randdecimal, -0.99, -0.70, 0.01, 2),
                 'v2': (randdecimal, -0.70, -0.40, 0.01, 2),
@@ -569,7 +568,7 @@ faktoren_zuordnen_1 = QuestionSet(
                 'v5': (randdecimal, 0.40, 0.70, 0.01, 2),
                 'v6': (randdecimal, 0.01, 0.40, 0.01, 2),
             }),
-        ]
+    ]
 )
 
 faktoren_zuordnen_2 = QuestionSet(
@@ -578,24 +577,24 @@ faktoren_zuordnen_2 = QuestionSet(
     subcapital='Prozentangaben im Alltag',
     title='Faktoren zuordnen',
     instruction='Ordne den prozentualen Veränderungen die richtigen Faktoren zu.',
-    hint='Um den richtigen Faktor herauszufinden wird zu der prozentualen Veränderung 100 % addiert und das Ergebnis durch 100 % geteilt.',
+    hint='Um den richtigen Faktor herauszufinden wird zu der prozentualen Veränderung 100 % addiert '
+         'und das Ergebnis durch 100 % geteilt.',
     question_type='dragMatch',
     questions=[
         Question(
             formula='',
             # correct='{{v1*10000}};{{"%.1f"|format(v2*100)}};{{v1*10000}};{{v2}};{{(v1*v2)|round|int}}',
-            correct= '+{{v1}}%|{{"%.2f"|format((100+v1)/100)}};'
-                     '-{{v1}}%|{{"%.2f"|format((100-v1)/100)}};'
-                     '+{{v2}}%|{{"%.2f"|format((100+v2)/100)}};'
-                     '-{{v3}}%|{{"%.2f"|format((100-v3)/100)}}',
+            correct='+{{v1}}%|{{"%.2f"|format((100+v1)/100)}};'
+                    '-{{v1}}%|{{"%.2f"|format((100-v1)/100)}};'
+                    '+{{v2}}%|{{"%.2f"|format((100+v2)/100)}};'
+                    '-{{v3}}%|{{"%.2f"|format((100-v3)/100)}}',
             variables={
                 'v1': (randint, 1, 70),
                 'v2': (randint, 8, 60),
                 'v3': (randint, 41, 95),
             }),
-        ]
+    ]
 )
-
 
 grundwert_8 = QuestionSet(
     grade='8',
@@ -603,7 +602,8 @@ grundwert_8 = QuestionSet(
     subcapital='Prozentangaben im Alltag',
     title='Grundwert berechnen',
     instruction='Berechne den neuen Grundwert.',
-    hint='G: Grundwert <br> p %: Prozentwert <br> W: vermehrter oder verminderter Grundwert<br><br>% steht für <mat>1/100</mat> bzw. <mat>0.01</mat>. Dementsprechend kann 100 % auch als 1 geschrieben werden.',
+    hint='G: Grundwert <br> p %: Prozentwert <br> W: vermehrter oder verminderter Grundwert<br><br>'
+         '% steht für <mat>1/100</mat> bzw. <mat>0.01</mat>. Dementsprechend kann 100 % auch als 1 geschrieben werden.',
     question_type='gap',
     questions=[
         Question(
@@ -622,9 +622,8 @@ grundwert_8 = QuestionSet(
                 'v1': (randint, 20, 200),
                 'v2': (randint, 2, 30),
             }),
-        ],
+    ],
 )
-
 
 grundwert_8_textaufgaben = QuestionSet(
     grade='8',
@@ -661,10 +660,9 @@ grundwert_8_textaufgaben = QuestionSet(
                 'v3': (randint, 11, 19),
                 'v4': (randint, 200, 400),
             })
-        ],
+    ],
 
 )
-
 
 grundwert_8_textaufgaben_2 = QuestionSet(
     grade='8',
@@ -695,11 +693,11 @@ grundwert_8_textaufgaben_2 = QuestionSet(
             variables={
                 'v1': (randint, 200, 800)
             })
-        ],
+    ],
 
 )
 
-anteile_in_prozent = QuestionSet(
+anteile_in_prozent_8 = QuestionSet(
     grade='8',
     capital='Prozente, Zinsen',
     subcapital='Vergleichen mit Prozenten',
@@ -715,14 +713,14 @@ anteile_in_prozent = QuestionSet(
                 'v1': (randrange, 2, 60, 2),
                 'v2': (randint, 1, 10),
             }),
-         Question(
+        Question(
             formula='{{"%.0f"|format(v2*1000*(v1/100))}} m sind ___ % von {{v2}} km.',
             correct='{{v1}}',
             variables={
                 'v1': (randrange, 0, 70, 2),
                 'v2': (randint, 1, 10),
             }),
-         Question(
+        Question(
             formula='{{"%.0f"|format(v2*60*(v1/100))}} min. sind ___ % von {{v2}} h.',
             correct='{{v1}}',
             variables={
@@ -736,7 +734,7 @@ anteile_in_prozent = QuestionSet(
                 'v1': (randdecimal, 2.5, 70, 2.5),
                 'v2': (randint, 1, 15),
             })
-        ],
+    ],
 )
 
 anteile_vergleichen_8 = anteile_vergleichen
@@ -764,9 +762,8 @@ anteile_vergleichen_8_1 = QuestionSet(
                 'v6': (randint, 4, 5),
                 'v7': (randint, 81, 99),
             }),
-        ]
+    ]
 )
-
 
 gangige_prozentangaben_8 = QuestionSet(
     grade='8',
@@ -774,11 +771,13 @@ gangige_prozentangaben_8 = QuestionSet(
     subcapital='Vergleichen mit Prozenten',
     title='Prozentzahlen erkennen',
     instruction='',
-    hint='Erinnere dich an die gängigen Prozentangaben. Wenn du weißt, dass <mat>1/5 = 20%</mat> sind, ist es einfach, <mat>3/5</mat> auszurechnen.',
+    hint='Erinnere dich an die gängigen Prozentangaben. Wenn du weißt, dass <mat>1/5 = 20%</mat> sind, '
+         'ist es einfach, <mat>3/5</mat> auszurechnen.',
     question_type='gap',
     questions=[
         Question(
-            instruction='{{v2[v1]|title}} von einhundert Messeteilnehmern waren im Jahr {{v3}} zwischen {{v4}} und {{v5}} Jahren alt.',
+            instruction='{{v2[v1]|title}} von einhundert Messeteilnehmern waren im Jahr {{v3}} zwischen {{v4}} '
+                        'und {{v5}} Jahren alt.',
             formula='<mat>___ = ___ %</mat>',
             correct='<mat>{{v1}}/100</mat>;v1',
             variables={
@@ -814,6 +813,286 @@ gangige_prozentangaben_8 = QuestionSet(
                 'v2': (choice, [20, 30, 40]),
                 'v3': (choice, weekdays),
             }),
+    ]
+)
+
+kapital_jahreszinsen_und_zinssatz_1 = QuestionSet(
+    grade='9',
+    capital='Prozente und Zinsen',
+    subcapital='Zinsrechnung',
+    title='Kapital, Jahreszinsen und Zinssatz (1)',
+    instruction='Setze die gegebenen Werte in die Formel ein und berechne den Zinssatz p%.',
+    question_type='gap',
+    questions=[
+        Question(
+            formula='<mat>K = {{v1}}€, Z = {{"%.2f"|format(v1*v2/100)}}€<br></mat>'
+                    '<mat>p% = ___/___<br> = ___%</mat>',
+            correct='{{"%.2f"|format(v1*v2/100)}};{{v1}};{{v2}}',
+            variables={
+                'v1': (randrange, 20, 100, 5),
+                'v2': (randint, 51, 90),
+            }),
+    ]
+)
+
+kapital_jahreszinsen_und_zinssatz_2 = QuestionSet(
+    grade='9',
+    capital='Prozente und Zinsen',
+    subcapital='Zinsrechnung',
+    title='Kapital, Jahreszinsen und Zinssatz (2)',
+    instruction='Welche Werte sind gegeben und welcher Wert ist gesucht?',
+    question_type='MC',
+    questions=[
+        Question(
+            formula='{{name}} hat <mat>{{v1}}€</mat> bei der Sparbriefen angelegt und erhält darauf einen Zinssatz von '
+                    '<mat>{{v2}}%</mat>. Von diesen Zinsen möchte er sich neue Turnschuhe kaufen. '
+                    '<br><br> Was ist das Kapital K?',
+            correct='{{v1}}€',
+            wrong_1='{{v2}}%',
+            wrong_2='gesucht',
+            variables={
+                'name': (choice, male_names),
+                'v1': (randrange, 1000, 5000, 50),
+                'v2': (randdecimal, 0.5, 3),
+            }),
+        Question(
+            formula='{{name}} hat <mat>{{v1}}€</mat> bei der Sparbriefen angelegt und erhält darauf einen Zinssatz von '
+                    '<mat>{{v2}}%</mat>. Von diesen Zinsen möchte er sich neue Turnschuhe kaufen. '
+                    '<br><br> Was sind die Jahreszinsen Z?',
+            correct='gesucht',
+            wrong_1='{{v1}}€',
+            wrong_2='{{v2}}%',
+            variables={
+                'name': (choice, male_names),
+                'v1': (randrange, 1000, 5000, 50),
+                'v2': (randdecimal, 0.5, 3),
+            }),
+        Question(
+            formula='{{name}} hat <mat>{{v1}}€</mat> bei der Sparbriefen angelegt und erhält darauf einen Zinssatz von '
+                    '<mat>{{v2}}%</mat>. Von diesen Zinsen möchte er sich neue Turnschuhe kaufen. '
+                    '<br><br> Was ist der Zinssatz p%?',
+            correct='{{v2}}%',
+            wrong_1='{{v1}}€',
+            wrong_2='gesucht',
+            variables={
+                'name': (choice, male_names),
+                'v1': (randrange, 1000, 5000, 50),
+                'v2': (randdecimal, 0.5, 3),
+            }),
+        Question(
+            instruction='Wähle die richtige Formel zur Bestimmung von Z und berechne.',
+            formula='{{name}} hat <mat>{{v1}}€</mat> bei der Sparbriefen angelegt und erhält darauf einen Zinssatz von '
+                    '<mat>{{v2}}%</mat>. Von diesen Zinsen möchte er sich neue Turnschuhe kaufen. '
+                    '<br><br> <mat>Z = ___<br> = ___<br> = ___</mat>',
+            correct='{{v1}}€*{{v2}}%|({{v1}}€)/({{v2}}%);'
+                    '{{v1}}€*{{"%.3f"|format(v2/100)}}|{{v1}}€*{{"%.2f"|format(v2/10)}};'
+                    '{{"%.2f"|format(v1*v2/100)}}€|{{"%.2f"|format(v1*v2/10)}}€',
+            variables={
+                'name': (choice, male_names),
+                'v1': (randrange, 1000, 5000, 50),
+                'v2': (randdecimal, 0.5, 3),
+            }),
+        Question(
+            formula='{{name}} hat ein Kredit von der Bank in Höhe von <mat>{{v1}}€</mat> aufgenommen. '
+                    'Diesen muss sie nach einem Jahr mit <mat>{{"%.2f"|format(v1*v2/100)}}€</mat> Zinsen zurückzahlen. '
+                    '<br><br> Was ist das Kapital K?',
+            correct='{{v1}}€',
+            wrong_1='{{"%.2f"|format(v1*v2/100)}}€',
+            wrong_2='gesucht',
+            variables={
+                'name': (choice, female_names),
+                'v1': (randrange, 10000, 50000, 100),
+                'v2': (randdecimal, 0.5, 3),
+            }),
+        Question(
+            formula='{{name}} hat ein Kredit von der Bank in Höhe von <mat>{{v1}}€</mat> aufgenommen. '
+                    'Diesen muss sie nach einem Jahr mit <mat>{{"%.2f"|format(v1*v2/100)}}€</mat> Zinsen zurückzahlen. '
+                    '<br><br> Was sind die Jahreszinsen Z?',
+            correct='{{"%.2f"|format(v1*v2/100)}}€',
+            wrong_1='{{v1}}€',
+            wrong_2='gesucht',
+            variables={
+                'name': (choice, female_names),
+                'v1': (randrange, 10000, 50000, 100),
+                'v2': (randdecimal, 0.5, 3),
+            }),
+        Question(
+            formula='{{name}} hat ein Kredit von der Bank in Höhe von <mat>{{v1}}€</mat> aufgenommen. '
+                    'Diesen muss sie nach einem Jahr mit <mat>{{"%.2f"|format(v1*v2/100)}}€</mat> Zinsen zurückzahlen. '
+                    '<br><br> Was ist der Zinssatz p%?',
+            correct='gesucht',
+            wrong_1='{{v1}}€',
+            wrong_2='{{"%.2f"|format(v1*v2/100)}}€',
+            variables={
+                'name': (choice, female_names),
+                'v1': (randrange, 10000, 50000, 100),
+                'v2': (randdecimal, 0.5, 3),
+            }),
+        Question(
+            instruction='Wähle die richtige Formel zur Bestimmung von p% und berechne.',
+            formula='{{name}} hat ein Kredit von der Bank in Höhe von <mat>{{v1}}€</mat> aufgenommen. '
+                    'Diesen muss sie nach einem Jahr mit <mat>{{"%.2f"|format(v1*v2/100)}}€</mat> Zinsen zurückzahlen. '
+                    '<br><br> <mat>p % = ___ = ___</mat>',
+            correct='({{"%.2f"|format(v1*v2/100)}}€)/({{v1}}€);{{"%.3f"|format(v2/100)}}',
+            wrong_1='({{"%.2f"|format(v1*v2/100)}}€)*({{v1}}€);{{"%.4f"|format(v2/1000)}}',
+            variables={
+                'name': (choice, female_names),
+                'v1': (randrange, 10000, 50000, 100),
+                'v2': (randdecimal, 0.5, 3),
+            }),
+        Question(
+            formula='{{name}} hat ihr Konto überzogen und muss nun auf dieses Geld <mat>{{v2}}%</mat> '
+                    'Zinsen zahlen. Nach einem Jahr entspricht das <mat>{{"%.2f"|format(v1*v2/100)}}€</mat>.'
+                    '<br><br> Was ist das Kapital K?',
+            correct='gesucht',
+            wrong_1='{{"%.2f"|format(v1*v2/100)}}€',
+            wrong_2='{{v2}}',
+            variables={
+                'name': (choice, female_names),
+                'v1': (randrange, 100, 500, 10),
+                'v2': (randdecimal, 5, 10),
+            }),
+        Question(
+            formula='{{name}} hat ihr Konto überzogen und muss nun auf dieses Geld <mat>{{v2}}%</mat> '
+                    'Zinsen zahlen. Nach einem Jahr entspricht das <mat>{{"%.2f"|format(v1*v2/100)}}€</mat>.'
+                    '<br><br> Was sind die Jahreszinsen Z?',
+            correct='{{"%.2f"|format(v1*v2/100)}}€',
+            wrong_1='gesucht',
+            wrong_2='{{v2}}%',
+            variables={
+                'name': (choice, female_names),
+                'v1': (randrange, 100, 500, 10),
+                'v2': (randdecimal, 5, 10),
+            }),
+        Question(
+            formula='{{name}} hat ihr Konto überzogen und muss nun auf dieses Geld <mat>{{v2}}%</mat> '
+                    'Zinsen zahlen. Nach einem Jahr entspricht das <mat>{{"%.2f"|format(v1*v2/100)}}€</mat>.'
+                    '<br><br> Was ist der Zinssatz p%?',
+            correct='{{v2}}%',
+            wrong_1='{{"%.2f"|format(v1*v2/100)}}€',
+            wrong_2='gesucht',
+            variables={
+                'name': (choice, female_names),
+                'v1': (randrange, 100, 500, 10),
+                'v2': (randdecimal, 5, 10),
+            }),
+        Question(
+            instruction='Wähle die richtige Formel zur Bestimmung von K und berechne.',
+            formula='{{name}} hat ihr Konto überzogen und muss nun auf dieses Geld <mat>{{v2}}%</mat> '
+                    'Zinsen zahlen. Nach einem Jahr entspricht das <mat>{{"%.2f"|format(v1*v2/100)}}€</mat>.'
+                    '<br><br> <mat>K = ___ = ___</mat>',
+            correct='({{"%.2f"|format(v1*v2/100)}}€)/({{v2}}%);{{v1}}€',
+            wrong_1='{{"%.2f"|format(v1*v2/100)}}€*{{v2}}%;{{v1*10}}€',
+            variables={
+                'name': (choice, female_names),
+                'v1': (randrange, 100, 500, 10),
+                'v2': (randdecimal, 5, 10),
+            }),
+    ]
+)
+
+tages_und_monatszinsen = QuestionSet(
+    grade='9',
+    capital='Prozente und Zinsen',
+    subcapital='Zinsrechnung',
+    title='Tages- und Monatszinsen',
+    instruction='Löse die Aufgabe.',
+    question_type='gap',
+    hint='Um die Aufgabe ausrechnen zu können, solltest du den Zinssatz p% '
+         'in Form einer Dezimalzahl in der Rechnung verwenden.',
+    questions=[
+        Question(
+            formula='<mat>{{v1}}€</mat> werden für {{v2}} Tage zu einem Zinssatz von <mat>{{v3}}%</mat> '
+                    'bei der Bank angelegt. <br><br> <b>Frage:</b> Wie hoch ist der Zinsertrag nach dieser Laufzeit? '
+                    '<br><br><b>Rechnung:</b><br>'
+                    '<mat>Z_(t) = K*p%*t/360<br>'
+                    'Z_(___) = ___€*___*___/360<br> = ___€</mat>',
+            correct='{{v2}};{{v1}};{{"%.2f"|format(v3/100)}};{{v2}};{{"%.2f"|format(v1*v2*v3/36000)}}',
+            variables={
+                'v1': (randrange, 500, 5000, 50),
+                'v2': (choice, [36*x for x in range(1, 10)]),
+                'v3': (randint, 2, 7),
+            }),
+        Question(
+            formula='Bei einer Bank wird ein Kredit in Höhe von <mat>{{v1}}€</mat> zu einem '
+                    'Zinssatz von <mat>{{v3}}%</mat> und mit einer Laufzeit von {{v2}} Monaten vergeben.<br><br>'
+                    '<b>Frage:</b> Wie hoch ist der Zinsertrag nach dieser Laufzeit? <br>'
+                    '<b>Rechnung:</b><br>'
+                    '<mat>Z_(m) = K*p%*m/12<br>'
+                    'Z_(___) = ___€*___*___/12<br> = ___€</mat>',
+            correct='{{v2}};{{v1}};{{"%.2f"|format(v3/100)}};{{v2}};{{"%.0f"|format(v1*v2*v3/1200)}}',
+            hint='Um die Aufgabe ausrechnen zu können, solltest du den Zinssatz p% '
+                 'in Form einer Dezimalzahl in der Rechnung verwenden.',
+            variables={
+                'v1': (randrange, 2400, 12000, 1200),
+                'v2': (randint, 2, 11),
+                'v3': (randint, 2, 7),
+            }),
+        ]
+)
+
+zinseszins = QuestionSet(
+    grade='9',
+    capital='Prozente und Zinsen',
+    subcapital='Zinsrechnung',
+    title='Zinseszins',
+    instruction='',
+    question_type='gap',
+    questions=[
+        Question(
+            instruction='Berechne die Zinsen nach dem ersten Jahr der Laufzeit sowie das Kapital nach einem Jahr.',
+            formula='<b>Gegeben:</b><br>'
+                    '<mat>Startkapital K_(0) = {{v1}}€<br>Zinssatz p% = {{v2}}%<br>'
+                    'Anzahl Jahre n = 3<br></mat><br><br>'
+                    'Zinsen nach dem <b>ersten</b> Jahr der Laufzeit: <br>'
+                    '<mat>Z = K_(0)*p%<br> = ___€*___<br> = ___€ </mat><br>'
+                    '<mat>K_(1) = K_(0) + Z<br> = ___ + ___ = ___ €</mat>',
+            correct='{{v1}};{{"%.2f"|format(v2/100)}};{{"%.0f"|format(v1*v2/100)}};'
+                    '{{v1}};{{"%.0f"|format(v1*v2/100)}};{{"%.0f"|format(v1*(1+v2/100))}}',
+            variables={
+                'v1': (randrange, 2000, 10000, 2000),
+                'v2': (randint, 2, 6),
+            }),
+        Question(
+            instruction='Berechne die Zinsen nach dem zweiten Jahr der Laufzeit sowie das Kapital nach zwei Jahren',
+            formula='<b>Gegeben:</b><br><mat>K_(1) = {{"%.0f"|format(v1*(1+v2/100))}}€<br>Zinssatz p% = {{v2}}%<br>'
+                    'Anzahl Jahre n = 3<br></mat><br><br>'
+                    'Zinsen nach dem <b>zweiten</b> Jahr der Laufzeit: <br>'
+                    '<mat>Z = K_(1)*p%<br> = ___€*___<br> = ___€ </mat><br>'
+                    '<mat>K_(2) = K_(1) + Z<br> = ___ + ___ = ___ €</mat>',
+            correct='{{v1*(1+v2/100)}};{{"%.2f"|format(v2/100)}};{{"%.1f"|format(v1*(1+v2/100)*v2/100)}};'
+                    '{{v1*(1+v2/100)}};{{"%.1f"|format(v1*(1+v2/100)*v2/100)}};'
+                    '{{"%.1f"|format(v1*(1+v2/100)**2)}}',
+            variables={
+                'v1': (randrange, 2000, 10000, 2000),
+                'v2': (randint, 2, 6),
+            }),
+        ]
+)
+
+zinseszins_berechnen = QuestionSet(
+    grade='9',
+    capital='Prozente und Zinsen',
+    subcapital='Zinsrechnung',
+    title='Zinseszins berechnen',
+    instruction='Löse die Aufgabe mithilfe der Zinseszinsformel. Runde das Ergebnis auf zwei Nachkommastellen.',
+    question_type='MC',
+    questions=[
+        Question(
+            formula='{{name}} legt <mat>{{v1}}€</mat> zu einem Zinssatz von <mat>{{v2}}%</mat> '
+                    'für {{v3}} Jahre bei der Bank an.<br><br>'
+                    '<b>Frage:</b> Wie viel Geld kriegt sie nach dieser Zeit ausgezahlt?<br><br>'
+                    'Setze die gegebenen Werte ein und rechne aus.<br>'
+                    '<mat>K_({{v3}}) = {{v1}}€*(__)^___<br>= ___</mat>',
+            correct='1.0{{v2}}|1.{{v2}}|0.0{{v2}};'
+                    '{{v3}}|{{v3-1}}|0;'
+                    '{{"%.2f"|format(v1*(1+v2/100)**v3)}} €|{{v1}} €|{{"%.2f"|format(v1*(1+v2/100)**v3-v1)}} €',
+            variables={
+                'name': (choice, female_names),
+                'v1': (randrange, 2000, 10000, 2000),
+                'v2': (randint, 2, 6),
+                'v3': (randint, 2, 4),
+            }),
         ]
 )
 
@@ -827,13 +1106,12 @@ question_sets = [
     anteile_in_prozent,
     grundwert_8,
     faktoren_zuordnen_1,
-    anteile_in_prozent,
     grundwert_8,
     faktoren_zuordnen_1,
     faktoren_zuordnen_2,
     anteile_vergleichen,
     umwandlung_von_bruchen_und_dezimalzahlen,
-    anteile_in_prozent,
+    anteile_in_prozent_8,
     gangige_prozentangaben,
     prozentzahlen_erkennen,
     prozentsatz,
@@ -845,4 +1123,9 @@ question_sets = [
     tageszins,
     zinssatz,
     kapital,
-    ]
+    kapital_jahreszinsen_und_zinssatz_1,
+    kapital_jahreszinsen_und_zinssatz_2,
+    tages_und_monatszinsen,
+    zinseszins,
+    zinseszins_berechnen,
+]

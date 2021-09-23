@@ -2,7 +2,7 @@ import os
 
 
 class Config:
-    QUESTIONS_PER_QUESTION_SET = 1
+    QUESTIONS_PER_QUESTION_SET = 5
     CSV_FILE_PATH = './sheets/{grade}/{capital}.csv'
     CSV_HEADERS = [
         'grade',
