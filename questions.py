@@ -1,4 +1,6 @@
 import random
+import hashlib
+import json
 from typing import Dict, List
 
 from jinja2 import Template, StrictUndefined
@@ -129,8 +131,8 @@ class QuestionSet:
             if self.question_type in ['MC', 'buttons', 'gap', 'lineCombineRight']:
                 if question.get('image'):
                     if isinstance(question['image'], dict):
-                        unique_image_part = question['image'].get('dots', [{}])[0].get('y', '') + \
-                                            question['image'].get('charts', [{}])[0].get('chart', '')
+                        image_dict_str = json.dumps(question['image'], sort_keys=True).encode('utf-8')
+                        unique_image_part = hashlib.md5(image_dict_str).hexdigest()
                     else:
                         unique_image_part = question['image']
                     unique_part = question['correct'] + unique_image_part
@@ -150,9 +152,13 @@ class QuestionSet:
                     drag_parts = [question['correct']]  # some parts can repeat
                 else:
                     drag_parts = question['correct'].replace('|', ';').split(';')
+                drag_parts = [part for part in drag_parts if part]  # Filter out empty strings
+                seen_parts = set()
                 for part in drag_parts:
-                    if part in seen_questions:
+                    if part in seen_questions or part in seen_parts:
                         break
+                    else:
+                        seen_parts.add(part)
                 else:
                     seen_questions.update(drag_parts)
                     question_list.append(question)
@@ -186,6 +192,8 @@ class QuestionSet:
                               charts=image_dict.get('charts'),
                               arrows=image_dict.get('arrows'),
                               polygons=image_dict.get('polygons'),
+                              angles=image_dict.get('angles'),
+                              lines=image_dict.get('lines'),
                               table=image_dict.get('table'),
                               pie_chart=image_dict.get('pie_chart'),
                               draw_grid=image_dict.get('draw_grid', True),

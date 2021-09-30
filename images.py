@@ -7,6 +7,9 @@ matplotlib.use('agg')
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 from ast import literal_eval
+from matplotlib.patches import Arc
+from matplotlib.transforms import IdentityTransform, TransformedBbox, Bbox
+from matplotlib.lines import Line2D
 
 
 def generate_table_cell_colors(nrows, ncols, cells_filled):
@@ -20,15 +23,135 @@ def generate_table_cell_colors(nrows, ncols, cells_filled):
     return cells
 
 
+class Angle(Arc):
+    """
+    Draws an arc between two vectors. Based on AngleAnnotation from
+    https://matplotlib.org/stable/gallery/text_labels_and_annotations/angle_annotation.html
+    """
+
+    def __init__(self, xy, p1, p2, size=2, ax=None, text="", textposition="inside", text_kw=None, **kwargs):
+        """
+        Parameters
+        ----------
+        xy, p1, p2 : tuple or array of two floats
+            Center position and two points. Angle annotation is drawn between
+            the two vectors connecting *p1* and *p2* with *xy*, respectively.
+            Units are data coordinates.
+
+        size : float
+            Diameter of the angle annotation.
+
+        ax : `matplotlib.axes.Axes`
+            The Axes to add the angle annotation to.
+
+        text : str
+            The text to mark the angle with.
+
+        textposition : {"inside", "outside", "edge"}
+            Whether to show the text in- or outside the arc. "edge" can be used
+            for custom positions anchored at the arc's edge.
+
+        text_kw : dict
+            Dictionary of arguments passed to the Annotation.
+
+        **kwargs
+            Further parameters are passed to `matplotlib.patches.Arc`. Use this
+            to specify, color, linewidth etc. of the arc.
+        """
+        self.ax = ax or plt.gca()
+        self._xydata = xy  # in data coordinates
+        self.vec1 = p1
+        self.vec2 = p2
+        self.size = size
+        self.textposition = textposition
+
+        super().__init__(self._xydata, size, size, angle=0.0,
+                         theta1=self.theta1, theta2=self.theta2, **kwargs)
+
+        # self.set_transform(ax.transData)
+        self.ax.add_patch(self)
+
+        self.kw = dict(ha="center", va="center",
+                       xytext=(0, 0), textcoords="offset points",
+                       annotation_clip=True)
+        self.kw.update(text_kw or {})
+        if text == 'auto':
+            angle_span = int(self.theta2 - self.theta1) % 360
+            text = str(angle_span) + '°'
+        self.text = ax.annotate(text, xy=self._center, **self.kw)
+
+    def get_center(self):
+        return self._xydata
+
+    def set_center(self, xy):
+        self._xydata = xy
+
+    def get_theta(self, vec):
+        return np.rad2deg(np.arctan2(vec[1]-self._xydata[1], vec[0]-self._xydata[0]))
+
+    def get_theta1(self):
+        return self.get_theta(self.vec1)
+
+    def get_theta2(self):
+        return self.get_theta(self.vec2)
+
+    def set_theta(self, angle):
+        pass
+
+    # Redefine attributes of the Arc to always give values in pixel space
+    _center = property(get_center, set_center)
+    theta1 = property(get_theta1, set_theta)
+    theta2 = property(get_theta2, set_theta)
+
+    # The following two methods are needed to update the text position.
+    def draw(self, renderer):
+        self.update_text()
+        super().draw(renderer)
+
+    def update_text(self):
+        c = self._center
+        s = self.size
+        angle_span = (self.theta2 - self.theta1) % 360
+        angle = np.deg2rad(self.theta1 + angle_span / 2)
+        r = s / 2
+        if self.textposition == "inside":
+            r = s / np.interp(angle_span, [60, 90, 135, 180],
+                              [3.3, 3.5, 3.8, 4])
+        self.text.xy = c + r * np.array([np.cos(angle), np.sin(angle)])
+        if self.textposition == "outside":
+            def R90(a, r, w, h):
+                if a < np.arctan(h / 2 / (r + w / 2)):
+                    return np.sqrt((r + w / 2) ** 2 + (np.tan(a) * (r + w / 2)) ** 2)
+                else:
+                    c = np.sqrt((w / 2) ** 2 + (h / 2) ** 2)
+                    T = np.arcsin(c * np.cos(np.pi / 2 - a + np.arcsin(h / 2 / c)) / r)
+                    xy = r * np.array([np.cos(a + T), np.sin(a + T)])
+                    xy += np.array([w / 2, h / 2])
+                    return np.sqrt(np.sum(xy ** 2))
+
+            def R(a, r, w, h):
+                aa = (a % (np.pi / 4)) * ((a % (np.pi / 2)) <= np.pi / 4) + \
+                     (np.pi / 4 - (a % (np.pi / 4))) * ((a % (np.pi / 2)) >= np.pi / 4)
+                return R90(aa, r, *[w, h][::int(np.sign(np.cos(2 * a)))])
+
+            bbox = self.text.get_window_extent()
+            X = R(angle, r, bbox.width, bbox.height)
+            trans = self.ax.figure.dpi_scale_trans.inverted()
+            offs = trans.transform(((X - s / 2), 0))[0] * 72
+            self.text.set_position([offs * np.cos(angle), offs * np.sin(angle)])
+
+
 class Image:
-    def __init__(self, axis_limits=None, dots=None, texts=None, charts=None, arrows=None, polygons=None, table=None,
-                 pie_chart=None,
+    def __init__(self, axis_limits=None, dots=None, texts=None, charts=None, arrows=None, polygons=None, angles=None,
+                 lines=None, table=None, pie_chart=None,
                  y_scale=1, draw_grid=True, draw_axes=True, output_directory=''):
         self.dots = dots
         self.texts = texts
         self.charts = charts
         self.arrows = arrows
         self.polygons = polygons
+        self.angles = angles
+        self.lines = lines
         self.table = table
         self.pie_chart = pie_chart
         self.y_scale = y_scale
@@ -133,6 +256,43 @@ class Image:
             polygon = patches.Polygon(**polygon_dict)
             ax.add_patch(polygon)
 
+    def _draw_angles(self, ax):
+        for angle_dict in self.angles:
+            for point in ['xy', 'p1', 'p2']:
+                x, y = angle_dict.get(point, (None, None))
+                if isinstance(x, str) or isinstance(y, str):
+                    angle_dict[point] = (float(x), float(y))
+            angle_dict['ax'] = ax
+            Angle(**angle_dict)
+
+    def _draw_lines(self, ax):
+        for line_dict in self.lines:
+            # form xdata and ydata lists from points
+            if line_dict.get('p1') and line_dict.get('p2'):
+                line_dict['xdata'] = (line_dict['p1'][0], line_dict['p2'][0])
+                line_dict['ydata'] = (line_dict['p1'][1], line_dict['p2'][1])
+                line_dict.pop('p1')
+                line_dict.pop('p2')
+            line_dict['xdata'] = [float(x) for x in line_dict['xdata']]
+            line_dict['ydata'] = [float(y) for y in line_dict['ydata']]
+
+            # draw text on the line with the correct rotation
+            if line_dict.get('text'):
+                text_kwargs = dict(ha='center', va='bottom', annotation_clip=True)
+                text_x = (line_dict['xdata'][0] + line_dict['xdata'][1]) / 2
+                text_y = (line_dict['ydata'][0] + line_dict['ydata'][1]) / 2
+                text_xy = (text_x, text_y)
+                dx = line_dict['xdata'][1] - line_dict['xdata'][0]
+                dy = line_dict['ydata'][1] - line_dict['ydata'][0]
+                text_kwargs['rotation'] = np.degrees(np.arctan2(dy, dx))
+                text_kwargs.update(line_dict.get('text_kw') or {})
+                ax.annotate(line_dict['text'], xy=text_xy, **text_kwargs)
+                line_dict.pop('text')
+                line_dict.pop('text_kw')
+
+            line = Line2D(**line_dict)
+            ax.add_line(line)
+
     def _draw_table(self, ax, fig):
         if self.table.get('cells_filled'):
             nrows = int(self.table['nrows'])
@@ -167,6 +327,7 @@ class Image:
     def draw_image(self):
         fig, ax = plt.subplots(figsize=(10, 10))
         if not self.draw_grid:
+            ax.set(xlim=(self._xmin - 1, self._xmax + 1), ylim=(self._ymin - 1, self._ymax + 1), aspect='equal')
             ax.set_axis_off()
         else:
             self._draw_grid(ax)
@@ -180,6 +341,10 @@ class Image:
             self._draw_arrows(ax)
         if self.polygons:
             self._draw_polygons(ax)
+        if self.angles:
+            self._draw_angles(ax)
+        if self.lines:
+            self._draw_lines(ax)
         if self.table:
             self._draw_table(ax, fig)
         if self.pie_chart:

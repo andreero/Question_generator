@@ -45,5 +45,6 @@ def main(config):
                   f'set {question_set.title} in {question_set.capital}')
             raise e
 
+
 if __name__ == '__main__':
     main(config=cfg)

@@ -6,13 +6,16 @@ from definitions.wahrscheinlichkeit_questions import question_sets as wahrschein
 from definitions.rationale_zahlen_questions import question_sets as rationale_zahlen_question_sets
 from definitions.zuordnungen_questions import question_sets as zuordnungen_question_sets
 from definitions.flaechen_koerper_questions import question_sets as flaechen_koerper_question_sets
+from definitions.wurzeln_und_potenzen_questions import question_sets as wurzeln_potenzen_question_sets
 
 question_sets = [
-    *prozente_question_sets,
-    *wahrscheinlichkeit_question_sets,
-    *terme_question_sets,
-    *funktionen_question_sets,
-    *gleichungen_question_sets,
-    *rationale_zahlen_question_sets,
-    *zuordnungen_question_sets,
+    # *prozente_question_sets,
+    # *wahrscheinlichkeit_question_sets,
+    # *terme_question_sets,
+    # *funktionen_question_sets,
+    # *gleichungen_question_sets,
+    # *rationale_zahlen_question_sets,
+    # *zuordnungen_question_sets,
+    # *flaechen_koerper_question_sets,
+    *wurzeln_potenzen_question_sets,
 ]
