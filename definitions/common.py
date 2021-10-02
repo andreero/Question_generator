@@ -10,7 +10,7 @@ female_names = ['Mia', 'Emilia', 'Sofia', 'Hanna', 'Emma', 'Mila',
 
 weekdays = ['Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag']
 
-measurement_units = ['mm', 'cm', 'dm', 'm', 'km']
+measurement_units = ['mm', 'cm', 'dm', 'm']
 
 numbersTe = {
     1: 'erste',

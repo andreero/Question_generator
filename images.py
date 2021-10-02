@@ -288,7 +288,8 @@ class Image:
                 text_kwargs.update(line_dict.get('text_kw') or {})
                 ax.annotate(line_dict['text'], xy=text_xy, **text_kwargs)
                 line_dict.pop('text')
-                line_dict.pop('text_kw')
+                if 'text_kw' in line_dict:
+                    line_dict.pop('text_kw')
 
             line = Line2D(**line_dict)
             ax.add_line(line)

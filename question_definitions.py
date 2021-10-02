@@ -16,6 +16,6 @@ question_sets = [
     # *gleichungen_question_sets,
     # *rationale_zahlen_question_sets,
     # *zuordnungen_question_sets,
-    # *flaechen_koerper_question_sets,
-    *wurzeln_potenzen_question_sets,
+    *flaechen_koerper_question_sets,
+    # *wurzeln_potenzen_question_sets,
 ]
