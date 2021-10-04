@@ -419,7 +419,7 @@ flacheninhalte_und_umfang_von_parallelogrammen = QuestionSet(
                      'p2': ('{{v3+3}}', 2),
                      'text': '•',
                      'text_kw': {'color': 'white'},
-                     'size': 2,
+                     'size': 1.5,
                      'zorder': 15,
                      'color': 'white',
                      }

@@ -7,7 +7,7 @@ matplotlib.use('agg')
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 from ast import literal_eval
-from matplotlib.patches import Arc
+from matplotlib.patches import Arc, Wedge
 from matplotlib.transforms import IdentityTransform, TransformedBbox, Bbox
 from matplotlib.lines import Line2D
 
@@ -65,15 +65,24 @@ class Angle(Arc):
         self.size = size
         self.textposition = textposition
 
+        # add a separate Wedge to act like an arc filler (since the Arc itself cannot be filled)
+        if 'facecolor' in kwargs:
+            zorder = None
+            if 'zorder' in kwargs:
+                zorder = int(kwargs.get('zorder'))-1
+            angle_wedge = Wedge(self._xydata, size/2, theta1=self.theta1, theta2=self.theta2,
+                                color=kwargs['facecolor'], zorder=zorder)
+            self.ax.add_patch(angle_wedge)
+            kwargs.pop('facecolor')
+
+        # create and add main arc
         super().__init__(self._xydata, size, size, angle=0.0,
                          theta1=self.theta1, theta2=self.theta2, **kwargs)
-
-        # self.set_transform(ax.transData)
         self.ax.add_patch(self)
 
         self.kw = dict(ha="center", va="center",
                        xytext=(0, 0), textcoords="offset points",
-                       annotation_clip=True)
+                       annotation_clip=True, zorder=kwargs.get('zorder'))
         self.kw.update(text_kw or {})
         if text == 'auto':
             angle_span = int(self.theta2 - self.theta1) % 360
@@ -98,7 +107,6 @@ class Angle(Arc):
     def set_theta(self, angle):
         pass
 
-    # Redefine attributes of the Arc to always give values in pixel space
     _center = property(get_center, set_center)
     theta1 = property(get_theta1, set_theta)
     theta2 = property(get_theta2, set_theta)
