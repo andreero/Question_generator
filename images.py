@@ -151,7 +151,7 @@ class Angle(Arc):
 
 class Image:
     def __init__(self, axis_limits=None, dots=None, texts=None, charts=None, arrows=None, polygons=None, angles=None,
-                 lines=None, table=None, pie_chart=None,
+                 lines=None, ellipses=None, arcs=None, table=None, pie_chart=None,
                  y_scale=1, draw_grid=True, draw_axes=True, output_directory=''):
         self.dots = dots
         self.texts = texts
@@ -160,6 +160,8 @@ class Image:
         self.polygons = polygons
         self.angles = angles
         self.lines = lines
+        self.ellipses = ellipses
+        self.arcs = arcs
         self.table = table
         self.pie_chart = pie_chart
         self.y_scale = y_scale
@@ -298,9 +300,24 @@ class Image:
                 line_dict.pop('text')
                 if 'text_kw' in line_dict:
                     line_dict.pop('text_kw')
-
             line = Line2D(**line_dict)
             ax.add_line(line)
+
+    def _draw_ellipses(self, ax):
+        for ellipse_dict in self.ellipses:
+            x, y = ellipse_dict['xy']
+            if isinstance(x, str) or isinstance(y, str):
+                ellipse_dict['xy'] = (float(x), float(y))
+            ellipse = patches.Ellipse(**ellipse_dict)
+            ax.add_patch(ellipse)
+
+    def _draw_arcs(self, ax):
+        for arc_dict in self.arcs:
+            x, y = arc_dict['xy']
+            if isinstance(x, str) or isinstance(y, str):
+                arc_dict['xy'] = (float(x), float(y))
+            arc = patches.Arc(**arc_dict)
+            ax.add_patch(arc)
 
     def _draw_table(self, ax, fig):
         if self.table.get('cells_filled'):
@@ -354,6 +371,10 @@ class Image:
             self._draw_angles(ax)
         if self.lines:
             self._draw_lines(ax)
+        if self.ellipses:
+            self._draw_ellipses(ax)
+        if self.arcs:
+            self._draw_arcs(ax)
         if self.table:
             self._draw_table(ax, fig)
         if self.pie_chart:

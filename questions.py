@@ -37,8 +37,6 @@ class Question:
                 generated_variables[variable_name] = function(*arguments)
             else:
                 generated_variables[variable_name] = variable_values
-                
-        
         return generated_variables
 
     @staticmethod
@@ -116,25 +114,30 @@ class QuestionSet:
         self.hint = hint
         self.output_directory = output_directory
 
-    def generate_questions(self, n) -> List[Dict[str, str]]:
+    @staticmethod
+    def _generate_image_description_hash(image_desc) -> str:
+        if isinstance(image_desc, dict):
+            image_dict_str = json.dumps(image_desc, sort_keys=True).encode('utf-8')
+            image_hash = hashlib.md5(image_dict_str).hexdigest()
+        else:
+            image_hash = image_desc
+        return image_hash
+
+    def generate_questions(self, questions_to_generate: int) -> List[Dict[str, str]]:
         """ Try to generate unique questions from the provided question set,
             rerolling when encountering a duplicate question. """
         question_list = []
         seen_questions = set()
-        max_retries = n*50
+        max_retries = questions_to_generate*50
        
-        for i in range(max_retries):  # try to generate n questions, but give up after 10*n attempts
-            if len(question_list) >= n:
+        for i in range(max_retries):  # try to generate n questions, but give up after max_retries attempts
+            if len(question_list) >= questions_to_generate:
                 break
             question = random.choice(self.questions).render()
 
             if self.question_type in ['MC', 'buttons', 'gap', 'lineCombineRight']:
                 if question.get('image'):
-                    if isinstance(question['image'], dict):
-                        image_dict_str = json.dumps(question['image'], sort_keys=True).encode('utf-8')
-                        unique_image_part = hashlib.md5(image_dict_str).hexdigest()
-                    else:
-                        unique_image_part = question['image']
+                    unique_image_part = self._generate_image_description_hash(question['image'])
                     unique_part = question['correct'] + unique_image_part
                 else:
                     unique_part = question['answer'] + question['correct']
@@ -168,9 +171,31 @@ class QuestionSet:
             print(f'Please define more question templates or increase the range of random variables.')
         return question_list
 
+    def render_question_image(self, image_dict: Dict[str, str]) -> str:
+        """ Render a png file from the provided description and return its path. """
+        image = Image(axis_limits=image_dict.get('axis_limits'),
+                      dots=image_dict.get('dots'),
+                      texts=image_dict.get('texts'),
+                      charts=image_dict.get('charts'),
+                      arrows=image_dict.get('arrows'),
+                      polygons=image_dict.get('polygons'),
+                      angles=image_dict.get('angles'),
+                      lines=image_dict.get('lines'),
+                      ellipses=image_dict.get('ellipses'),
+                      arcs=image_dict.get('arcs'),
+                      table=image_dict.get('table'),
+                      pie_chart=image_dict.get('pie_chart'),
+                      draw_grid=image_dict.get('draw_grid', True),
+                      draw_axes=image_dict.get('draw_axes', True),
+                      y_scale=image_dict.get('y_scale', 1),
+                      )
+        image.output_directory = self.output_directory
+        return image.draw_image()
+
     def render_questions(self, n) -> List[Dict[str, str]]:
-        questions = self.generate_questions(n)
+        questions = self.generate_questions(questions_to_generate=n)
         questions_with_extra_data = list()
+        seen_images = dict()
         for question in questions:
             question['leitidee'] = ''
             question['grade'] = self.grade
@@ -186,22 +211,11 @@ class QuestionSet:
             question['niveau_end'] = 'M'
             if question.get('image') and isinstance(question['image'], dict):
                 image_dict = question['image']
-                image = Image(axis_limits=image_dict.get('axis_limits'),
-                              dots=image_dict.get('dots'),
-                              texts=image_dict.get('texts'),
-                              charts=image_dict.get('charts'),
-                              arrows=image_dict.get('arrows'),
-                              polygons=image_dict.get('polygons'),
-                              angles=image_dict.get('angles'),
-                              lines=image_dict.get('lines'),
-                              table=image_dict.get('table'),
-                              pie_chart=image_dict.get('pie_chart'),
-                              draw_grid=image_dict.get('draw_grid', True),
-                              draw_axes=image_dict.get('draw_axes', True),
-                              y_scale=image_dict.get('y_scale', 1),
-                              )
-                image.output_directory = self.output_directory
-                question['image'] = image.draw_image()
+                image_desc_hash = self._generate_image_description_hash(image_dict)
+                if image_desc_hash not in seen_images:
+                    rendered_image_path = self.render_question_image(image_dict=image_dict)
+                    seen_images[image_desc_hash] = rendered_image_path
+                question['image'] = seen_images[image_desc_hash]
                 question['visual'] = 'Ja'
             questions_with_extra_data.append(question)
         return questions_with_extra_data

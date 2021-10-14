@@ -2019,6 +2019,7 @@ kongruenzsatze_anwenden_1 = QuestionSet(
                      'text_kw': {
                          'fontsize': 'large',
                          'va': 'bottom',
+                         'ha': 'right',
                      }
                      },
                     {'p1': (1, 3.5),
@@ -2064,6 +2065,7 @@ kongruenzsatze_anwenden_1 = QuestionSet(
                      'text_kw': {
                          'fontsize': 'large',
                          'va': 'top',
+                         'ha': 'right',
                      }
                      },
                 ],
