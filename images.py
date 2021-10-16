@@ -237,7 +237,9 @@ class Image:
 
     def _draw_charts(self, ax):
         for chart in self.charts:
-            chart_xs = np.linspace(self._xmin - 1, self._xmax + 1, 200)
+            xmin = float(chart['xmin']) if chart.get('xmin') else self._xmin - 1
+            xmax = float(chart['xmax']) if chart.get('xmax') else self._xmax + 1
+            chart_xs = np.linspace(xmin, xmax, 200)
             if chart.get('chart_xs') and chart.get('chart_ys'):
                 chart_xs = literal_eval(str(chart.get('chart_xs')))
                 chart_ys = literal_eval(str(chart.get('chart_ys')))
