@@ -558,7 +558,7 @@ flacheninhalte_von_trapezen = QuestionSet(
             variables={
                 'v1': (choice, [2.5, 3.5, 4.5, 5.5]),
                 'v2': (choice, [6.5, 7.5, 8.5, 9.5]),
-                'v3': (randrange, 4, 8, 2),
+                'v3': (randrange, 4, 10, 2),
                 'units': (choice, measurement_units),
             },
             image={
