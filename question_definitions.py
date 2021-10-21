@@ -9,6 +9,7 @@ from definitions.flaechen_koerper_questions import question_sets as flaechen_koe
 from definitions.wurzeln_und_potenzen_questions import question_sets as wurzeln_potenzen_question_sets
 from definitions.dreiecke_vielecke_questions import question_sets as dreiecke_vielecke_question_sets
 from definitions.koeper_questions import question_sets as koerper_question_sets
+from definitions.flaechen_questions import question_sets as flaechen_question_sets
 
 question_sets = [
     # *prozente_question_sets,
@@ -21,5 +22,6 @@ question_sets = [
     # *flaechen_koerper_question_sets,
     # *wurzeln_potenzen_question_sets,
     # *dreiecke_vielecke_question_sets,
-    *koerper_question_sets,
+    # *koerper_question_sets,
+    *flaechen_question_sets,
 ]
