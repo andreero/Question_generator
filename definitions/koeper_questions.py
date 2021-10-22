@@ -166,18 +166,18 @@ zusammengesetze_korper = QuestionSet(
     capital='Körper',
     subcapital='Volumen von Körpern',
     title='Zusammengesetze Körper',
-    instruction='Berechne das Volumen des Körpers V₁',
+    instruction='Berechne das Volumen des Körpers V_1',
     question_type='gap',
     questions=[
         Question(
-            formula='<mat>V_2= ___ * ___ * ___ = 1^ ___ = ___ </mat><br>'
+            formula='<mat>V_2 = ___ * ___ * ___ = 1^ ___ = ___ </mat><br>'
                     '<mat>V_(1+2) = {{v1}} * ___ * ___ = ___ ^3 = ___ </mat><br><br>'
                     '<mat>V_1 = V_(1+2) - V_2 = ___ - ___ = ___ </mat>',
             correct='1;1;1;3;1;'
                     '{{v1}};{{v1}};{{v1}};{{v1**3}};'
                     '{{v1**3}};1;{{v1**3-1}}',
-            hint='Berechne zuerst das Volumen des zusammengesetzte n Körpers (V₁ + V₂) und ziehe '
-                 'anschließend davon das Volumen des zugefügten Körpers ab (V₂).<br>'
+            hint='Berechne zuerst das Volumen des zusammengesetzte n Körpers (V_1 + V_2) und ziehe '
+                 'anschließend davon das Volumen des zugefügten Körpers ab (V_2).<br>'
                  'Für alle Quader gilt:<br><mat><b>Volumen = Länge * Breite * Höhe</b></mat>',
             variables={
                 'v1': (randint, 2, 5),
@@ -371,7 +371,7 @@ zusammengesetze_korper = QuestionSet(
                 'texts': [
                     {'x': 1,
                      'y': 1,
-                     's': 'V_1',
+                     's': 'V₁',
                      'color': 'tab:blue',
                      'fontsize': 'x-large',
                      'ha': 'right',
@@ -380,7 +380,7 @@ zusammengesetze_korper = QuestionSet(
                      },
                     {'x': '{{5+1.5/v1}}',
                      'y': '{{3-1.5/v1}}',
-                     's': 'V_2',
+                     's': 'V₂',
                      'color': 'tab:blue',
                      'fontsize': 'x-large',
                      'ha': 'center',
@@ -596,7 +596,7 @@ zusammengesetze_korper = QuestionSet(
                 'texts': [
                     {'x': 1.5,
                      'y': 2,
-                     's': 'V_1',
+                     's': 'V₁',
                      'color': 'tab:blue',
                      'fontsize': 'x-large',
                      'ha': 'center',
@@ -605,7 +605,7 @@ zusammengesetze_korper = QuestionSet(
                      },
                     {'x': 5.5,
                      'y': 2,
-                     's': 'V_2',
+                     's': 'V₂',
                      'color': 'tab:blue',
                      'fontsize': 'x-large',
                      'ha': 'center',
@@ -614,7 +614,7 @@ zusammengesetze_korper = QuestionSet(
                      },
                     {'x': 7.5,
                      'y': 1,
-                     's': 'V_3',
+                     's': 'V₃',
                      'color': 'tab:blue',
                      'fontsize': 'x-large',
                      'ha': 'center',
