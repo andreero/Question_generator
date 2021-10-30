@@ -25,11 +25,14 @@ def generate_table_cell_colors(nrows, ncols, cells_filled):
 
 class Angle(Arc):
     """
-    Draws an arc between two vectors. Based on AngleAnnotation from
+    A composite object that combines Arc, Wedge and Text to draw an annotated angle between two vectors.
+
+    Based on AngleAnnotation from
     https://matplotlib.org/stable/gallery/text_labels_and_annotations/angle_annotation.html
     """
 
-    def __init__(self, xy, p1, p2, size=2, ax=None, text="", textposition="inside", text_kw=None, **kwargs):
+    def __init__(self, xy, p1=None, p2=None, theta1=None, theta2=None, size=2,
+                 ax=None, text="", textposition="inside", text_kw=None, **kwargs):
         """
         Parameters
         ----------
@@ -37,6 +40,9 @@ class Angle(Arc):
             Center position and two points. Angle annotation is drawn between
             the two vectors connecting *p1* and *p2* with *xy*, respectively.
             Units are data coordinates.
+
+        theta1, theta2 : Alternative way of defining the Angle,
+            directly providing the angles instead of calculating them from p1 and p2.
 
         size : float
             Diameter of the angle annotation.
@@ -62,6 +68,8 @@ class Angle(Arc):
         self._xydata = xy  # in data coordinates
         self.vec1 = p1
         self.vec2 = p2
+        self._theta1 = theta1
+        self._theta2 = theta2
         self.size = size
         self.textposition = textposition
 
@@ -99,10 +107,16 @@ class Angle(Arc):
         return np.rad2deg(np.arctan2(vec[1]-self._xydata[1], vec[0]-self._xydata[0]))
 
     def get_theta1(self):
-        return self.get_theta(self.vec1)
+        if self._theta1 is not None:
+            return self._theta1
+        else:
+            return self.get_theta(self.vec1)
 
     def get_theta2(self):
-        return self.get_theta(self.vec2)
+        if self._theta2 is not None:
+            return self._theta2
+        else:
+            return self.get_theta(self.vec2)
 
     def set_theta(self, angle):
         pass
@@ -151,7 +165,7 @@ class Angle(Arc):
 
 class Image:
     def __init__(self, axis_limits=None, dots=None, texts=None, charts=None, arrows=None, polygons=None, angles=None,
-                 lines=None, ellipses=None, arcs=None, table=None, pie_chart=None,
+                 lines=None, ellipses=None, arcs=None, wedges=None, table=None, pie_chart=None,
                  y_scale=1, draw_grid=True, draw_axes=True, output_directory=''):
         self.dots = dots
         self.texts = texts
@@ -162,6 +176,7 @@ class Image:
         self.lines = lines
         self.ellipses = ellipses
         self.arcs = arcs
+        self.wedges = wedges
         self.table = table
         self.pie_chart = pie_chart
         self.y_scale = y_scale
@@ -274,6 +289,9 @@ class Image:
                 x, y = angle_dict.get(point, (None, None))
                 if isinstance(x, str) or isinstance(y, str):
                     angle_dict[point] = (float(x), float(y))
+            for key in ['theta1', 'theta2']:
+                if isinstance(angle_dict.get(key), str):
+                    angle_dict[key] = float(angle_dict[key])
             angle_dict['ax'] = ax
             Angle(**angle_dict)
 
@@ -318,8 +336,22 @@ class Image:
             x, y = arc_dict['xy']
             if isinstance(x, str) or isinstance(y, str):
                 arc_dict['xy'] = (float(x), float(y))
+            for key in ['angle', 'theta1', 'theta2', 'width', 'height']:
+                if isinstance(arc_dict.get(key), str):
+                    arc_dict[key] = float(arc_dict[key])
             arc = patches.Arc(**arc_dict)
             ax.add_patch(arc)
+
+    def _draw_wedges(self, ax):
+        for wedge_dict in self.wedges:
+            x, y = wedge_dict['center']
+            if isinstance(x, str) or isinstance(y, str):
+                wedge_dict['center'] = (float(x), float(y))
+            for key in ['theta1', 'theta2', 'width']:
+                if isinstance(wedge_dict.get(key), str):
+                    wedge_dict[key] = float(wedge_dict[key])
+            wedge = patches.Wedge(**wedge_dict)
+            ax.add_patch(wedge)
 
     def _draw_table(self, ax, fig):
         if self.table.get('cells_filled'):
@@ -377,6 +409,8 @@ class Image:
             self._draw_ellipses(ax)
         if self.arcs:
             self._draw_arcs(ax)
+        if self.wedges:
+            self._draw_wedges(ax)
         if self.table:
             self._draw_table(ax, fig)
         if self.pie_chart:

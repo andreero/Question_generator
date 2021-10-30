@@ -180,6 +180,7 @@ class QuestionSet:
                       arrows=image_dict.get('arrows'),
                       polygons=image_dict.get('polygons'),
                       angles=image_dict.get('angles'),
+                      wedges=image_dict.get('wedges'),
                       lines=image_dict.get('lines'),
                       ellipses=image_dict.get('ellipses'),
                       arcs=image_dict.get('arcs'),
@@ -190,7 +191,8 @@ class QuestionSet:
                       y_scale=image_dict.get('y_scale', 1),
                       )
         image.output_directory = self.output_directory
-        return image.draw_image()
+        image_path = image.draw_image()
+        return image_path
 
     def render_questions(self, n) -> List[Dict[str, str]]:
         questions = self.generate_questions(questions_to_generate=n)
